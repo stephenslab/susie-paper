@@ -14,7 +14,7 @@ source_label: "source" # Set to NULL to disable it; default is github octopus ic
 notebook_toc: False
 report_style: True # Use SoS report style that hides codes by default for SoS notebooks
 theme: "readable" # Theme from bootstrap
-# font: "Droid Sans" # Set to NULL for theme default font
+font: NULL
 # long_autoindex: True # When set to `True` it uses the first paragraph under the title if available, instead of using the title, to make descriptions on the automatically generated for a page.
 # reverse_autoindex: [] # Directories for which auto-index be reversed. This is useful when a folder has notebook named like `20160502_XX` because it will show the newer notebook on the top.
 # remove_whiteline: False # When set to `True` the empty lines in the output HTML will be purged. This will make the code block read more compact.

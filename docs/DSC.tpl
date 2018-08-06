@@ -425,10 +425,6 @@ body {
   <a href="../numerical_results.html">Numerical Results</a>
 </li>
         
-<li>
-  <a href="../Yang_2016_sQTL.html">Yang 2016 Sqtl</a>
-</li>
-        
       </ul>
         
 <ul class="nav navbar-nav navbar-right">
@@ -509,7 +505,7 @@ body {
         
 {% block footer %}
 <hr>
-&copy 2017-2018 Gao Wang at Stephens Lab, University of Chicago
+&copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
 </div>
 </div>
 </body>

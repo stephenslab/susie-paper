@@ -4,6 +4,3 @@ var DSCArrayMap = {}
 var numerical_resultsArray = []
 var numerical_resultsDict = {}
 var numerical_resultsArrayMap = {}
-var Yang_2016_sQTLArray = []
-var Yang_2016_sQTLDict = {}
-var Yang_2016_sQTLArrayMap = {}

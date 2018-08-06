@@ -92,7 +92,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 }
 
 body {
-  font-family: "Droid Sans";
+  
   font-size: 160%;
   padding-top: 66px;
   padding-bottom: 40px;

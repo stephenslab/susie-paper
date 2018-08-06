@@ -387,7 +387,7 @@ function toggle_messages() {
 
 <style type = "text/css">
 body {
-  font-family: "Droid Sans";
+  
   padding-top: 66px;
   padding-bottom: 40px;
 }

@@ -1083,6 +1083,7 @@ def make_index_nb(path, exclude, long_description = False, reverse_alphabet = Fa
     "### %s\\n"
    ]
   },''' % date_section
+        html_link = (os.path.splitext(os.path.basename(fn))[0] + '.html') if os.path.splitext(os.path.basename(fn))[0] != os.path.basename(os.path.dirname(fn)) else 'index.html'
         if title != description:
             out += '''
   {
@@ -1092,7 +1093,7 @@ def make_index_nb(path, exclude, long_description = False, reverse_alphabet = Fa
     "[**%s**](%s/%s)<br>\\n",
     %s
    ]
-  },''' % (title, path, os.path.splitext(os.path.basename(fn))[0] + '.html', json.dumps("&nbsp; &nbsp;" + description))
+  },''' % (title, path, html_link, json.dumps("&nbsp; &nbsp;" + description))
         else:
             out += '''
   {
@@ -1101,7 +1102,7 @@ def make_index_nb(path, exclude, long_description = False, reverse_alphabet = Fa
    "source": [
     "[**%s**](%s/%s)<br>"
    ]
-  },''' % (title, path, os.path.splitext(os.path.basename(fn))[0] + '.html')
+  },''' % (title, path, html_link)
     if len(sos_files):
         out += '''
   {

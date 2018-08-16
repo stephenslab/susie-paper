@@ -174,7 +174,7 @@ stop_if(len(notebook_files) == 0)
 from jnbinder import get_commit_info
 nb_info = [get_commit_info(x, conf) for x in notebook_files]
 input: notebook_files, group_by = 1, paired_with = ['nb_info'], concurrent = True
-output: [f"docs/{x.replace('.ipynb', '.html')}" for x in notebook_files], group_by = 1
+output: [f"docs/{path(x):d}/index.html" if f'{path(x):db}' == f'{path(x):bn}' else f"docs/{x.replace('.ipynb', '.html')}" for x in notebook_files], group_by = 1
 bash: expand = "${ }", stderr = False
   jupyter nbconvert ${_input:e} --output ${_output:ae} --template docs/${_input:d}.tpl
   num=`grep -n -Fx '''${conf['footer']}''' ${_output:e} | tail -1 | sed 's/\([0-9]*\).*/\1/'`

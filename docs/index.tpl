@@ -190,7 +190,7 @@ $(document).ready(function () {
 </li>
         
 <li>
-  <a href="./numerical_results.html">Numerical Results</a>
+  <a href="./numerical_results/index.html">Numerical Results</a>
 </li>
         
       </ul>

@@ -12,7 +12,6 @@ post_release_actions: NULL
 homepage_label: Overview # Set to NULL to disable
 source_label: "source" # Set to NULL to disable it; default is github octopus icon
 notebook_toc: False
-report_style: True # Use SoS report style that hides codes by default for SoS notebooks
 theme: "readable" # Theme from bootstrap
 font: NULL
 # long_autoindex: True # When set to `True` it uses the first paragraph under the title if available, instead of using the title, to make descriptions on the automatically generated for a page.

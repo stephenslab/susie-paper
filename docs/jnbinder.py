@@ -1039,7 +1039,7 @@ def make_index_nb(path, exclude, long_description = False, reverse_alphabet = Fa
    "source": [
     "# %s"
    ]
-  },''' % os.path.basename(path.capitalize())
+  },''' % os.path.basename(path).replace('_', ' ').capitalize()
     if len(sos_files):
         out += '''
   {

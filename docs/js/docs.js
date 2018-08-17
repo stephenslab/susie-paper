@@ -1,3 +1,6 @@
+var pedagogical_exampleArray = ['index']
+var pedagogical_exampleDict = {'A-pedagogical-example-of-how-SuSiE-works-1': 'pedagogical_example'}
+var pedagogical_exampleArrayMap = {'pedagogical_example': 'A pedagogical example o ... SuSiE works'}
 var DSCArray = []
 var DSCDict = {'Finemapping-benchmark-1': 'finemapping'}
 var DSCArrayMap = {'finemapping': 'Finemapping benchmark'}

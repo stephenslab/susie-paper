@@ -183,6 +183,10 @@ body {
 </li>
         
 <li>
+  <a href="../pedagogical_example/index.html">Pedagogical Example</a>
+</li>
+        
+<li>
   <a href="../DSC.html">DSC</a>
 </li>
         

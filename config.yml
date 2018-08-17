@@ -1,7 +1,7 @@
 name: 'SuSiE manuscript'
 repo: 'http://github.com/stephenslab/susie-paper'
 footer: "&copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago"
-include_dir: ['DSC', 'numerical_results', 'Yang_2016_sQTL']
+include_dir: ['DSC', 'numerical_results', 'Li_2016_sQTL']
 exclude_file: []
 hide_navbar: []
 homepage: "Home.ipynb"

@@ -243,6 +243,36 @@ gene-level p-value for the most significant QTL for each gene; and at 10% and 5%
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+
+        <table class="revision_table">
+        <tr>
+        <th>Revision</th>
+        <th>Author</th>
+        <th>Date</th>
+        <th>Message</th>
+        <tr>
+        <tr><td><a target="_blank" href="http://github.com/stephenslab/susie-paper/blob/19cc6cfe25c5eb58dfe8fbe4f1ba98da7649ac8c/Li_2016_splice_QTL/Li_2016_splice_QTL.ipynb"><span class="revision_id">19cc6cf<span></a></td>
+<td>Gao Wang</td>
+<td>2018-08-16</td>
+<td>Add sQTL analysis</td></tr></table>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -346,6 +376,7 @@ annotation_list="data/annotation.list"</code></pre>
     --x-data $xdata \
     --y-data $ydata \
     --max-dist 100000 -j 16 --trait AS</code></pre>
+<p>Comparison between CAVIAR and SuSiE results for intron clusters analyzed can be found <a href="https://shiny.stephenslab.uchicago.edu/">here</a>.</p>
 
 </div>
 </div>
@@ -440,7 +471,7 @@ annotation_list="data/annotation.list"</code></pre>
 <h4 id="CTCF-binding">CTCF binding<a class="anchor-link" href="#CTCF-binding">&#182;</a></h4>
 <pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb download_ctcf_annotation --trait AS \
     --y-data $ydata</code></pre>
-<h4 id="PolyII-binding">PolyII binding<a class="anchor-link" href="#PolyII-binding">&#182;</a></h4>
+<h4 id="RNA-polymerase-II-binding">RNA polymerase II binding<a class="anchor-link" href="#RNA-polymerase-II-binding">&#182;</a></h4>
 <pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb download_polII_annotation --trait AS \
     --y-data $ydata</code></pre>
 <h4 id="Gene-regions">Gene regions<a class="anchor-link" href="#Gene-regions">&#182;</a></h4>
@@ -565,7 +596,7 @@ annotation_list="data/annotation.list"</code></pre>
 </div>
 <hr>
 &copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
-<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/19cc6cfe25c5eb58dfe8fbe4f1ba98da7649ac8c/Li_2016_splice_QTL/Li_2016_splice_QTL.ipynb"><code>Li_2016_splice_QTL/Li_2016_splice_QTL.ipynb</code></a> committed by Gao Wang on Thu Aug 16 20:49:16 2018 <a href="http://github.com/stephenslab/susie-paper/commit/19cc6cfe25c5eb58dfe8fbe4f1ba98da7649ac8c">revision 1, 19cc6cf</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/c5c5642b0c8f0dba2306cf980cbdef7184befcaf/Li_2016_splice_QTL/Li_2016_splice_QTL.ipynb"><code>Li_2016_splice_QTL/Li_2016_splice_QTL.ipynb</code></a> committed by Gao Wang on Thu Aug 16 21:29:11 2018 <a href="http://github.com/stephenslab/susie-paper/commit/c5c5642b0c8f0dba2306cf980cbdef7184befcaf">revision 2, c5c5642</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
 </div>
 </div>
 </body>

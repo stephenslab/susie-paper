@@ -460,6 +460,26 @@ annotation_list="data/annotation.list"</code></pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Comparison-with-MatrixQTL-results-(analysis-performed-by-Li-et-al-2016)">Comparison with MatrixQTL results (analysis performed by Li et al 2016)<a class="anchor-link" href="#Comparison-with-MatrixQTL-results-(analysis-performed-by-Li-et-al-2016)">&#182;</a></h2>
+<pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
+    --y-data $ydata \
+    --trait AS --fdr 0.01
+
+sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
+    --y-data $ydata \
+    --trait AS --fdr 0.001   
+
+sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
+    --y-data $ydata \
+    --trait AS --fdr 0.0001</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Enrichment-analysis">Enrichment analysis<a class="anchor-link" href="#Enrichment-analysis">&#182;</a></h2>
 </div>
 </div>
@@ -600,7 +620,7 @@ annotation_list="data/annotation.list"</code></pre>
 </div>
 <hr>
 &copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
-<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/c5c5642b0c8f0dba2306cf980cbdef7184befcaf/Li_2016_splice_QTL/Li_2016_splice_QTL.ipynb"><code>Li_2016_splice_QTL/Li_2016_splice_QTL.ipynb</code></a> committed by Gao Wang on Thu Aug 16 21:29:11 2018 <a href="http://github.com/stephenslab/susie-paper/commit/c5c5642b0c8f0dba2306cf980cbdef7184befcaf">revision 2, c5c5642</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/e36a89a36ba6788ba03dded79475d4048f14dfeb/Li_2016_splice_QTL/Li_2016_splice_QTL.ipynb"><code>Li_2016_splice_QTL/Li_2016_splice_QTL.ipynb</code></a> committed by Gao Wang on Fri Aug 17 14:28:28 2018 <a href="http://github.com/stephenslab/susie-paper/commit/e36a89a36ba6788ba03dded79475d4048f14dfeb">revision 3, e36a89a</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
 </div>
 </div>
 </body>

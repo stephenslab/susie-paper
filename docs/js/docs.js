@@ -4,3 +4,6 @@ var DSCArrayMap = {}
 var numerical_resultsArray = ['index']
 var numerical_resultsDict = {'Numerical-Comparisons-1': 'numerical_results'}
 var numerical_resultsArrayMap = {'numerical_results': 'Numerical Comparisons'}
+var Li_2016_splice_QTLArray = ['index']
+var Li_2016_splice_QTLDict = {'Application-to-Li-et-al-2016-splice-QTL-analysis-1': 'Li_2016_splice_QTL'}
+var Li_2016_splice_QTLArrayMap = {'Li_2016_splice_QTL': 'Application to Li et al ... QTL analysis'}

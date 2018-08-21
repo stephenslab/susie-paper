@@ -186,19 +186,11 @@ $(document).ready(function () {
 </li>
         
 <li>
-  <a href="./pedagogical_example/index.html">Pedagogical Example</a>
+  <a href="./finemapping_benchmark.html">Finemapping Benchmark</a>
 </li>
         
 <li>
-  <a href="./DSC.html">DSC</a>
-</li>
-        
-<li>
-  <a href="./numerical_results/index.html">Numerical Results</a>
-</li>
-        
-<li>
-  <a href="./Li_2016_splice_QTL/index.html">Li 2016 Splice QTL</a>
+  <a href="./manuscript_results.html">Manuscript Results</a>
 </li>
         
       </ul>

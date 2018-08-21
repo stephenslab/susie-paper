@@ -1,7 +1,7 @@
 name: 'SuSiE manuscript'
 repo: 'http://github.com/stephenslab/susie-paper'
 footer: "&copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago"
-include_dir: ['pedagogical_example', 'DSC', 'numerical_results', 'Li_2016_splice_QTL']
+include_dir: ['finemapping_benchmark', 'manuscript_results']
 exclude_file: []
 hide_navbar: []
 homepage: "Home.ipynb"

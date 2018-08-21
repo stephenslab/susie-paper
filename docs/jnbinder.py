@@ -1065,6 +1065,9 @@ def make_index_nb(path, exclude, long_description = False, reverse_alphabet = Fa
             data = json.load(f)
         try:
             source = [x.strip() for x in data["cells"][0]["source"] if x.strip()]
+            print(long_description)
+            print(source[0])
+            print(source[1])
             if long_description and source[0].startswith('#') and len(source) >= 2 and not source[1].startswith('#'):
                 title = source[0].lstrip('#').strip()
                 description = source[1].lstrip('#').strip()

@@ -466,17 +466,29 @@ annotation_list="data/annotation.list"</code></pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Extract-SuSiE-summary-statistics">Extract SuSiE summary statistics<a class="anchor-link" href="#Extract-SuSiE-summary-statistics">&#182;</a></h3><p>We consolidate PIP and CS from identified sQTLs -- relevant to other analysis downstream:</p>
+
+<pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb extract_sumstats \
+    --trait $trait --y-data $ydata -j $ncpu --cwd $cwd</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Comparison-with-MatrixQTL-results-(analysis-performed-by-Li-et-al-2016)">Comparison with MatrixQTL results (analysis performed by Li et al 2016)<a class="anchor-link" href="#Comparison-with-MatrixQTL-results-(analysis-performed-by-Li-et-al-2016)">&#182;</a></h2>
 <pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
-    --y-data $ydata \
+    --y-data $ydata --cwd $cwd \
     --trait $trait --fdr 0.01
 
 sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
-    --y-data $ydata \
+    --y-data $ydata --cwd $cwd \
     --trait $trait --fdr 0.001   
 
 sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
-    --y-data $ydata \
+    --y-data $ydata --cwd $cwd \
     --trait $trait --fdr 0.0001</code></pre>
 
 </div>
@@ -496,33 +508,23 @@ sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Download-and-pre-process-annotation-data">Download and pre-process annotation data<a class="anchor-link" href="#Download-and-pre-process-annotation-data">&#182;</a></h3><p>Pipelines below were used to obtain and pre-process the annotation data-sets. We provide <a href="https://shiny.stephenslab.uchicago.edu/">here</a> the processed annotation files for easier access.</p>
 <h4 id="Histone-marks-&amp;-DNase-I-hypersensitive-site">Histone marks &amp; DNase I hypersensitive site<a class="anchor-link" href="#Histone-marks-&amp;-DNase-I-hypersensitive-site">&#182;</a></h4>
-<pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb download_histone_annotation --trait AS \
+<pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb download_histone_annotation --trait $trait \
     --y-data $ydata</code></pre>
 <h4 id="CTCF-binding">CTCF binding<a class="anchor-link" href="#CTCF-binding">&#182;</a></h4>
-<pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb download_ctcf_annotation --trait AS \
+<pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb download_ctcf_annotation --trait $trait \
     --y-data $ydata</code></pre>
 <h4 id="RNA-polymerase-II-binding">RNA polymerase II binding<a class="anchor-link" href="#RNA-polymerase-II-binding">&#182;</a></h4>
-<pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb download_polII_annotation --trait AS \
+<pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb download_polII_annotation --trait $trait \
+    --y-data $ydata</code></pre>
+<h4 id="General-annotations">General annotations<a class="anchor-link" href="#General-annotations">&#182;</a></h4>
+<pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb download_general_annotation --trait $trait \
     --y-data $ydata</code></pre>
 <h4 id="Gene-regions">Gene regions<a class="anchor-link" href="#Gene-regions">&#182;</a></h4>
-<pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb gene_regions --trait AS \
+<pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb gene_regions --trait $trait \
     --y-data $ydata</code></pre>
 <h4 id="Extended-splice-sites">Extended splice sites<a class="anchor-link" href="#Extended-splice-sites">&#182;</a></h4>
-<pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb extended_splice_site --trait AS \
+<pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb extended_splice_site --trait $trait \
     --y-data $ydata</code></pre>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Extract-SuSiE-summary-statistics">Extract SuSiE summary statistics<a class="anchor-link" href="#Extract-SuSiE-summary-statistics">&#182;</a></h3><p>We consolidate PIP and CS from identified sQTLs:</p>
-
-<pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb extract_sumstats \
-    --y-data $ydata \
-    --trait AS -j 16</code></pre>
 
 </div>
 </div>
@@ -534,7 +536,7 @@ sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
 <h3 id="Apply-annotations">Apply annotations<a class="anchor-link" href="#Apply-annotations">&#182;</a></h3>
 <pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb range2var_annotation \
     --y-data $ydata \
-    --trait AS -j 16 \
+    --cwd $cwd --trait $trait -j $ncpu \
     --single-annot $annotation_list</code></pre>
 
 </div>
@@ -548,7 +550,7 @@ sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
 
 <pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb overlap_cluster \
     --y-data $ydata \
-    --trait AS</code></pre>
+    --cwd $cwd --trait $trait -j $ncpu</code></pre>
 
 </div>
 </div>
@@ -560,7 +562,7 @@ sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
 <h3 id="Fisher's-exact-test-for-enrichment">Fisher's exact test for enrichment<a class="anchor-link" href="#Fisher's-exact-test-for-enrichment">&#182;</a></h3>
 <pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb cs_fisher_test \
     --y-data $ydata \
-    --trait AS -j 16 \
+    --cwd $cwd --trait $trait -j $ncpu \
     --single-annot $annotation_list</code></pre>
 
 </div>
@@ -626,7 +628,7 @@ sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
 </div>
 <hr>
 &copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
-<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/0eec855575569928bd957fdafdfc492691c499c8/manuscript_results/Li_2016_splice_QTL.ipynb"><code>manuscript_results/Li_2016_splice_QTL.ipynb</code></a> committed by Gao Wang on Thu Sep 6 15:54:38 2018 <a href="http://github.com/stephenslab/susie-paper/commit/0eec855575569928bd957fdafdfc492691c499c8">revision 5, 0eec855</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/318255921bd54b5f8d3057e23bfdffb5f9c92112/manuscript_results/Li_2016_splice_QTL.ipynb"><code>manuscript_results/Li_2016_splice_QTL.ipynb</code></a> committed by Gao Wang on Fri Sep 7 12:54:34 2018 <a href="http://github.com/stephenslab/susie-paper/commit/318255921bd54b5f8d3057e23bfdffb5f9c92112">revision 8, 3182559</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
 </div>
 </div>
 </body>

@@ -274,7 +274,7 @@ gene-level p-value for the most significant QTL for each gene; and at 10% and 5%
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Data-paths">Data paths<a class="anchor-link" href="#Data-paths">&#182;</a></h2><p>Set these environment variables in the command window that performs the analysis:</p>
+<h2 id="Data-paths">Data paths<a class="anchor-link" href="#Data-paths">&#182;</a></h2><p>Set these environment variables in the command window that performs the analysis. To reproduce you need to change these paths to fit your computing environment:</p>
 
 <pre><code>xdata=/project/compbio/jointLCLs/genotype/hg19/YRI/genotypesYRI.gen.txt.gz
 ydata=/project/compbio/jointLCLs/phenotypes/fastqtl_qqnorm_ASintron_RNAseqGeuvadis_YangVCF.txt.gz
@@ -299,7 +299,7 @@ annotation_list="data/annotation.list"</code></pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Intron-cluster-data-preprocessing">Intron cluster data preprocessing<a class="anchor-link" href="#Intron-cluster-data-preprocessing">&#182;</a></h3>
+<h3 id="Alternative-splicing-ratio-intron-data-preprocessing">Alternative splicing ratio intron data preprocessing<a class="anchor-link" href="#Alternative-splicing-ratio-intron-data-preprocessing">&#182;</a></h3>
 <pre><code>sos run analysis/20180704_MolecularQTL_Workflow.ipynb preprocess \
     --x-data $xdata --y-data $ydata --trait $trait --cwd $cwd -j $ncpu \
     --max-dist 100000 --num-pcs 3</code></pre>
@@ -628,7 +628,7 @@ sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
 </div>
 <hr>
 &copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
-<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/318255921bd54b5f8d3057e23bfdffb5f9c92112/manuscript_results/Li_2016_splice_QTL.ipynb"><code>manuscript_results/Li_2016_splice_QTL.ipynb</code></a> committed by Gao Wang on Fri Sep 7 12:54:34 2018 <a href="http://github.com/stephenslab/susie-paper/commit/318255921bd54b5f8d3057e23bfdffb5f9c92112">revision 8, 3182559</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/a6e7dada1edc544d9fda6dde1b46a3d14bcd5ce1/manuscript_results/Li_2016_splice_QTL.ipynb"><code>manuscript_results/Li_2016_splice_QTL.ipynb</code></a> committed by Gao Wang on Sun Sep 9 09:30:57 2018 <a href="http://github.com/stephenslab/susie-paper/commit/a6e7dada1edc544d9fda6dde1b46a3d14bcd5ce1">revision 9, a6e7dad</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
 </div>
 </div>
 </body>

@@ -202,7 +202,8 @@ body {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="A-hard-case-fine-mapping-example">A hard case fine-mapping example<a class="anchor-link" href="#A-hard-case-fine-mapping-example">&#182;</a></h1>
+<h1 id="A-pedagogical-example-of-fine-mapping-problem">A pedagogical example of fine-mapping problem<a class="anchor-link" href="#A-pedagogical-example-of-fine-mapping-problem">&#182;</a></h1><p>Here we demonstrate with simulated data a setting that for fine-mapping problem it is problematic to run step-wise conditional analysis, but SuSiE's variational procedure can correctly identify the causal signals. We also compared SuSiE results with other Bayesian sparse regression approach, and demonstrate that SuSiE is robust to prior choice and provide information more relevant to fine mapping applications that other methods do not provide.</p>
+
 </div>
 </div>
 </div>
@@ -211,7 +212,6 @@ body {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>From simulated data we pick this case example where the top z-score might be a result of two adjecent clusters of non-zero effects. See <a href="https://stephenslab.github.io/susieR/articles/finemapping.html">here</a> for a brief description on simulation.</p>
-<p>We demonstrate that this setting makes it problematic to run step-wise conditional analysis, but SuSiE's variational procedure can correctly identify the causal signals.</p>
 
 </div>
 </div>
@@ -1379,7 +1379,7 @@ Iterplot saved to demo_l2.gif
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It seems at the first iteration, the first CS picks up the induced wrong signal cluster, but the true signal were both picked up by the 2nd CS which is quite wide. Later iterations removed the induced wrong cluster and the 2 CS properly converged to the two true signals as desired.</p>
+<p>It seems at the first iteration, the first CS picks up the induced wrong signal cluster, but both true signals were picked up by the 2nd CS which is quite wide. Later iterations removed the induced wrong cluster and the 2 CS properly converged to the two true signals as desired.</p>
 
 </div>
 </div>
@@ -4674,7 +4674,7 @@ AAAmAnac8xL+3EQzAAAAAElFTkSuQmCC"
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Good job!</p>
+<p>The default prior works</p>
 
 </div>
 </div>
@@ -4741,7 +4741,7 @@ AAAmAnac8xL+3EQzAAAAAElFTkSuQmCC"
 </div>
 <hr>
 &copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
-<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/e003f9144d5a0521d9431f0f3738768622d96502/manuscript_results/pedagogical_example.ipynb"><code>manuscript_results/pedagogical_example.ipynb</code></a> committed by Gao Wang on Tue Sep 11 09:28:46 2018 <a href="http://github.com/stephenslab/susie-paper/commit/e003f9144d5a0521d9431f0f3738768622d96502">revision 7, e003f91</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/77f1af1d319ecc249e4d475979c31cc778bd5dc2/manuscript_results/pedagogical_example.ipynb"><code>manuscript_results/pedagogical_example.ipynb</code></a> committed by Gao Wang on Tue Sep 11 09:36:03 2018 <a href="http://github.com/stephenslab/susie-paper/commit/77f1af1d319ecc249e4d475979c31cc778bd5dc2">revision 8, 77f1af1</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
 </div>
 </div>
 </body>

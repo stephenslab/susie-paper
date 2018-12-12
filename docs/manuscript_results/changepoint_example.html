@@ -202,13 +202,7 @@ body {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Application-to-change-point-detection-problem">Application to change point detection problem<a class="anchor-link" href="#Application-to-change-point-detection-problem">&#182;</a></h1><p>Although we developed SuSiE primarily with the goal
-of performing variable selection
-in highly sparse settings -- and, in particular, for genetic fine-mapping --
-the approach also has considerable potential
-for application to other large-scale regression problems. Here
-we briefly illustrate this potential by applying it to a non-parametric
-regression problem that at first sight seems to be ill-suited to our approach.</p>
+<h1 id="Application-to-change-point-detection-problem">Application to change point detection problem<a class="anchor-link" href="#Application-to-change-point-detection-problem">&#182;</a></h1><p>Although we developed SuSiE primarily with the goal of performing variable selection in highly sparse settings -- and, in particular, for genetic fine-mapping -- the approach also has considerable potential for application to other large-scale regression problems. Here we briefly illustrate this potential by applying it to a non-parametric regression problem that at first sight seems to be ill-suited to our approach.</p>
 
 </div>
 </div>
@@ -217,23 +211,11 @@ regression problem that at first sight seems to be ill-suited to our approach.</
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In particular we focus on the "change point detection problem", which does not involve
-strict sparsity, and the underlying correlation 
-structure of the explanatory variables
-is very different from the "blocky" covariance structure of genetic data
-that SuSiE was designed for. Nonetheless, we will see that SuSiE performs
-well here despite this (partly due to its ability to capture non-sparse signals via Bayesian Model Averaging).
-Specifically, consider the non-parametric regression:
+<p>Specifically we focus on the "change point detection problem", which does not involve strict sparsity, and the underlying correlation structure of the explanatory variables is very different from the "blocky" covariance structure of genetic data that SuSiE was designed for. Nonetheless, we will see that SuSiE performs well here despite this (partly due to its ability to capture non-sparse signals via Bayesian Model Averaging). Consider the non-parametric regression:
 $$y_t = \mu_t + e_t \quad t=1,\dots,T$$
-where the goal is to estimate the underlying mean, $\mu_t$, under the assumption that it varies smoothly (or, more precisely, in a spatially-structured way) with $t$.
-One very simple way to capture spatial structure in $\mu$ is to model it
-as a (sparse) linear combination of step functions:
+where the goal is to estimate the underlying mean, $\mu_t$, under the assumption that it varies smoothly (or, more precisely, in a spatially-structured way) with $t$. One very simple way to capture spatial structure in $\mu$ is to model it as a (sparse) linear combination of step functions:
 $$\mu = Xb$$ 
-where the $j$th column of $X$ is the step function with a step at $j$ ($j = 1,\dots,(T-1)$); that is $x_{tj}=0$ for $t&lt;=j$ and 1 for $t&gt;j$.
-The $j$th element of $b$ therefore determines the change in the mean $|\mu_j-\mu_{j+1}|$, and an assumption that $b$ is sparse encapsulates an
-assumption that $\mu$ is spatially structured (indeed, piecewise constant).
-This very simple approach is
-essentially <a href="https://projecteuclid.org/euclid.aos/1395234979">0th-order trend filtering</a>.</p>
+where the $j$th column of $X$ is the step function with a step at $j$ ($j = 1,\dots,(T-1)$); that is $x_{tj}=0$ for $t&lt;=j$ and 1 for $t&gt;j$. The $j$th element of $b$ therefore determines the change in the mean $|\mu_j-\mu_{j+1}|$, and an assumption that $b$ is sparse encapsulates an assumption that $\mu$ is spatially structured (indeed, piecewise constant). This very simple approach is essentially <a href="https://projecteuclid.org/euclid.aos/1395234979">0th-order trend filtering</a>.</p>
 
 </div>
 </div>
@@ -1047,7 +1029,7 @@ loaded via a namespace (and not attached):
 </div>
 <hr>
 &copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
-<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/01adfeae6e58cbf0213f8e331cf308a68750b524/manuscript_results/changepoint_example.ipynb"><code>manuscript_results/changepoint_example.ipynb</code></a> committed by Gao Wang on Tue Dec 11 19:22:34 2018 <a href="http://github.com/stephenslab/susie-paper/commit/01adfeae6e58cbf0213f8e331cf308a68750b524">revision 1, 01adfea</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/56834d6f7fe9e4cb87e90d6a704a18d1ee61553f/manuscript_results/changepoint_example.ipynb"><code>manuscript_results/changepoint_example.ipynb</code></a> committed by Gao Wang on Tue Dec 11 19:29:12 2018 <a href="http://github.com/stephenslab/susie-paper/commit/56834d6f7fe9e4cb87e90d6a704a18d1ee61553f">revision 2, 56834d6</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
 </div>
 </div>
 </body>

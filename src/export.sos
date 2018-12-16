@@ -3,6 +3,6 @@ parameter: notebook = 'finemapping.ipynb'
 
 [convert]
 input: notebook
-output: f'/tmp/{_input:b}'
 bash: expand = True, stderr = False
-  jupyter nbconvert --to notebook --execute {_input} --output {_output}
+  mkdir -p modules
+  jupyter nbconvert --to notebook --execute {_input} --output {_input}

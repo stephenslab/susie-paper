@@ -247,8 +247,9 @@ with application to genetic fine-mapping.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In addition to <code>susieR</code>, software required to reproduce numerical comparisons in the manuscript are <code>CAVIAR</code>, <code>FINEMAP</code> and <code>DAP-G</code>, and a benchmarking tool <a href="https://stephenslab.github.io/dsc-wiki/"><code>dsc</code></a>. To reproduce the splicing QTL data analysis a bioinformatics pipeline tool <a href="https://github.com/vatlab/SoS"><code>SoS</code></a> is needed. To facilicate setting up the analysis environment we have developed <a href="https://github.com/stephenslab/susie-paper/blob/master/Dockerfile">a docker image</a> that includes all
-software components necessary to run the analyses, configured to specified versions used in the manuscript. Unfortunately due to potential licensing restrictions with the <code>FINEMAP</code> program we cannot distribute the docker container on dockerhub. However it is straightforward to build and the docker image by yourself.  Docker can run on
+<p>In addition to <code>susieR</code>, software required to reproduce numerical comparisons in the manuscript are <code>CAVIAR</code>, <code>FINEMAP</code> and <code>DAP-G</code>, and a benchmarking tool <a href="https://stephenslab.github.io/dsc-wiki/"><code>dsc</code></a>. To reproduce the splicing QTL data analysis a bioinformatics pipeline tool <a href="https://github.com/vatlab/SoS"><code>SoS</code></a> is needed.</p>
+<p>Of course with some work it is possible to setup the computational environment on a Linux or Mac computer to reproduce &amp; extend our work. Alternatively, we have developed <a href="https://github.com/stephenslab/susie-paper/blob/master/Dockerfile">a docker image</a> that includes all software components necessary to run the analyses, configured to specified versions used in the manuscript. The image can be used both for evaluating the manuscript and for use in production. Unfortunately due to potential licensing restrictions with the <code>FINEMAP</code> program we cannot distribute the docker container on dockerhub. However it is straightforward to build and the docker image by yourself. In the rest of this section we discuss building and using the docker image for the manuscript.</p>
+<p>Docker can run on
 most popular operating systems (Mac, Windows and Linux) and cloud
 computing services such as Amazon Web Services and Microsoft Azure. If
 you have not used Docker before, you might want to read
@@ -270,7 +271,7 @@ administrator access.</p>
 <h3 id="Build-the-docker-image">Build the docker image<a class="anchor-link" href="#Build-the-docker-image">&#182;</a></h3><p>Under the root of the repository where <code>Dockerfile</code> is located,</p>
 <div class="highlight"><pre><span></span>docker build -t susie/susie-paper .
 </pre></div>
-<p>It will take a while to download and install the system and required software.</p>
+<p>It will take a while (&gt; 30min) to download and install the system and required software.</p>
 <h3 id="Test-the-docker-build">Test the docker build<a class="anchor-link" href="#Test-the-docker-build">&#182;</a></h3><p>Run this <code>alias</code> command in the shell, which will be used below to run
 commands inside the Docker container:</p>
 <div class="highlight"><pre><span></span><span class="nb">alias</span> susie-docker<span class="o">=</span><span class="s1">&#39;docker run --security-opt label:disable -t --rm &#39;</span><span class="se">\</span>

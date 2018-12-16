@@ -202,7 +202,7 @@ body {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="A-pedagogical-example-of-fine-mapping-problem">A pedagogical example of fine-mapping problem<a class="anchor-link" href="#A-pedagogical-example-of-fine-mapping-problem">&#182;</a></h1><p>Here we demonstrate with simulated data a setting that for fine-mapping problem it is problematic to run step-wise conditional analysis, but SuSiE's variational procedure can correctly identify the causal signals. We also compared SuSiE results with other Bayesian sparse regression approach, and demonstrate that SuSiE is robust to prior choice and provide information more relevant to fine mapping applications that other methods do not provide.</p>
+<h1 id="A-pedagogical-example-of-fine-mapping-problem">A pedagogical example of fine-mapping problem<a class="anchor-link" href="#A-pedagogical-example-of-fine-mapping-problem">&#182;</a></h1><p>Here we demonstrate with simulated data a setting of fine-mapping problem where it is clearly problematic to run forward stagewise selection, but SuSiE's Iterative Bayesian Stepwise Selection procedure can correctly identify the causal signals and compute posterior inclusion probability (posterior mean from a variational approximation to the posterior distribution). We also compared SuSiE results with other Bayesian sparse regression approach, and demonstrate that SuSiE is robust to prior choice and provide information more relevant to fine-mapping applications that other methods do not provide.</p>
 
 </div>
 </div>
@@ -211,7 +211,7 @@ body {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>From simulated data we pick this case example where the top z-score might be a result of two adjecent clusters of non-zero effects. See <a href="https://stephenslab.github.io/susieR/articles/finemapping.html">here</a> for a brief description on simulation.</p>
+<p>From simulated data we pick this case example where the top z-score might be a result of two other nearby signal clusters (containing variables of non-zero effects). See <a href="https://stephenslab.github.io/susieR/articles/finemapping.html">here</a> for a brief description on the simulation settings.</p>
 
 </div>
 </div>
@@ -2166,7 +2166,7 @@ TRUE
 </div>
 <hr>
 &copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
-<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/e391550bfabe35daf200fe6a7cfd41fb4409c5a5/manuscript_results/pedagogical_example.ipynb"><code>manuscript_results/pedagogical_example.ipynb</code></a> committed by Gao Wang on Sun Dec 16 00:01:11 2018 <a href="http://github.com/stephenslab/susie-paper/commit/e391550bfabe35daf200fe6a7cfd41fb4409c5a5">revision 13, e391550</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/83af7a75cd241be2ae57809057b40d9bcd9eda21/manuscript_results/pedagogical_example.ipynb"><code>manuscript_results/pedagogical_example.ipynb</code></a> committed by Gao Wang on Sun Dec 16 17:52:49 2018 <a href="http://github.com/stephenslab/susie-paper/commit/83af7a75cd241be2ae57809057b40d9bcd9eda21">revision 14, 83af7a7</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
 </div>
 </div>
 </body>

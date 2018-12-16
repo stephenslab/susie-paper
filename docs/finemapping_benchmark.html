@@ -205,7 +205,23 @@ $(document).ready(function () {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="A-Dynamic-Statistical-Comparison-benchmark">A Dynamic Statistical Comparison benchmark<a class="anchor-link" href="#A-Dynamic-Statistical-Comparison-benchmark">&#182;</a></h2>
+<h1 id="A-Dynamic-Statistical-Comparison-benchmark">A Dynamic Statistical Comparison benchmark<a class="anchor-link" href="#A-Dynamic-Statistical-Comparison-benchmark">&#182;</a></h1><p>Please read our manuscript for simulation details.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Since the simulation was based on human genotype from GTEx project which is only available via dbGaP for approved users, we cannot share the input genotype data with the public. However in this repository we share:</p>
+<ol>
+<li>The complete code-set for our fine-mapping benchmark</li>
+<li>The commands to run the benchmark</li>
+<li>An example run on the genotype data from DAP-G paper (biorxiv preprint on May, 2018)</li>
+<li>All output files from the benchmark including intermediate files and figures</li>
+</ol>
+
 </div>
 </div>
 </div>
@@ -214,7 +230,7 @@ $(document).ready(function () {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We implemented the numerical study of the manuscript in <a href="https://stephenslab.github.io/dsc-wiki/">the DSC framework</a>. 
-The benchmark is a single <a href="https://vatlab.github.io/sos-docs/">SoS Notebook</a> file (a Jupyter notebook with SoS kernel, in JSON format) <code>finemapping.ipynb</code> that conslidates all scripts required for the benchmark.</p>
+The benchmark is a single <a href="https://vatlab.github.io/sos-docs/">SoS Notebook</a> file (a Jupyter notebook with SoS kernel, in JSON format) <code>finemapping.ipynb</code> that conslidates all scripts required for the benchmark, distributed in this repository under <code>src</code> folder.</p>
 
 </div>
 </div>
@@ -223,15 +239,62 @@ The benchmark is a single <a href="https://vatlab.github.io/sos-docs/">SoS Noteb
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>To run the benchmark, first export scripts from the notebook:</p>
+<p>To run the benchmark, first navigate to <code>src</code>, then export scripts from the notebook:</p>
 
 <pre><code>./export.sos</code></pre>
-<p>Then run selected sub-benchmarks. For the manuscript we executed 2 benchmarks:</p>
-<h2 id="Comparison-with-other-methods-on-a-subset-of-genotypes-for-cis-QTL-analysis">Comparison with other methods on a subset of genotypes for cis-QTL analysis<a class="anchor-link" href="#Comparison-with-other-methods-on-a-subset-of-genotypes-for-cis-QTL-analysis">&#182;</a></h2>
+<p>You should see a number of scripts generated under <code>src</code> and <code>src/modules</code> with extensions <code>*.dsc</code>, <code>*.py</code> and <code>*.R</code>. These are scripts essential to run the benchmark.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="A-toy-benchmark-example">A toy benchmark example<a class="anchor-link" href="#A-toy-benchmark-example">&#182;</a></h2><p>Here using one data-set from DAP-G paper we demonstrate now the benchmark works,</p>
+
+<pre><code>dsc susie.dsc --target run_comparison -o toy_comparison -c 8</code></pre>
+<p>screen output:</p>
+
+<pre><code>INFO: Load command line DSC sequence: run_comparison
+INFO: DSC script exported to toy_comparison.html
+INFO: Constructing DSC from susie.dsc ...
+INFO: Building execution graph &amp; running DSC ...
+[#####################] 21 steps processed (183 jobs completed)
+INFO: Building DSC database ...
+INFO: DSC complete!
+INFO: Elapsed time 6456.271 seconds.</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Results from this one toy data-set can be found under <code>toy_comparison</code> folder.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Actual-commands-used-for-SuSiE-paper">Actual commands used for SuSiE paper<a class="anchor-link" href="#Actual-commands-used-for-SuSiE-paper">&#182;</a></h2><p>Computations of DSC are performed on The University of Chicago RCC Midway cluster. 
+The files <code>*.yml</code> are relevant to settings on the cluster that assigns resource for different computational modules involved.</p>
+<p>To compare with methods on smaller simulations scenarios for effect variable $S = 1,2,3,4,5$ on smaller data (1000 variables):</p>
+
 <pre><code>dsc susie.dsc --target run_comparison -o susie_comparison --host susie_comparison.yml -c 60</code></pre>
-<h2 id="Comparison-with-DAP-G-on-full-cis-QTL-genotypes-with-10-causal-SNPs">Comparison with DAP-G on full cis-QTL genotypes with 10 causal SNPs<a class="anchor-link" href="#Comparison-with-DAP-G-on-full-cis-QTL-genotypes-with-10-causal-SNPs">&#182;</a></h2>
+<p>To compare with DAP on $S = 10$ on full range of genotype data (~8K variables on average):</p>
+
 <pre><code>dsc susie.dsc --target hard_case -o hard_case --host hard_case.yml -c 60</code></pre>
-<p>The configuration files <code>*.yml</code> configured the benchmark execution environment on a cluster system operated by the University of Chicago. It is also possible to run the benchmark on a local computer, if <code>--host</code> option is dropped. The <code>*.yml</code> files are still relevant in providing information on required resource for each DSC module. It is estimated that benchmark commands above will take about a week's computation on a single desktop machine with 28 CPU threads.</p>
+<p>It is also possible to run the benchmark on a local computer, if <code>--host</code> option is dropped. The <code>*.yml</code> files under <code>src</code> folder are still relevant in providing information on required resource for each DSC module. Running time of the benchmark depends on avaiable computational resource. It is estimated that the entire benchmark will take over a week to run on a single compute node with 28 Intel Xeon E5 CPU threads (some otehr fine-mapping methods are the speed bottleneck)</p>
+<p>To sync only relevant results to local computer:</p>
+
+<pre><code>#to_sync=susie_comparison
+to_sync=hard_case
+rsync -auzP --include="*/" --exclude="*.ld_mat.rds" --include="*.rds" --include="*.pkl" --include="*.pdf" --include="*.png" --include="*.db"  --include="*.mpk" --exclude="*" &lt;remote_url&gt;:&lt;path&gt;/$to_sync ./</code></pre>
 
 </div>
 </div>

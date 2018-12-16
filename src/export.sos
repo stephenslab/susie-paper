@@ -5,4 +5,5 @@ parameter: notebook = 'finemapping.ipynb'
 input: notebook
 bash: expand = True, stderr = False
   mkdir -p modules
-  jupyter nbconvert --to notebook --execute {_input} --output {_input}
+  jupyter nbconvert --to notebook --execute {_input} --output {_input:n}.exported.ipynb
+  rm -f {_input:n}.exported.ipynb

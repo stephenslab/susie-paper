@@ -54,7 +54,8 @@ RUN R --slave -e "devtools::install_github('hazimehh/L0Learn')"
 RUN R --slave -e "install.packages('matrixStats', repos='http://cran.us.r-project.org')"
 
 # SoS and DSC
-RUN pip3 install sos==0.17.7 sos-notebook==0.17.3 dsc==0.3.1.2 rpy2==2.9.4 tzlocal --no-cache-dir
+RUN pip3 install sos==0.17.7 sos-notebook==0.17.2 dsc==0.3.1.2 rpy2==2.9.4 tzlocal --no-cache-dir
+RUN pip3 install jupyter_contrib_nbextensions==0.2.8 jupyter_contrib_core==0.3.1 --no-cache-dir
 RUN R --slave -e "devtools::install_github('stephenslab/dsc@v0.3.1.2', subdir = 'dscrutils')"
 
 # Python packages for making plots
@@ -62,9 +63,6 @@ RUN pip3 install matplotlib==3.0.2 seaborn==0.9.0 --no-cache-dir
 
 # susieR 
 RUN R --slave -e "devtools::install_github('stephenslab/susieR', ref = '"${SuSiE_VERSION}"')"
-
-# Jupyter support
-RUN pip3 install jupyter_contrib_nbextensions==0.5.0
 
 # Prevent local config / packages from being loaded
 ENV R_ENVIRON_USER ""

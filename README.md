@@ -1,6 +1,5 @@
 # Code & data accompanying SuSiE manuscript (Wang et al, 2018)
-
-[![DOI](https://zenodo.org/badge/44247975.svg)](https://zenodo.org/badge/latestdoi/2368676)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2368676.svg)](https://doi.org/10.5281/zenodo.2368676)
 
 This repository contains code and data resources to accompany our
 research paper:

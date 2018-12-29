@@ -15,7 +15,6 @@ RUN apt-get update \
     gfortran \
     libgfortran-6-dev \
     libgomp1 \
-    pandoc \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /var/log/dpkg.log
 

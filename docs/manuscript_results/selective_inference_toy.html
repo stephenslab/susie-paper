@@ -1,0 +1,597 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="ipynb_website:version" content="0.9.7" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet" type="text/css" href="../css/jt.css">
+<link rel="stylesheet" type="text/css" href="../css/readable.css">
+<link rel="stylesheet" type="text/css" href="../css/toc2.css">
+
+<link href="../site_libs/jqueryui-1.11.4/jquery-ui.css">
+<link rel="stylesheet" href="../site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="../site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+<script src="../site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="../site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="../site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+
+<link rel="stylesheet"
+      href="../site_libs/highlightjs/null.min.css"
+      type="text/css" />
+
+<script src="../site_libs/highlightjs/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+<script src="../js/doc_toc.js"></script>
+<script src="../js/docs.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+        },
+        "HTML-CSS": {
+            preferredFont: "TeX",
+            availableFonts: ["TeX"],
+            styles: {
+                scale: 110,
+                ".MathJax_Display": {
+                    "font-size": "110%",
+                }
+            }
+        }
+    });
+</script>
+<script>
+function filterDataFrame(id) {
+    var input = document.getElementById("search_" + id);
+    var filter = input.value.toUpperCase();
+    var table = document.getElementById("dataframe_" + id);
+    var tr = table.getElementsByTagName("tr");
+    // Loop through all table rows, and hide those who don't match the search query
+    for (var i = 1; i < tr.length; i++) {
+        for (var j = 0; j < tr[i].cells.length; ++j) {
+            var matched = false;
+            if (tr[i].cells[j].innerHTML.toUpperCase().indexOf(filter) != -1) {
+                tr[i].style.display = "";
+                matched = true
+                break;
+            }
+            if (!matched)
+                tr[i].style.display = "none";
+        }
+    }
+}
+function sortDataFrame(id, n, dtype) {
+    var table = document.getElementById("dataframe_" + id);
+    var tb = table.tBodies[0]; // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
+    var tr = Array.prototype.slice.call(tb.rows, 0); // put rows into array
+    if (dtype === 'numeric') {
+        var fn = function(a, b) { 
+            return parseFloat(a.cells[n].textContent) <= parseFloat(b.cells[n].textContent) ? -1 : 1;
+        }
+    } else {
+        var fn = function(a, b) {
+            var c = a.cells[n].textContent.trim().localeCompare(b.cells[n].textContent.trim()); 
+            return c > 0 ? 1 : (c < 0 ? -1 : 0) }
+    }
+    var isSorted = function(array, fn) {
+        if (array.length < 2)
+            return 1;
+        var direction = fn(array[0], array[1]); 
+        for (var i = 1; i < array.length - 1; ++i) {
+            var d = fn(array[i], array[i+1]);
+            if (d == 0)
+                continue;
+            else if (direction == 0)
+                direction = d;
+            else if (direction != d)
+                return 0;
+            }
+        return direction;
+    }
+    var sorted = isSorted(tr, fn);
+    if (sorted == 1 || sorted == -1) {
+        // if sorted already, reverse it
+        for(var i = tr.length - 1; i >= 0; --i)
+            tb.appendChild(tr[i]); // append each row in order
+    } else {
+        tr = tr.sort(fn);
+        for(var i = 0; i < tr.length; ++i)
+            tb.appendChild(tr[i]); // append each row in order
+    }
+}
+</script>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+  // mark it active
+  menuAnchor.parent().addClass('active');
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+<div class="container-fluid main-container">
+<!-- tabsets -->
+<script src="../site_libs/navigation-1.1/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+
+
+<title>SuSiE manuscript</title>
+
+<style type = "text/css">
+body {
+  
+  padding-top: 66px;
+  padding-bottom: 40px;
+}
+</style>
+</head>
+
+<body>
+<div tabindex="-1" id="notebook" class="border-box-sizing">
+<div class="container" id="notebook-container">
+
+<!-- code folding -->
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">SuSiE manuscript</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+<li>
+  <a href="../index.html">Overview</a>
+</li>
+        
+<li>
+  <a href="../finemapping_benchmark.html">Finemapping Benchmark</a>
+</li>
+        
+<li>
+  <a href="../manuscript_results.html">Manuscript Results</a>
+</li>
+        
+      </ul>
+        
+<ul class="nav navbar-nav navbar-right">
+<li>
+   <a href="http://github.com/stephenslab/susie-paper"> source </a>
+</li>
+</ul>
+        
+      </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>The aim here is to run selective inference on the toy example from
+Wang et al (2018) [<a href="https://www.biorxiv.org/content/10.1101/501114v1">https://www.biorxiv.org/content/10.1101/501114v1</a>]</p>
+<p>First load libraries:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="kn">library</span><span class="p">(</span>selectiveInference<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Loading required package: glmnet
+Loading required package: Matrix
+Loading required package: foreach
+Loaded glmnet 2.0-18
+
+Loading required package: intervals
+
+Attaching package: ‘intervals’
+
+The following object is masked from ‘package:Matrix’:
+
+    expand
+
+Loading required package: survival
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now simulate some data with $x_1=x_2$ and $x_3=x_4$ and effects at variables
+1 and 3. (We do $p=100$ rather than $p=1000$ to reduce run-time)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="kp">set.seed</span><span class="p">(</span><span class="m">15</span><span class="p">)</span>
+n<span class="o">=</span> <span class="m">500</span>
+p <span class="o">=</span> <span class="m">100</span>
+x <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span>rnorm<span class="p">(</span>n<span class="o">*</span>p<span class="p">),</span>nrow<span class="o">=</span>n<span class="p">,</span>ncol<span class="o">=</span>p<span class="p">)</span>
+x<span class="p">[,</span><span class="m">2</span><span class="p">]</span> <span class="o">=</span> x<span class="p">[,</span><span class="m">1</span><span class="p">]</span>
+x<span class="p">[,</span><span class="m">4</span><span class="p">]</span> <span class="o">=</span> x<span class="p">[,</span><span class="m">3</span><span class="p">]</span>
+b <span class="o">=</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span>p<span class="p">)</span>
+b<span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">=</span> <span class="m">1</span>
+b<span class="p">[</span><span class="m">4</span><span class="p">]</span> <span class="o">=</span> <span class="m">1</span>
+y <span class="o">=</span> x <span class="o">%*%</span> b <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Unfortunately the method won't allow duplicate columns:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># run forward stepwise,</span>
+  <span class="kp">try</span><span class="p">(</span>fsfit <span class="o">&lt;-</span> fs<span class="p">(</span>x<span class="p">,</span>y<span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Error in checkargs.xy(x = x, y = y) : x cannot have duplicate columns
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="kp">try</span><span class="p">(</span>larfit <span class="o">&lt;-</span> lar<span class="p">(</span>x<span class="p">,</span>y<span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Error in checkargs.xy(x = x, y = y) : x cannot have duplicate columns
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So we modify x to make it not quite identical</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>x<span class="p">[,</span><span class="m">2</span><span class="p">]</span> <span class="o">=</span> x<span class="p">[,</span><span class="m">1</span><span class="p">]</span> <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0.1</span><span class="p">)</span>
+  x<span class="p">[,</span><span class="m">4</span><span class="p">]</span> <span class="o">=</span> x<span class="p">[,</span><span class="m">3</span><span class="p">]</span> <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0.1</span><span class="p">)</span>
+  cor<span class="p">(</span>x<span class="p">[,</span><span class="m">2</span><span class="p">],</span>x<span class="p">[,</span><span class="m">1</span><span class="p">])</span>
+  cor<span class="p">(</span>x<span class="p">[,</span><span class="m">4</span><span class="p">],</span>x<span class="p">[,</span><span class="m">3</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+0.995597708926389
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+0.995224321845479
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now run the forward selection, and compute sequential p-values and confidence intervals</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>fsfit <span class="o">&lt;-</span> fs<span class="p">(</span>x<span class="p">,</span>y<span class="p">)</span>
+
+<span class="c1"># compute sequential p-values and confidence intervals</span>
+<span class="c1"># (sigma estimated from full model)</span>
+  out <span class="o">=</span> fsInf<span class="p">(</span>fsfit<span class="p">)</span>
+  out
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>
+Call:
+fsInf(obj = fsfit)
+
+Standard deviation of noise (specified or estimated) sigma = 0.995
+
+Sequential testing results with alpha = 0.100
+ Step Var   Coef Z-score P-value LowConfPt UpConfPt LowTailArea UpTailArea
+    1   1  0.900  20.573   0.003     0.441    0.953       0.050      0.049
+    2   3  0.956  21.494   0.000     0.716    1.397       0.050      0.050
+    3  37  0.099   2.133   0.539    -0.439    0.156       0.050      0.050
+    4  45  0.083   1.817   0.911      -Inf    0.204       0.000      0.050
+    5   4 -0.838  -1.850   0.215      -Inf   10.125       0.000      0.050
+    6  46  0.077   1.747   0.715    -3.695    1.192       0.050      0.050
+    7  64 -0.077  -1.718   0.409    -3.906    2.666       0.050      0.050
+    8  79  0.076   1.678   0.542    -3.007    2.405       0.050      0.050
+    9  43  0.080   1.721   0.366    -1.354    2.373       0.050      0.050
+   10  68 -0.075  -1.669   0.456      -Inf      Inf       0.000      0.000
+   11  13  0.081   1.738   0.434      -Inf      Inf       0.000      0.000
+   12  61 -0.075  -1.588   0.102      -Inf    0.580       0.000      0.050
+   13  56 -0.064  -1.452   0.487    -3.159    3.055       0.050      0.050
+   14  84  0.058   1.332   0.901      -Inf    0.601       0.000      0.050
+   15  90  0.060   1.324   0.548    -3.950    3.120       0.050      0.050
+   16  65 -0.057  -1.284   0.298      -Inf      Inf       0.000      0.000
+   17  69 -0.056  -1.243   0.071      -Inf    0.613       0.000      0.050
+   18  74 -0.053  -1.177   0.998     4.469      Inf       0.010      0.000
+   19  18  0.052   1.194   0.084    -3.562      Inf       0.050      0.000
+   20  70 -0.047  -1.097   0.229      -Inf      Inf       0.000      0.000
+   21  49 -0.049  -1.075   0.092      -Inf    1.785       0.000      0.050
+   22  88  0.055   1.118   0.918      -Inf    1.226       0.000      0.050
+   23  25  0.049   1.055   0.060    -0.614      Inf       0.050      0.000
+   24  27 -0.047  -1.055   0.504      -Inf      Inf       0.000      0.000
+   25  96  0.051   1.120   0.861      -Inf      Inf       0.000      0.000
+   26  39  0.048   1.029   0.908      -Inf    3.127       0.000      0.050
+   27  40 -0.050  -1.041   0.005      -Inf   -4.787       0.000      0.011
+   28  17 -0.045  -0.968   0.190      -Inf    3.100       0.000      0.050
+   29  66 -0.041  -0.901   0.879    -2.066      Inf       0.050      0.000
+   30  85  0.042   0.916   0.874      -Inf      Inf       0.000      0.000
+   31   8 -0.044  -0.932   0.391      -Inf      Inf       0.000      0.000
+   32  22 -0.044  -0.933   0.144      -Inf    3.515       0.000      0.050
+   33  78  0.041   0.933   0.821      -Inf      Inf       0.000      0.000
+   34  28 -0.041  -0.882   0.789    -4.262      Inf       0.050      0.000
+   35   7  0.043   0.896   0.894      -Inf    2.807       0.000      0.050
+   36  26  0.044   0.905   0.620      -Inf      Inf       0.000      0.000
+   37  21 -0.041  -0.869   0.590      -Inf      Inf       0.000      0.000
+   38  71  0.043   0.940   0.194      -Inf      Inf       0.000      0.000
+   39  73  0.040   0.858   0.247      -Inf      Inf       0.000      0.000
+   40  50 -0.041  -0.867   0.963     4.773      Inf       0.048      0.000
+   41  99  0.041   0.876   0.022     4.638      Inf       0.033      0.000
+   42  59  0.036   0.790   0.079    -1.322      Inf       0.050      0.000
+   43  76  0.034   0.738   0.060    -0.458      Inf       0.050      0.000
+   44  62 -0.037  -0.781   0.760    -3.209      Inf       0.050      0.000
+   45  19  0.031   0.717   0.638      -Inf      Inf       0.000      0.000
+   46  36 -0.033  -0.711   0.705      -Inf      Inf       0.000      0.000
+   47   6  0.030   0.684   0.828      -Inf      Inf       0.000      0.000
+   48  34  0.034   0.725   0.041     1.281      Inf       0.050      0.000
+   49  57 -0.035  -0.740   0.915    -2.026      Inf       0.050      0.000
+   50  42 -0.034  -0.754   0.865    -4.424      Inf       0.050      0.000
+   51  14 -0.032  -0.692   0.212      -Inf    3.813       0.000      0.050
+   52  53  0.030   0.665   0.301      -Inf      Inf       0.000      0.000
+   53  83 -0.028  -0.627   0.704      -Inf      Inf       0.000      0.000
+   54  35  0.029   0.620   0.680      -Inf      Inf       0.000      0.000
+   55  12  0.027   0.594   0.850      -Inf    2.456       0.000      0.050
+   56   2 -0.285  -0.587   0.877      -Inf      Inf       0.000      0.000
+   57  38  0.031   0.617   0.632      -Inf      Inf       0.000      0.000
+   58  41 -0.026  -0.562   0.987     0.322      Inf       0.000      0.000
+   59  51  0.027   0.583   0.023    -0.330      Inf       0.000      0.000
+   60  91  0.030   0.644   0.943      -Inf    0.654       0.000      0.050
+   61  58  0.027   0.574   0.773      -Inf      Inf       0.000      0.000
+   62  97  0.029   0.558   0.002     5.116      Inf       0.004      0.000
+   63  87  0.025   0.523   0.552      -Inf      Inf       0.000      0.000
+   64   5  0.025   0.509   0.108    -2.311      Inf       0.050      0.000
+   65  63  0.022   0.485   0.489      -Inf      Inf       0.000      0.000
+   66  47  0.022   0.455   0.927      -Inf    2.634       0.000      0.050
+   67   9  0.021   0.459   0.642      -Inf      Inf       0.000      0.000
+   68  31  0.021   0.448   0.064    -1.444      Inf       0.050      0.000
+   69  89 -0.021  -0.426   0.721      -Inf      Inf       0.000      0.000
+   70  32 -0.022  -0.419   0.428      -Inf      Inf       0.000      0.000
+   71  86 -0.021  -0.422   0.188      -Inf      Inf       0.000      0.000
+   72  48 -0.020  -0.402   0.492      -Inf      Inf       0.000      0.000
+   73  20 -0.017  -0.360   0.163      -Inf      Inf       0.000      0.000
+   74  67 -0.018  -0.373   0.202      -Inf      Inf       0.000      0.000
+   75  44  0.017   0.348   0.281      -Inf      Inf       0.000      0.000
+   76  52  0.016   0.329   0.407    -3.741      Inf       0.050      0.000
+   77  11  0.015   0.309   0.697      -Inf      Inf       0.000      0.000
+   78  23  0.014   0.308   0.357      -Inf      Inf       0.000      0.000
+   79  94  0.014   0.313   0.402      -Inf      Inf       0.000      0.000
+   80  30  0.014   0.287   0.339      -Inf      Inf       0.000      0.000
+   81  95  0.013   0.264   0.269      -Inf      Inf       0.000      0.000
+   82  33  0.012   0.251   0.553      -Inf      Inf       0.000      0.000
+   83  15 -0.011  -0.226   0.534      -Inf      Inf       0.000      0.000
+   84  98  0.011   0.235   0.305      -Inf      Inf       0.000      0.000
+   85  72 -0.010  -0.205   0.119      -Inf    4.010       0.000      0.050
+   86 100  0.008   0.161   0.797      -Inf      Inf       0.000      0.000
+   87  81 -0.008  -0.161   0.107      -Inf    2.010       0.000      0.050
+   88  24  0.007   0.135   0.771      -Inf      Inf       0.000      0.000
+   89  10  0.006   0.123   0.440      -Inf      Inf       0.000      0.000
+   90  60  0.006   0.120   0.592      -Inf      Inf       0.000      0.000
+   91  75 -0.005  -0.113   0.153      -Inf    4.187       0.000      0.050
+   92  16 -0.004  -0.086   0.629      -Inf      Inf       0.000      0.000
+   93  54  0.004   0.078   0.996      -Inf   -5.340       0.000      0.004
+   94  29  0.004   0.077   0.842      -Inf      Inf       0.000      0.000
+   95  82  0.004   0.078   0.004     4.839      Inf       0.005      0.000
+   96  80  0.000  -0.008   0.880      -Inf      Inf       0.000      0.000
+   97  93  0.000   0.008   0.642      -Inf      Inf       0.000      0.000
+   98  77  0.000  -0.007   0.185      -Inf      Inf       0.000      0.000
+   99  55  0.000  -0.004   0.716      -Inf      Inf       0.000      0.000
+  100  92  0.000  -0.003   0.443      -Inf      Inf       0.000      0.000
+
+Estimated stopping point from ForwardStop rule = 2</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Summary">Summary<a class="anchor-link" href="#Summary">&#182;</a></h1><p>In this example, selective inference selected variables 1 and 3,
+each with very small $p$ values. Of course we know that
+variable 3 is a false selection,
+so it might seem bad that the p value is small. However you have
+to remember that the p value does not measure significance of the variable selection: it measures the significance of the coefficient of the selected
+variable, conditional on the selection event.</p>
+<p>Put another way, selective inference is not really trying
+to assess uncertainty in which variables should be selected,
+and is certainly not trying to produce inferences of the form
+$$(b_1 \neq 0 \text{ OR } b_2 \neq 0) \text{ AND }  (b_3 \neq 0 \text{ OR } b_4 \neq 0)$$
+which was the goal in Wang et al.</p>
+
+</div>
+</div>
+</div>
+<hr>
+&copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob//manuscript_results/selective_inference_toy.Rmd"><code>manuscript_results/selective_inference_toy.Rmd</code></a> committed by gaow on Sat Feb 2 00:21:39 2019 <a href="http://github.com/stephenslab/susie-paper/commit/">revision 0, </a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+</div>
+</div>
+</body>
+</html>

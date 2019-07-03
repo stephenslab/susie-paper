@@ -1,0 +1,83 @@
+---
+title: "selective_inference_toy"
+author: "Matthew Stephens"
+date: "2019-06-25"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+The aim here is to run selective inference on the toy example from
+Wang et al (2018) [https://www.biorxiv.org/content/10.1101/501114v1]
+
+
+First load libraries:
+```{r}
+library(selectiveInference)
+```
+
+
+Now simulate some data with $x_1=x_2$ and $x_3=x_4$ and effects at variables
+1 and 3. (We do $p=100$ rather than $p=1000$ to reduce run-time)
+```{r}
+set.seed(15)
+n= 500
+p = 100
+x = matrix(rnorm(n*p),nrow=n,ncol=p)
+x[,2] = x[,1] 
+x[,4] = x[,3]
+b = rep(0,p)
+b[1]= 1
+b[4] = 1
+y = x %*% b + rnorm(n)
+```
+
+Unfortunately the method won't allow duplicate columns:
+```{r}
+# run forward stepwise,
+  try(fsfit <- fs(x,y))
+
+```
+
+
+```{r}
+  try(larfit <- lar(x,y))
+```
+
+
+So we modify x to make it not quite identical
+```{r}
+  x[,2] = x[,1] + rnorm(n,0,0.1) 
+  x[,4] = x[,3] + rnorm(n,0,0.1)
+  cor(x[,2],x[,1])
+  cor(x[,4],x[,3])
+  
+```
+
+Now run the forward selection, and compute sequential p-values and confidence intervals
+```{r}
+  fsfit <- fs(x,y)
+  
+# compute sequential p-values and confidence intervals
+# (sigma estimated from full model)
+  out = fsInf(fsfit)
+  out
+```
+
+
+#  Summary
+
+In this example, selective inference selected variables 1 and 3,
+each with very small $p$ values. Of course we know that
+variable 3 is a false selection,
+so it might seem bad that the p value is small. However you have
+to remember that the p value does not measure significance of the variable selection: it measures the significance of the coefficient of the selected
+variable, conditional on the selection event. 
+
+Put another way, selective inference is not really trying
+to assess uncertainty in which variables should be selected,
+and is certainly not trying to produce inferences of the form
+$$(b_1 \neq 0 \text{ OR } b_2 \neq 0) \text{ AND }  (b_3 \neq 0 \text{ OR } b_4 \neq 0)$$
+which was the goal in Wang et al.

@@ -1,7 +1,7 @@
 ---
-title: "selective_inference_toy"
+title: "Selective inference for a toy example"
 author: "Matthew Stephens"
-date: "2019-06-25"
+date: 2019-07-03
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
@@ -9,75 +9,84 @@ editor_options:
 
 ## Introduction
 
-The aim here is to run selective inference on the toy example from
-Wang et al (2018) [https://www.biorxiv.org/content/10.1101/501114v1]
+Here we investigate "selective inference" in the toy example of
+[Wang et al (2018)][wang-2018].
 
+```{r knitr-opts, include=FALSE}
+knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold")
+```
 
-First load libraries:
-```{r}
+## Load packages
+
+First, load the [selective inference][selectiveInference] package.
+
+```{r load-pkgs, warning=FALSE, message=FALSE}
 library(selectiveInference)
 ```
 
+## Simulate data
 
-Now simulate some data with $x_1=x_2$ and $x_3=x_4$ and effects at variables
-1 and 3. (We do $p=100$ rather than $p=1000$ to reduce run-time)
-```{r}
+Now simulate some data with $x_1 = x_2$ and $x_3 = x_4$, and with
+effects at variables 1 and 3. (We simulate $p = 100$ variables rather
+than $p = 1000$ so that the example runs faster.)
+
+```{r sim-data}
 set.seed(15)
-n= 500
-p = 100
-x = matrix(rnorm(n*p),nrow=n,ncol=p)
-x[,2] = x[,1] 
-x[,4] = x[,3]
-b = rep(0,p)
-b[1]= 1
-b[4] = 1
-y = x %*% b + rnorm(n)
+n     <- 500
+p     <- 100
+x     <- matrix(rnorm(n*p),n,p)
+x[,2] <- x[,1] 
+x[,4] <- x[,3]
+b     <- rep(0,p)
+b[1]  <- 1
+b[4]  <- 1
+y     <- drop(x %*% b + rnorm(n))
 ```
 
-Unfortunately the method won't allow duplicate columns:
-```{r}
-# run forward stepwise,
-  try(fsfit <- fs(x,y))
+## Run selective inference
 
+Unfortunately, the selective inference methods won't allow duplicate
+columns.
+
+```{r run-fs-1}
+try(fsfit <- fs(x,y))
+try(larfit <- lar(x,y))
 ```
 
+So we modify `x` so that the identical columns aren't quite identical.
 
-```{r}
-  try(larfit <- lar(x,y))
+```{r tweak-x}
+x[,2] <- x[,1] + rnorm(n,0,0.1) 
+x[,4] <- x[,3] + rnorm(n,0,0.1)
+cor(x[,1],x[,2])
+cor(x[,3],x[,4])
 ```
 
+Now run the forward selection again, computing sequential *p*-values and
+confidence intervals.
 
-So we modify x to make it not quite identical
-```{r}
-  x[,2] = x[,1] + rnorm(n,0,0.1) 
-  x[,4] = x[,3] + rnorm(n,0,0.1)
-  cor(x[,2],x[,1])
-  cor(x[,4],x[,3])
-  
+```{r run-fs-2}
+fsfit <- fs(x,y)
+out   <- fsInf(fsfit)
+print(out)
 ```
 
-Now run the forward selection, and compute sequential p-values and confidence intervals
-```{r}
-  fsfit <- fs(x,y)
-  
-# compute sequential p-values and confidence intervals
-# (sigma estimated from full model)
-  out = fsInf(fsfit)
-  out
-```
+## Summary
 
+From the above output, we see that the selective inference method
+selected variables 1 and 3 with very small *p*-values. Of course, we
+know that variable 3 is a false selection, so it might seem bad that
+the *p*-value is small. However, you have to remember that 
+*p*-values do not measure significance of variable selection---they
+measure the significance of the coefficient of the selected variable,
+*conditional on the selection event.*
 
-#  Summary
+Put another way, selective inference is not trying to assess
+uncertainty in which variables should be selected, and is certainly
+not trying to produce inferences of the form $$(b_1 \neq 0 \text{ OR }
+b_2 \neq 0) \text{ AND } (b_3 \neq 0 \text{ OR } b_4 \neq 0),$$ which
+was the goal of [Wang et al (2018)][wang-2018].
 
-In this example, selective inference selected variables 1 and 3,
-each with very small $p$ values. Of course we know that
-variable 3 is a false selection,
-so it might seem bad that the p value is small. However you have
-to remember that the p value does not measure significance of the variable selection: it measures the significance of the coefficient of the selected
-variable, conditional on the selection event. 
+[wang-2018]: https://www.biorxiv.org/content/10.1101/501114v1
+[selectiveInference]: https://cran.r-project.org/package=selectiveInference
 
-Put another way, selective inference is not really trying
-to assess uncertainty in which variables should be selected,
-and is certainly not trying to produce inferences of the form
-$$(b_1 \neq 0 \text{ OR } b_2 \neq 0) \text{ AND }  (b_3 \neq 0 \text{ OR } b_4 \neq 0)$$
-which was the goal in Wang et al.

@@ -1,13 +1,4 @@
----
-title: "Selective inference for a toy example"
-author: "Matthew Stephens"
-date: 2019-07-03
-output: workflowr::wflow_html
-editor_options:
-  chunk_output_type: console
----
-
-## Introduction
+# Selective inference for a toy example
 
 Here we investigate "selective inference" in the toy example of
 [Wang et al (2018)][wang-2018].

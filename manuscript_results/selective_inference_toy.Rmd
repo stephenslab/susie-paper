@@ -1,7 +1,6 @@
 # Selective inference for a toy example
 
-Here we investigate "selective inference" in the toy example of
-[Wang et al (2018)][wang-2018].
+Here we investigate "selective inference" in the toy example of [Wang et al (2018)][wang-2018].
 
 ```{r knitr-opts, include=FALSE}
 knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold")

@@ -199,8 +199,7 @@ body {
   </div><!--/.container -->
 </div><!--/.navbar -->
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Splicing-QTL-analysis:-application-to-Li-et-al-2016">Splicing QTL analysis: application to Li et al 2016<a class="anchor-link" href="#Splicing-QTL-analysis:-application-to-Li-et-al-2016">&#182;</a></h1><p>In Li et al 2016 the authors systematically analyzed genetic effects (SNPs) on various molecular phenotypes of gene regulation, from the chromatin state through protein function. 
 Here we re-analyze one molecular phenotype, the alternative splicing. We fine-map splice QTL (sQTL) using data provided in Li et al.</p>
@@ -209,8 +208,7 @@ Here we re-analyze one molecular phenotype, the alternative splicing. We fine-ma
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The data-set is <a href="http://eqtl.uchicago.edu/jointLCL/">available here</a>. Summary statistics for sQTL analysis via <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3348564/"><code>MatrixQTL</code></a> was also provided on the website. In the original analysis the authors performed permutation based procedure to calibrate p-value for <code>MatrixQTL</code> results.  They computed the empirical
 gene-level p-value for the most significant QTL for each gene; and at 10% and 5% FDR, they identified 2,893 and 1,602 sQTLs respectively.</p>
@@ -219,8 +217,7 @@ gene-level p-value for the most significant QTL for each gene; and at 10% and 5%
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here we perform two analysis, sQTL fine-mapping with SuSiE and enrichment analysis in selected genomic regions or functional annotations. This notebook provides commands to reproduce our fine-mapping and enrichment analysis.</p>
 
@@ -235,7 +232,7 @@ gene-level p-value for the most significant QTL for each gene; and at 10% and 5%
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">revisions</span> <span class="o">-</span><span class="n">s</span> <span class="o">--</span><span class="kp">tags</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">walk</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -245,7 +242,7 @@ gene-level p-value for the most significant QTL for each gene; and at 10% and 5%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -278,7 +275,7 @@ gene-level p-value for the most significant QTL for each gene; and at 10% and 5%
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">cd</span> <span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">compbio</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -288,7 +285,7 @@ gene-level p-value for the most significant QTL for each gene; and at 10% and 5%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -301,8 +298,7 @@ gene-level p-value for the most significant QTL for each gene; and at 10% and 5%
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Data-paths">Data paths<a class="anchor-link" href="#Data-paths">&#182;</a></h2><p>Set these environment variables in the command window that performs the analysis. To reproduce you need to change these paths to fit your computing environment:</p>
 
@@ -318,16 +314,14 @@ annotation_list="data/annotation.list"</code></pre>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Fine-mapping-with-SuSiE">Fine-mapping with SuSiE<a class="anchor-link" href="#Fine-mapping-with-SuSiE">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Alternative-splicing-ratio-intron-data-preprocessing">Alternative splicing ratio intron data preprocessing<a class="anchor-link" href="#Alternative-splicing-ratio-intron-data-preprocessing">&#182;</a></h3>
 <pre><code>sos run analysis/20180704_MolecularQTL_Workflow.ipynb preprocess \
@@ -338,16 +332,14 @@ annotation_list="data/annotation.list"</code></pre>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="SuSiE-analysis">SuSiE analysis<a class="anchor-link" href="#SuSiE-analysis">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 
 <pre><code>sos run analysis/20180704_MolecularQTL_Workflow.ipynb SuSiE \
@@ -358,8 +350,7 @@ annotation_list="data/annotation.list"</code></pre>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Fine-mapping-results-plot">Fine-mapping results plot<a class="anchor-link" href="#Fine-mapping-results-plot">&#182;</a></h3><p>We plot posterior inclusion probability for intron clusters having one or more confidence sets identified:</p>
 
@@ -372,8 +363,7 @@ annotation_list="data/annotation.list"</code></pre>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Confidence-sets-summary">Confidence sets summary<a class="anchor-link" href="#Confidence-sets-summary">&#182;</a></h3>
 <pre><code>sos run analysis/20180704_MolecularQTL_Workflow.ipynb signal_summary \
@@ -385,16 +375,14 @@ annotation_list="data/annotation.list"</code></pre>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Fine-mapping-with-other-methods">Fine-mapping with other methods<a class="anchor-link" href="#Fine-mapping-with-other-methods">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="DAP-G">DAP-G<a class="anchor-link" href="#DAP-G">&#182;</a></h3><p>We also run DAP-G on the dataset:</p>
 
@@ -408,8 +396,7 @@ annotation_list="data/annotation.list"</code></pre>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Follow-up-with-CAVIAR">Follow-up with CAVIAR<a class="anchor-link" href="#Follow-up-with-CAVIAR">&#182;</a></h3><p>For intron cluster with one or more confidence sets we follow up with CAVIAR allowing for one additional possible secondary signal (use <code>-c 2</code> option):</p>
 
@@ -423,8 +410,7 @@ annotation_list="data/annotation.list"</code></pre>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Follow-up-with-multiple-regression">Follow-up with multiple regression<a class="anchor-link" href="#Follow-up-with-multiple-regression">&#182;</a></h3>
 <pre><code>sos run analysis/20180704_MolecularQTL_Workflow.ipynb lm_follow_up \
@@ -442,7 +428,7 @@ annotation_list="data/annotation.list"</code></pre>
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">JointLCL</span><span class="o">/</span><span class="n">AS_output</span><span class="o">/</span><span class="n">fastqtl_qqnorm_ASintron_RNAseqGeuvadis_YangVCF_100Kb</span><span class="o">/</span><span class="n">lm_follow_up</span><span class="o">/</span><span class="n">top_cond_pval</span><span class="o">.</span><span class="n">png</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -452,7 +438,7 @@ annotation_list="data/annotation.list"</code></pre>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -464,7 +450,7 @@ annotation_list="data/annotation.list"</code></pre>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -476,7 +462,7 @@ annotation_list="data/annotation.list"</code></pre>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -493,8 +479,7 @@ annotation_list="data/annotation.list"</code></pre>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Extract-SuSiE-summary-statistics">Extract SuSiE summary statistics<a class="anchor-link" href="#Extract-SuSiE-summary-statistics">&#182;</a></h3><p>We consolidate PIP and CS from identified sQTLs -- relevant to other analysis downstream:</p>
 
@@ -505,8 +490,7 @@ annotation_list="data/annotation.list"</code></pre>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Comparison-with-MatrixQTL-results-(analysis-performed-by-Li-et-al-2016)">Comparison with MatrixQTL results (analysis performed by Li et al 2016)<a class="anchor-link" href="#Comparison-with-MatrixQTL-results-(analysis-performed-by-Li-et-al-2016)">&#182;</a></h2>
 <pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
@@ -525,16 +509,14 @@ sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Enrichment-analysis">Enrichment analysis<a class="anchor-link" href="#Enrichment-analysis">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Download-and-pre-process-annotation-data">Download and pre-process annotation data<a class="anchor-link" href="#Download-and-pre-process-annotation-data">&#182;</a></h3><p>Pipelines below were used to obtain and pre-process the annotation data-sets. We provide <a href="https://shiny.stephenslab.uchicago.edu/">here</a> the processed annotation files for easier access.</p>
 <h4 id="Histone-marks-&amp;-DNase-I-hypersensitive-site">Histone marks &amp; DNase I hypersensitive site<a class="anchor-link" href="#Histone-marks-&amp;-DNase-I-hypersensitive-site">&#182;</a></h4>
@@ -560,8 +542,7 @@ sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Apply-annotations">Apply annotations<a class="anchor-link" href="#Apply-annotations">&#182;</a></h3>
 <pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb range2var_annotation \
@@ -573,8 +554,7 @@ sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Select-candidate-SNPs-for-sQTL-enrichment-analysis">Select candidate SNPs for sQTL enrichment analysis<a class="anchor-link" href="#Select-candidate-SNPs-for-sQTL-enrichment-analysis">&#182;</a></h3><p>Instead of performing matched analysis (matching MAF, distance to TSS, LD pattern) for other molecular genotypes, we focus on SNPs in genes for sQTL, as suggested by Li et al 2016.</p>
 
@@ -586,8 +566,7 @@ sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Fisher's-exact-test-for-enrichment">Fisher's exact test for enrichment<a class="anchor-link" href="#Fisher's-exact-test-for-enrichment">&#182;</a></h3>
 <pre><code>sos run analysis/20180712_Enrichment_Workflow.ipynb cs_fisher_test \
@@ -606,7 +585,7 @@ sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">jointLCLs</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">SuSiE</span><span class="o">/</span><span class="n">fastqtl_qqnorm_ASintron_RNAseqGeuvadis_YangVCF_100Kb</span><span class="o">/</span><span class="n">enrichment</span><span class="o">/</span><span class="n">SuSiE_loci</span><span class="o">.</span><span class="n">sumstats</span><span class="o">.</span><span class="n">cs_fisher_test</span><span class="o">.</span><span class="n">png</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -616,7 +595,7 @@ sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -628,7 +607,7 @@ sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -640,7 +619,7 @@ sos run analysis/20180712_Enrichment_Workflow.ipynb signal_overlap \
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 

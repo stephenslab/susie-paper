@@ -199,8 +199,7 @@ body {
   </div><!--/.container -->
 </div><!--/.navbar -->
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="A-pedagogical-example-of-fine-mapping-problem">A pedagogical example of fine-mapping problem<a class="anchor-link" href="#A-pedagogical-example-of-fine-mapping-problem">&#182;</a></h1><p>Here we demonstrate with simulated data a setting of fine-mapping problem where it is clearly problematic to run forward stagewise selection, but SuSiE's Iterative Bayesian Stepwise Selection procedure can correctly identify the causal signals and compute posterior inclusion probability (posterior mean from a variational approximation to the posterior distribution). We also compared SuSiE results with other Bayesian sparse regression approach, and demonstrate that SuSiE is robust to prior choice and provide information more relevant to fine-mapping applications that other methods do not provide.</p>
 
@@ -208,8 +207,7 @@ body {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>From simulated data we pick this case example where the top z-score might be a result of two other nearby signal clusters (containing variables of non-zero effects). See <a href="https://stephenslab.github.io/susieR/articles/finemapping.html">here</a> for a brief description on the simulation settings.</p>
 
@@ -224,7 +222,7 @@ body {
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">revisions</span> <span class="o">-</span><span class="n">s</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -234,7 +232,7 @@ body {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -295,7 +293,7 @@ body {
 <span class="nb">set</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -309,7 +307,7 @@ body {
 <span class="n">attach</span><span class="p">(</span><span class="n">N2finemapping</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -323,7 +321,7 @@ body {
 <span class="n">names</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -333,7 +331,7 @@ body {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -358,8 +356,7 @@ body {
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This simulated data-set has two replicates. We focus on the fist replicate:</p>
 
@@ -374,22 +371,20 @@ body {
 <div class=" highlight hl-sos"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Comparing-SuSiE-with-per-variable-regression">Comparing SuSiE with per-variable regression<a class="anchor-link" href="#Comparing-SuSiE-with-per-variable-regression">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We fit SuSiE and obtain its CS and PIP. We also perform a per-feature simple regression and get (asymptotic) z-scores by setting <code>compute_univariate_zscore</code> to <code>TRUE</code>.</p>
 
@@ -409,14 +404,13 @@ body {
                <span class="n">coverage</span> <span class="o">=</span> <span class="mf">0.95</span><span class="p">,</span> <span class="n">min_abs_corr</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We plot p-values from per-feature regression in parallel with PIP from SuSiE.</p>
 
@@ -439,7 +433,7 @@ body {
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -449,7 +443,7 @@ body {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -471,7 +465,7 @@ body {
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">susie_demo</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">150</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -481,7 +475,7 @@ body {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -493,7 +487,7 @@ body {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -505,7 +499,7 @@ body {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -522,8 +516,7 @@ body {
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The identified CS are:</p>
 
@@ -538,7 +531,7 @@ body {
 <div class=" highlight hl-sos"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">fitted</span><span class="err">$</span><span class="n">sets</span><span class="err">$</span><span class="n">cs</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -548,7 +541,7 @@ body {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -569,8 +562,7 @@ $L3
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><code>L2</code> corresponds to the blue cluster around position 900. <code>L3</code> corresponds to the cyan cluster around position 400. In both cases the simulated non-zero effect are captured by the confidence sets.</p>
 
@@ -578,8 +570,7 @@ $L3
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The CS <code>L2</code> has many variables. We check how correlated they are:</p>
 
@@ -594,7 +585,7 @@ $L3
 <div class=" highlight hl-sos"><pre><span></span><span class="n">fitted</span><span class="err">$</span><span class="n">sets</span><span class="err">$</span><span class="n">purity</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -604,7 +595,7 @@ $L3
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -626,8 +617,7 @@ $L3
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The minimum absolute correlation is 0.97 for CS <code>L2</code>. So SuSiE behavior is reasonable.</p>
 
@@ -635,8 +625,7 @@ $L3
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Notice that the strongest marginal association is at position</p>
 
@@ -651,7 +640,7 @@ $L3
 <div class=" highlight hl-sos"><pre><span></span><span class="n">which</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">fitted</span><span class="err">$</span><span class="n">z</span><span class="p">))</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -661,7 +650,7 @@ $L3
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -676,16 +665,14 @@ $L3
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Looking-into-SuSiE-VEM-iterations">Looking into SuSiE VEM iterations<a class="anchor-link" href="#Looking-into-SuSiE-VEM-iterations">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It takes 23 iterations for SuSiE to converge on this example. With <code>track_fit=TRUE</code> we keep in <code>fitted$trace</code> object various quantities to help with diagnotics.</p>
 
@@ -700,7 +687,7 @@ $L3
 <div class=" highlight hl-sos"><pre><span></span><span class="n">fitted</span><span class="err">$</span><span class="n">niter</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -710,7 +697,7 @@ $L3
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -732,7 +719,7 @@ $L3
 <div class=" highlight hl-sos"><pre><span></span><span class="n">susie_plot_iteration</span><span class="p">(</span><span class="n">fitted</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;demo&#39;</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -742,7 +729,7 @@ $L3
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -764,7 +751,7 @@ Iterplot saved to demo.gif
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">demo</span><span class="o">.</span><span class="n">gif</span> <span class="o">--</span><span class="n">width</span> <span class="mi">80</span><span class="o">%</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -774,7 +761,7 @@ Iterplot saved to demo.gif
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -786,7 +773,7 @@ Iterplot saved to demo.gif
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -798,7 +785,7 @@ Iterplot saved to demo.gif
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -816,8 +803,7 @@ width=80%
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>At the first iteration, the variable with the top z-score was picked up by the first CS. But in later iterations, the first CS vanishes; the 2nd and 3rd CS correctly pick up the two "true" signals.</p>
 
@@ -825,16 +811,14 @@ width=80%
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="SuSiE-with-L=2">SuSiE with <code>L=2</code><a class="anchor-link" href="#SuSiE-with-L=2">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We now set <code>L=2</code> and see how SuSiE converges to the true signals, if capable:</p>
 
@@ -856,7 +840,7 @@ width=80%
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -866,7 +850,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -888,7 +872,7 @@ width=80%
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">l2</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">150</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -898,7 +882,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -910,7 +894,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -922,7 +906,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -946,7 +930,7 @@ width=80%
 <div class=" highlight hl-sos"><pre><span></span><span class="n">fitted</span><span class="err">$</span><span class="n">niter</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -956,7 +940,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -978,7 +962,7 @@ width=80%
 <div class=" highlight hl-sos"><pre><span></span><span class="n">susie_plot_iteration</span><span class="p">(</span><span class="n">fitted</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;demo_l2&#39;</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -988,7 +972,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -1010,7 +994,7 @@ Iterplot saved to demo_l2.gif
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">demo_l2</span><span class="o">.</span><span class="n">gif</span> <span class="o">--</span><span class="n">width</span> <span class="mi">80</span><span class="o">%</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1020,7 +1004,7 @@ Iterplot saved to demo_l2.gif
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1032,7 +1016,7 @@ Iterplot saved to demo_l2.gif
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1044,7 +1028,7 @@ Iterplot saved to demo_l2.gif
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1062,8 +1046,7 @@ width=80%
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It seems at the first iteration, the first CS picks up the induced wrong signal cluster, but both true signals were picked up by the 2nd CS which is quite wide. Later iterations removed the induced wrong cluster and the 2 CS properly converged to the two true signals as desired.</p>
 
@@ -1071,8 +1054,7 @@ width=80%
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Is-the-result-robust-to-prior-choice?">Is the result robust to prior choice?<a class="anchor-link" href="#Is-the-result-robust-to-prior-choice?">&#182;</a></h2><p>Here instead of fixing prior, I ask SuSiE to update prior variance</p>
 
@@ -1092,7 +1074,7 @@ width=80%
                <span class="n">min_abs_corr</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1107,7 +1089,7 @@ width=80%
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1117,7 +1099,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1139,7 +1121,7 @@ width=80%
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">est_prior</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">150</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1149,7 +1131,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1161,7 +1143,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1173,7 +1155,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1190,8 +1172,7 @@ width=80%
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now I fix SuSiE prior to a smaller value (scaled prior is 0.005):</p>
 
@@ -1211,7 +1192,7 @@ width=80%
                <span class="n">min_abs_corr</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1226,7 +1207,7 @@ width=80%
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1236,7 +1217,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1258,7 +1239,7 @@ width=80%
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">small_prior</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">150</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1268,7 +1249,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1280,7 +1261,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1292,7 +1273,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1309,8 +1290,7 @@ width=80%
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Result remains largely the same.</p>
 
@@ -1318,16 +1298,14 @@ width=80%
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="How-other-methods-cope-with-this">How other methods cope with this<a class="anchor-link" href="#How-other-methods-cope-with-this">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In <a href="https://github.com/stephenslab/susieR/tree/master/inst/code">this folder</a> we provide scripts to run <code>CAVIAR</code>, <code>FINEMAP</code> (version 1.1) and <code>DAP-G</code> on the same data-set for a comparison. We generate summary statistics and run these 3 other methods on the example.</p>
 
@@ -1353,7 +1331,7 @@ width=80%
 <span class="n">saveRDS</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">dat</span><span class="p">,</span> <span class="n">sumstats</span><span class="o">=</span><span class="n">sumstats</span><span class="p">),</span> <span class="s1">&#39;N2.with_sumstats.rds&#39;</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1367,7 +1345,7 @@ width=80%
 <span class="n">Rscript</span> <span class="o">~/</span><span class="n">GIT</span><span class="o">/</span><span class="n">susieR</span><span class="o">/</span><span class="n">inst</span><span class="o">/</span><span class="n">code</span><span class="o">/</span><span class="n">finemap</span><span class="o">.</span><span class="n">R</span> <span class="nb">input</span><span class="o">=</span>\<span class="s2">&quot;N2.with_sumstats.rds</span><span class="se">\&quot;</span><span class="s2"> output=</span><span class="se">\&quot;</span><span class="s2">N2finemapping.FINEMAP</span><span class="se">\&quot;</span><span class="s2"> args=</span><span class="se">\&quot;</span><span class="s2">--n-causal-max\ 2</span><span class="se">\&quot;</span><span class="s2"> &amp;&gt; /dev/null</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1381,7 +1359,7 @@ width=80%
 <span class="n">Rscript</span> <span class="o">~/</span><span class="n">GIT</span><span class="o">/</span><span class="n">susieR</span><span class="o">/</span><span class="n">inst</span><span class="o">/</span><span class="n">code</span><span class="o">/</span><span class="n">caviar</span><span class="o">.</span><span class="n">R</span> <span class="nb">input</span><span class="o">=</span>\<span class="s2">&quot;N2.with_sumstats.rds</span><span class="se">\&quot;</span><span class="s2"> output=</span><span class="se">\&quot;</span><span class="s2">N2finemapping.CAVIAR</span><span class="se">\&quot;</span><span class="s2"> args=</span><span class="se">\&quot;</span><span class="s2">-c\ 2\ -g\ 0.01</span><span class="se">\&quot;</span><span class="s2"> &amp;&gt; /dev/null</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1395,14 +1373,13 @@ width=80%
 <span class="n">python</span> <span class="o">~/</span><span class="n">GIT</span><span class="o">/</span><span class="n">susieR</span><span class="o">/</span><span class="n">inst</span><span class="o">/</span><span class="n">code</span><span class="o">/</span><span class="n">dap</span><span class="o">-</span><span class="n">g</span><span class="o">.</span><span class="n">py</span> <span class="n">N2</span><span class="o">.</span><span class="n">with_sumstats</span><span class="o">.</span><span class="n">rds</span> <span class="n">N2finemapping</span><span class="o">.</span><span class="n">DAP</span> <span class="o">-</span><span class="n">ld_control</span> <span class="mf">0.20</span> <span class="o">--</span><span class="nb">all</span> <span class="o">&amp;&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we look at these results.</p>
 
@@ -1419,14 +1396,13 @@ width=80%
 <span class="n">dap</span> <span class="o">=</span> <span class="n">readRDS</span><span class="p">(</span><span class="s2">&quot;N2finemapping.DAP.rds&quot;</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="CAVIAR-results"><code>CAVIAR</code> results<a class="anchor-link" href="#CAVIAR-results">&#182;</a></h3><h4 id="PIP">PIP<a class="anchor-link" href="#PIP">&#182;</a></h4>
 </div>
@@ -1444,7 +1420,7 @@ width=80%
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1454,7 +1430,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1476,7 +1452,7 @@ width=80%
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">caviar_fm</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">150</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1486,7 +1462,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1498,7 +1474,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1510,7 +1486,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1527,8 +1503,7 @@ width=80%
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="95%-CS">95% CS<a class="anchor-link" href="#95%-CS">&#182;</a></h4><p>CAVIAR provides single 95% confidence sets as follows:</p>
 
@@ -1543,7 +1518,7 @@ width=80%
 <div class=" highlight hl-sos"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">caviar</span><span class="p">[[</span><span class="mi">1</span><span class="p">]]</span><span class="err">$</span><span class="nb">set</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1553,7 +1528,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -1584,7 +1559,7 @@ width=80%
 <div class=" highlight hl-sos"><pre><span></span><span class="nb">any</span><span class="p">(</span><span class="n">which</span><span class="p">(</span><span class="n">b</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="o">%</span><span class="ow">in</span><span class="o">%</span> <span class="n">caviar</span><span class="p">[[</span><span class="mi">1</span><span class="p">]]</span><span class="err">$</span><span class="nb">set</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1594,7 +1569,7 @@ width=80%
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1609,8 +1584,7 @@ TRUE
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It is a wide CS, although it does capture the causal SNPs.</p>
 
@@ -1618,8 +1592,7 @@ TRUE
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Choice-of-prior">Choice of prior<a class="anchor-link" href="#Choice-of-prior">&#182;</a></h4><p>When I set <code>CAVIAR</code> non-centrality parameter to 10 instead of the default 5.2, I do get an improved result,</p>
 
@@ -1634,7 +1607,7 @@ TRUE
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">CAVIAR</span><span class="o">.</span><span class="n">ncp</span><span class="o">.</span><span class="n">hack</span><span class="o">.</span><span class="n">png</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1644,7 +1617,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1656,7 +1629,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1668,7 +1641,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1685,8 +1658,7 @@ TRUE
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Analysis procedure not shown because <code>CAVIAR</code> by default does not allow configuration of NCP (need to change the code and re-compile the binary).</p>
 
@@ -1694,8 +1666,7 @@ TRUE
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="FINEMAP-results"><code>FINEMAP</code> results<a class="anchor-link" href="#FINEMAP-results">&#182;</a></h3><h4 id="PIP">PIP<a class="anchor-link" href="#PIP">&#182;</a></h4>
 </div>
@@ -1713,7 +1684,7 @@ TRUE
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1723,7 +1694,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1745,7 +1716,7 @@ TRUE
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">finemap_fm</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">150</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1755,7 +1726,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1767,7 +1738,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1779,7 +1750,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1796,8 +1767,7 @@ TRUE
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="95%-CS">95% CS<a class="anchor-link" href="#95%-CS">&#182;</a></h4><p>For each configuration, FINEMAP provides the corresponding configuration probability:</p>
 
@@ -1812,7 +1782,7 @@ TRUE
 <div class=" highlight hl-sos"><pre><span></span><span class="n">head</span><span class="p">(</span><span class="n">finemap</span><span class="p">[[</span><span class="mi">1</span><span class="p">]]</span><span class="err">$</span><span class="nb">set</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1822,7 +1792,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1852,8 +1822,7 @@ TRUE
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It requires post-processing to come up with a single 95% set similar to that of CAVIAR with all 3 causal variables captured. The result from running <code>finemap.R</code> provided has been truncated to the minimum set of configurations having cumulative probability of 95%. But the top 10 configurations completely missed the causal signals.</p>
 
@@ -1861,8 +1830,7 @@ TRUE
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Choice-of-prior">Choice of prior<a class="anchor-link" href="#Choice-of-prior">&#182;</a></h4><p>The default prior for <code>FINEMAP</code> is 0.05 (for the Gaussian standard deviation). Knowing from simulation parameters of the true effect size, we increase it to 0.1.</p>
 
@@ -1878,7 +1846,7 @@ TRUE
 <span class="n">Rscript</span> <span class="o">~/</span><span class="n">GIT</span><span class="o">/</span><span class="n">susieR</span><span class="o">/</span><span class="n">inst</span><span class="o">/</span><span class="n">code</span><span class="o">/</span><span class="n">finemap</span><span class="o">.</span><span class="n">R</span> <span class="nb">input</span><span class="o">=</span>\<span class="s2">&quot;N2.with_sumstats.rds</span><span class="se">\&quot;</span><span class="s2"> output=</span><span class="se">\&quot;</span><span class="s2">N2finemapping.FINEMAP.p1std</span><span class="se">\&quot;</span><span class="s2"> args=</span><span class="se">\&quot;</span><span class="s2">--n-causal-max\ 2\ --prior-std\ 0.1</span><span class="se">\&quot;</span><span class="s2"> &amp;&gt; /dev/null</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1896,7 +1864,7 @@ TRUE
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1906,7 +1874,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1928,7 +1896,7 @@ TRUE
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">finemap_bigger_prior</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">150</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1938,7 +1906,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1950,7 +1918,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1962,7 +1930,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1986,7 +1954,7 @@ TRUE
 <div class=" highlight hl-sos"><pre><span></span><span class="n">head</span><span class="p">(</span><span class="n">finemap</span><span class="p">[[</span><span class="mi">1</span><span class="p">]]</span><span class="err">$</span><span class="nb">set</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1996,7 +1964,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2026,8 +1994,7 @@ TRUE
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The reported best configuration is closer to the true effects.</p>
 
@@ -2035,8 +2002,7 @@ TRUE
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="DAP-G-results"><code>DAP-G</code> results<a class="anchor-link" href="#DAP-G-results">&#182;</a></h3><h4 id="PIP">PIP<a class="anchor-link" href="#PIP">&#182;</a></h4>
 </div>
@@ -2054,7 +2020,7 @@ TRUE
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2064,7 +2030,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2086,7 +2052,7 @@ TRUE
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">dap_fm</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">150</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2096,7 +2062,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2108,7 +2074,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2120,7 +2086,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2137,8 +2103,7 @@ TRUE
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The default prior works</p>
 
@@ -2146,8 +2111,7 @@ TRUE
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="95%-CS">95% CS<a class="anchor-link" href="#95%-CS">&#182;</a></h4><p>Similar to SuSiE, DAP-G provides per-signal 95% CS:</p>
 
@@ -2162,7 +2126,7 @@ TRUE
 <div class=" highlight hl-sos"><pre><span></span><span class="n">dap</span><span class="p">[[</span><span class="mi">1</span><span class="p">]]</span><span class="err">$</span><span class="nb">set</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2172,7 +2136,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2197,8 +2161,7 @@ TRUE
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Using an average $r^2$ filter of 0.2 ($r=0.44$, compared to SuSiE's $r=0.1$ in earlier analysis), it reports five 95% CS; the first 3 CS contain causal signals. Also the first CS is wider.</p>
 

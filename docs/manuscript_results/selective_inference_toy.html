@@ -199,8 +199,7 @@ body {
   </div><!--/.container -->
 </div><!--/.navbar -->
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Selective-inference-for-a-toy-example">Selective inference for a toy example<a class="anchor-link" href="#Selective-inference-for-a-toy-example">&#182;</a></h1><p>Here we investigate "selective inference" in the toy example of <a href="https://www.biorxiv.org/content/10.1101/501114v1">Wang et al (2018)</a>. We show that the approach will sometimes select the wrong variables -- which is inevitable in cases where variables are perfectly correlated -- and then assign them highly significant $p$ values. This is because even though the wrong variables are selected, their coefficients within the wrong model can be estimated precisely.</p>
 
@@ -212,17 +211,16 @@ body {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>knitr<span class="o">::</span>opts_chunk<span class="o">$</span>set<span class="p">(</span>comment <span class="o">=</span> <span class="s">&quot;#&quot;</span><span class="p">,</span>collapse <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>results <span class="o">=</span> <span class="s">&quot;hold&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">knitr</span><span class="o">::</span><span class="n">opts_chunk</span><span class="o">$</span><span class="nf">set</span><span class="p">(</span><span class="n">comment</span> <span class="o">=</span> <span class="s">&quot;#&quot;</span><span class="p">,</span><span class="n">collapse</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span><span class="n">results</span> <span class="o">=</span> <span class="s">&quot;hold&quot;</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Load-packages">Load packages<a class="anchor-link" href="#Load-packages">&#182;</a></h2><p>First, load the <a href="https://cran.r-project.org/package=selectiveInference">selective inference</a> package.</p>
 
@@ -234,10 +232,10 @@ body {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kn">library</span><span class="p">(</span>selectiveInference<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">selectiveInference</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -247,14 +245,14 @@ body {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>Loading required package: glmnet
 Loading required package: Matrix
 Loading required package: foreach
-Loaded glmnet 2.0-18
+Loaded glmnet 2.0-16
 
 Loading required package: intervals
 
@@ -274,8 +272,7 @@ Loading required package: survival
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Simulate-data">Simulate data<a class="anchor-link" href="#Simulate-data">&#182;</a></h2><p>Now simulate some data with $x_1 = x_2$ and $x_3 = x_4$, and with
 effects at variables 1 and 3. (We simulate $p = 100$ variables rather
@@ -289,26 +286,25 @@ than $p = 1000$ so that the example runs faster.)</p>
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">set.seed</span><span class="p">(</span><span class="m">15</span><span class="p">)</span>
-n     <span class="o">&lt;-</span> <span class="m">500</span>
-p     <span class="o">&lt;-</span> <span class="m">100</span>
-x     <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span>rnorm<span class="p">(</span>n<span class="o">*</span>p<span class="p">),</span>n<span class="p">,</span>p<span class="p">)</span>
-x<span class="p">[,</span><span class="m">2</span><span class="p">]</span> <span class="o">&lt;-</span> x<span class="p">[,</span><span class="m">1</span><span class="p">]</span>
-x<span class="p">[,</span><span class="m">4</span><span class="p">]</span> <span class="o">&lt;-</span> x<span class="p">[,</span><span class="m">3</span><span class="p">]</span>
-b     <span class="o">&lt;-</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span>p<span class="p">)</span>
-b<span class="p">[</span><span class="m">1</span><span class="p">]</span>  <span class="o">&lt;-</span> <span class="m">1</span>
-b<span class="p">[</span><span class="m">4</span><span class="p">]</span>  <span class="o">&lt;-</span> <span class="m">1</span>
-y     <span class="o">&lt;-</span> <span class="kp">drop</span><span class="p">(</span>x <span class="o">%*%</span> b <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">))</span>
+<div class=" highlight hl-r"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">15</span><span class="p">)</span>
+<span class="n">n</span>     <span class="o">&lt;-</span> <span class="m">500</span>
+<span class="n">p</span>     <span class="o">&lt;-</span> <span class="m">100</span>
+<span class="n">x</span>     <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">p</span><span class="p">),</span><span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+<span class="n">x[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span> <span class="o">&lt;-</span> <span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span>
+<span class="n">x[</span><span class="p">,</span><span class="m">4</span><span class="n">]</span> <span class="o">&lt;-</span> <span class="n">x[</span><span class="p">,</span><span class="m">3</span><span class="n">]</span>
+<span class="n">b</span>     <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+<span class="n">b[1]</span>  <span class="o">&lt;-</span> <span class="m">1</span>
+<span class="n">b[4]</span>  <span class="o">&lt;-</span> <span class="m">1</span>
+<span class="n">y</span>     <span class="o">&lt;-</span> <span class="nf">drop</span><span class="p">(</span><span class="n">x</span> <span class="o">%*%</span> <span class="n">b</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Run-selective-inference">Run selective inference<a class="anchor-link" href="#Run-selective-inference">&#182;</a></h2><p>Unfortunately, the selective inference methods won't allow duplicate
 columns.</p>
@@ -321,37 +317,17 @@ columns.</p>
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">try</span><span class="p">(</span>fsfit <span class="o">&lt;-</span> fs<span class="p">(</span>x<span class="p">,</span>y<span class="p">))</span>
-<span class="kp">try</span><span class="p">(</span>larfit <span class="o">&lt;-</span> lar<span class="p">(</span>x<span class="p">,</span>y<span class="p">))</span>
+<div class=" highlight hl-r"><pre><span></span><span class="nf">try</span><span class="p">(</span><span class="n">fsfit</span> <span class="o">&lt;-</span> <span class="nf">fs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+<span class="nf">try</span><span class="p">(</span><span class="n">larfit</span> <span class="o">&lt;-</span> <span class="nf">lar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
 </pre></div>
 
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Error in checkargs.xy(x = x, y = y) : x cannot have duplicate columns
-Error in checkargs.xy(x = x, y = y) : x cannot have duplicate columns
-</pre>
-</div>
-</div>
-
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So we modify <code>x</code> so that the identical columns aren't quite identical.</p>
 
@@ -363,13 +339,13 @@ Error in checkargs.xy(x = x, y = y) : x cannot have duplicate columns
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>x<span class="p">[,</span><span class="m">2</span><span class="p">]</span> <span class="o">&lt;-</span> x<span class="p">[,</span><span class="m">1</span><span class="p">]</span> <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0.1</span><span class="p">)</span>
-x<span class="p">[,</span><span class="m">4</span><span class="p">]</span> <span class="o">&lt;-</span> x<span class="p">[,</span><span class="m">3</span><span class="p">]</span> <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0.1</span><span class="p">)</span>
-cor<span class="p">(</span>x<span class="p">[,</span><span class="m">1</span><span class="p">],</span>x<span class="p">[,</span><span class="m">2</span><span class="p">])</span>
-cor<span class="p">(</span>x<span class="p">[,</span><span class="m">3</span><span class="p">],</span>x<span class="p">[,</span><span class="m">4</span><span class="p">])</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">x[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span> <span class="o">&lt;-</span> <span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0.1</span><span class="p">)</span>
+<span class="n">x[</span><span class="p">,</span><span class="m">4</span><span class="n">]</span> <span class="o">&lt;-</span> <span class="n">x[</span><span class="p">,</span><span class="m">3</span><span class="n">]</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">cor</span><span class="p">(</span><span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">,</span><span class="n">x[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="p">)</span>
+<span class="nf">cor</span><span class="p">(</span><span class="n">x[</span><span class="p">,</span><span class="m">3</span><span class="n">]</span><span class="p">,</span><span class="n">x[</span><span class="p">,</span><span class="m">4</span><span class="n">]</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -379,7 +355,7 @@ cor<span class="p">(</span>x<span class="p">[,</span><span class="m">3</span><sp
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -391,7 +367,7 @@ cor<span class="p">(</span>x<span class="p">[,</span><span class="m">3</span><sp
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -406,8 +382,7 @@ cor<span class="p">(</span>x<span class="p">[,</span><span class="m">3</span><sp
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now run the forward selection again, computing sequential <em>p</em>-values and
 confidence intervals.</p>
@@ -420,12 +395,12 @@ confidence intervals.</p>
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>fsfit <span class="o">&lt;-</span> fs<span class="p">(</span>x<span class="p">,</span>y<span class="p">)</span>
-out   <span class="o">&lt;-</span> fsInf<span class="p">(</span>fsfit<span class="p">)</span>
-<span class="kp">print</span><span class="p">(</span>out<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">fsfit</span> <span class="o">&lt;-</span> <span class="nf">fs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">out</span>   <span class="o">&lt;-</span> <span class="nf">fsInf</span><span class="p">(</span><span class="n">fsfit</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -435,7 +410,7 @@ out   <span class="o">&lt;-</span> fsInf<span class="p">(</span>fsfit<span class
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -558,8 +533,7 @@ Estimated stopping point from ForwardStop rule = 2
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Summary">Summary<a class="anchor-link" href="#Summary">&#182;</a></h2><p>From the above output, we see that the selective inference method
 selected variables 1 and 3 with very small <em>p</em>-values. Of course, we

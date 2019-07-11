@@ -199,8 +199,7 @@ body {
   </div><!--/.container -->
 </div><!--/.navbar -->
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="A-demonstration-of-SuSiE's-motivations">A demonstration of SuSiE's motivations<a class="anchor-link" href="#A-demonstration-of-SuSiE's-motivations">&#182;</a></h1><p>This document explains with toy example illustration the unique type of inference SuSiE is interested in.</p>
 
@@ -208,16 +207,14 @@ body {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="The-inference-problem">The inference problem<a class="anchor-link" href="#The-inference-problem">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We assume our audience are familiar or interested in large scale regression. Similar to eg LASSO, SuSiE is a method for variable selection in large scale regression. Yet the type of inference SuSiE attempts to accomplish is different from other large scale regression methods, and is worth motivating in this document for those not familiar with this particular type of inference.</p>
 
@@ -225,8 +222,7 @@ body {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The type of inference is motivated by the so-called "genetic fine-mapping" study. Consider fitting the regression model $$y = \sum_{j=1}^p x_j\beta_j + \epsilon \quad \epsilon \sim N(0, \sigma^2I_n)$$ where $x_1 = x_2, x_3 = x_4$ and 
 $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to make a statement that $$\beta_1 \ne 0 \text{ or } \beta_2 \ne 0, \text{ and } \beta_3 \ne 0 \text{ or } \beta_4 \ne 0,$$</p>
@@ -235,8 +231,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>that is, in SuSiE variable selection we want to capture the fact that variables $x_1$ and $x_2$ (likewise $x_3$ and $x_4$) are too similar to distinguish. This is an inference that to our knowledge few other large scale regression can make; at least not in an intuitive and interpretable fashion.</p>
 
@@ -244,8 +239,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To illustrate here I set $p=1000$ and simulate a data-set:</p>
 
@@ -269,14 +263,13 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 <span class="n">y</span> <span class="o">=</span> <span class="n">X</span> <span class="o">%*%</span> <span class="n">b</span> <span class="o">+</span> <span class="n">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The "true" effects are:</p>
 
@@ -295,7 +288,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -305,7 +298,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -327,7 +320,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">truth</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">100</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -337,7 +330,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -349,7 +342,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -361,7 +354,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -378,8 +371,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="LASSO-inference">LASSO inference<a class="anchor-link" href="#LASSO-inference">&#182;</a></h2><p>LASSO will simply choose one of:</p>
 <ul>
@@ -406,7 +398,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
                                <span class="n">s</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">cv</span><span class="err">$</span><span class="k">lambda</span><span class="o">.</span><span class="n">min</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -423,7 +415,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -433,7 +425,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -455,7 +447,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">lasso</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">100</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -465,7 +457,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -477,7 +469,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -489,7 +481,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -506,8 +498,7 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>LASSO randomly picked $x_1$ and $x_3$ even though the true non-zero effects are $\beta_1$ and $\beta_4$.</p>
 
@@ -515,16 +506,14 @@ $\beta_1 \ne 0, \beta_4 \ne 0, \beta_{j \notin \{1,4\}} = 0$. Our goal is to mak
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Existing-Bayesian-methods-for-sparse-regression">Existing Bayesian methods for sparse regression<a class="anchor-link" href="#Existing-Bayesian-methods-for-sparse-regression">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For sparse enough problems, most other Bayesian methods provide posterior probabilities on "models" by enumerating (CAVIAR), schochastic search (FINEMAP) or sampling (BIMBAM) from all possible combinations of variables. In our motivating example, the "true" posterior for models are
 \begin{align}
@@ -566,14 +555,13 @@ but this does not provide the type of inference we are interested in.</p>
 <span class="n">saveRDS</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">dat</span><span class="p">,</span> <span class="n">sumstats</span><span class="o">=</span><span class="n">sumstats</span><span class="p">),</span> <span class="s1">&#39;/tmp/Toy.with_sumstats.rds&#39;</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>we then set up the path containing the <code>finemap</code> executable (here set to <code>~/GIT/github/mvarbvs/dsc/modules/linux</code>) and run a wrapper script provided in the <code>susieR</code> package under <code>inst/code</code> folder (the package source can be <a href="https://github.com/stephenslab/susieR">downloaded here</a>).</p>
 
@@ -589,7 +577,7 @@ but this does not provide the type of inference we are interested in.</p>
 <span class="n">Rscript</span> <span class="o">~/</span><span class="n">GIT</span><span class="o">/</span><span class="n">susieR</span><span class="o">/</span><span class="n">inst</span><span class="o">/</span><span class="n">code</span><span class="o">/</span><span class="n">finemap</span><span class="o">.</span><span class="n">R</span> <span class="nb">input</span><span class="o">=</span>\<span class="s2">&quot;/tmp/Toy.with_sumstats.rds</span><span class="se">\&quot;</span><span class="s2"> output=</span><span class="se">\&quot;</span><span class="s2">N2finemapping.FINEMAP</span><span class="se">\&quot;</span><span class="s2"> args=</span><span class="se">\&quot;</span><span class="s2">--n-causal-max\ 2</span><span class="se">\&quot;</span><span class="s2"> 2&gt; /dev/null</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -599,7 +587,7 @@ but this does not provide the type of inference we are interested in.</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -665,8 +653,7 @@ RUNNING FINEMAP (1/1)
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Posterior probabilities for "models" are:</p>
 
@@ -682,7 +669,7 @@ RUNNING FINEMAP (1/1)
 <span class="n">head</span><span class="p">(</span><span class="n">finemap</span><span class="err">$</span><span class="nb">set</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -692,7 +679,7 @@ RUNNING FINEMAP (1/1)
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -718,8 +705,7 @@ RUNNING FINEMAP (1/1)
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><code>FINEMAP</code> correctly determined 4 "model configurations" as expected, each with probability 0.25. Simply marginalizing across all models we obtain posterior inclusion probability per feature,</p>
 
@@ -735,7 +721,7 @@ RUNNING FINEMAP (1/1)
 <span class="n">pip</span> <span class="o">=</span> <span class="n">snp</span><span class="p">[</span><span class="n">order</span><span class="p">(</span><span class="k">as</span><span class="o">.</span><span class="n">numeric</span><span class="p">(</span><span class="n">snp</span><span class="err">$</span><span class="n">snp</span><span class="p">)),]</span><span class="err">$</span><span class="n">snp_prob</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -750,7 +736,7 @@ RUNNING FINEMAP (1/1)
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -760,7 +746,7 @@ RUNNING FINEMAP (1/1)
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -782,7 +768,7 @@ RUNNING FINEMAP (1/1)
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">finemap</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">100</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -792,7 +778,7 @@ RUNNING FINEMAP (1/1)
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -804,7 +790,7 @@ RUNNING FINEMAP (1/1)
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -816,7 +802,7 @@ RUNNING FINEMAP (1/1)
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -833,8 +819,7 @@ RUNNING FINEMAP (1/1)
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>From these marginalized posterior we can only make a statement that each of the 4 identified variables have 0.5 probability of being non-zero. That is, they all have equal contributions. It does not reflect the fact that the result comes from identical feature pairs $x_1, x_2$ and $x_3, x_4$.</p>
 
@@ -842,8 +827,7 @@ RUNNING FINEMAP (1/1)
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Existing variational inference methods (<code>varbvs</code>) do not provide accurate calculation of marginal posterior probabilities, although like LASSO, existing variational methods are good for prediction purposes.</p>
 
@@ -851,8 +835,7 @@ RUNNING FINEMAP (1/1)
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="SuSiE">SuSiE<a class="anchor-link" href="#SuSiE">&#182;</a></h2><p>SuSiE uses a variational inference algorithm which is not only computational convenient, but also directly obtains posterior statements of the desired form.</p>
 
@@ -870,7 +853,7 @@ RUNNING FINEMAP (1/1)
                <span class="n">tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">track_fit</span><span class="o">=</span><span class="n">TRUE</span><span class="p">,</span> <span class="n">min_abs_corr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -885,7 +868,7 @@ RUNNING FINEMAP (1/1)
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -895,7 +878,7 @@ RUNNING FINEMAP (1/1)
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -917,7 +900,7 @@ RUNNING FINEMAP (1/1)
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">susie</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">100</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -927,7 +910,7 @@ RUNNING FINEMAP (1/1)
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -939,7 +922,7 @@ RUNNING FINEMAP (1/1)
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -951,7 +934,7 @@ RUNNING FINEMAP (1/1)
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -968,8 +951,7 @@ RUNNING FINEMAP (1/1)
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here SuSiE identifies 2 sets of variables -- 2 confidence sets each containing one causal variable (blue and green circles). The marginal posterior is the same as from existing Bayesian methods (FINEMAP result), but with the two sets identified one can easily state that the causal variables are ($x_1$ or $x_2$), and ($x_3$ or $x_4$). Within each set, the contributions of variables are equal because there is no information to distinguish between them.</p>
 <p>Notice that SuSiE does not directly provide posterior of model configuration, that is, inference on ($x_1$ and $x_3$), or ($x_1$ and $x_4$), or ($x_2$ and $x_3$), or ($x_2$ and $x_4$).</p>
@@ -978,8 +960,7 @@ RUNNING FINEMAP (1/1)
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Effect size estimate by SuSiE,</p>
 
@@ -997,7 +978,7 @@ RUNNING FINEMAP (1/1)
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1007,7 +988,7 @@ RUNNING FINEMAP (1/1)
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1029,7 +1010,7 @@ RUNNING FINEMAP (1/1)
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">susie_eff</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">100</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1039,7 +1020,7 @@ RUNNING FINEMAP (1/1)
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1051,7 +1032,7 @@ RUNNING FINEMAP (1/1)
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1063,7 +1044,7 @@ RUNNING FINEMAP (1/1)
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1087,7 +1068,7 @@ RUNNING FINEMAP (1/1)
 <div class=" highlight hl-sos"><pre><span></span><span class="n">convert</span> <span class="o">-</span><span class="n">density</span> <span class="mi">120</span> \<span class="p">(</span> <span class="n">truth</span><span class="o">.</span><span class="n">pdf</span> <span class="n">lasso</span><span class="o">.</span><span class="n">pdf</span> <span class="o">+</span><span class="n">append</span> \<span class="p">)</span> \<span class="p">(</span> <span class="n">finemap</span><span class="o">.</span><span class="n">pdf</span> <span class="n">susie</span><span class="o">.</span><span class="n">pdf</span> <span class="o">+</span><span class="n">append</span> \<span class="p">)</span> <span class="o">-</span><span class="n">append</span> <span class="n">Motivating_Example</span><span class="o">.</span><span class="n">png</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 

@@ -1,14 +1,15 @@
 # Selective inference for a toy example
 
-Here we investigate "selective inference" in the toy example of [Wang et al (2018)][wang-2018].
+Here we investigate "selective inference" in the toy example of [Wang et al (2018)](https://www.biorxiv.org/content/10.1101/501114v1). We show that the approach will sometimes select the wrong variables -- which is inevitable in cases where variables are perfectly correlated -- and then assign them highly significant $p$ values. This is because even though the wrong variables are selected, their coefficients within the wrong model can be estimated precisely.
 
+ 
 ```{r knitr-opts, include=FALSE}
 knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold")
 ```
 
 ## Load packages
 
-First, load the [selective inference][selectiveInference] package.
+First, load the [selective inference](https://cran.r-project.org/package=selectiveInference) package.
 
 ```{r load-pkgs, warning=FALSE, message=FALSE}
 library(selectiveInference)
@@ -75,8 +76,4 @@ Put another way, selective inference is not trying to assess
 uncertainty in which variables should be selected, and is certainly
 not trying to produce inferences of the form $$(b_1 \neq 0 \text{ OR }
 b_2 \neq 0) \text{ AND } (b_3 \neq 0 \text{ OR } b_4 \neq 0),$$ which
-was the goal of [Wang et al (2018)][wang-2018].
-
-[wang-2018]: https://www.biorxiv.org/content/10.1101/501114v1
-[selectiveInference]: https://cran.r-project.org/package=selectiveInference
-
+was the goal of [Wang et al (2018)](https://www.biorxiv.org/content/10.1101/501114v1).

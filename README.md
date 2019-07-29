@@ -4,7 +4,7 @@
 This repository contains code and data resources to accompany our
 research paper:
 
-> G Wang, A K Sarkar, P Carbonetto and M Stephens. A simple new approach to variable selection in regression, with application to genetic fine-mapping. [bioRxiv](https://www.biorxiv.org/content/10.1101/501114v1) doi:10.1101/501114. 
+> G Wang, A K Sarkar, P Carbonetto and M Stephens. A simple new approach to variable selection in regression, with application to genetic fine-mapping. [bioRxiv](https://www.biorxiv.org/content/10.1101/501114v2) doi:10.1101/501114. 
 
 
 

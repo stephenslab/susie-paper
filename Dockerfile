@@ -18,30 +18,40 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /var/log/dpkg.log
 
+# Fine-mapping tools required packages
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    libgsl-dev libgsl2 libatlas3-base liblapack-dev \
+    && apt-get clean
+
 # R, Python, SoS and DSC
-ENV MINICONDA_VERSION 4.5.11
+ENV MINICONDA_VERSION 4.7.12
 ENV PATH /opt/miniconda3/bin:$PATH
 RUN curl https://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VERSION-Linux-x86_64.sh -o MCON.sh \
     && /bin/bash MCON.sh -b -p /opt/miniconda3 \
     && ln -s /opt/miniconda3/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
-    && conda install matplotlib==3.0.2 seaborn==0.9.0 \
-    && conda install -c conda-forge r-base==3.5.1 sos==0.17.7 dsc==0.3.1.2 rpy2==2.9.4 \
+    && conda install -c conda-forge r-base==3.5.1 rpy2==3.1.0 r-reticulate==1.13 \
+			matplotlib==3.0.2 seaborn==0.9.0 \
     && conda clean --all -tipsy && rm -rf /tmp/* $HOME/.cache
-RUN pip install sos-notebook==0.17.3 jupyter_contrib_nbextensions==0.5.0 --no-cache-dir
+RUN pip install sos-notebook==0.21.0 sos==0.20.12 dsc==0.4.0 --no-cache-dir
 
 # Packages for building and running susieR vignettes
 RUN conda install -c conda-forge r-devtools r-testthat r-openssl r-reshape r-ggplot2 r-cowplot \
-	r-profvis r-microbenchmark r-pkgdown r-dplyr r-stringr r-readr r-magrittr \
+	r-profvis r-microbenchmark r-pkgdown r-dplyr r-stringr r-readr r-magrittr r-abind r-tibble \
 	r-matrixstats r-glmnet \
 	libiconv && conda clean --all -tipsy && rm -rf /tmp/* $HOME/.cache
 RUN ln -s /bin/tar /bin/gtar
 
-# Large scale regression related tools for running some susieR vignettes
-RUN R --slave -e "devtools::install_github('glmgen/genlasso')"
-RUN R --slave -e "devtools::install_github('hazimehh/L0Learn')"
+# DSC R utils
+ENV DSCRUTILS_VERSION f90099a6e5f6d056602b57347a2b5f65ec65f94b
+RUN R --slave -e "devtools::install_github('stephenslab/dsc', subdir = 'dscrutils', ref = '"${DSCRUTILS_VERSION}"')"
 
-# Fine-mapping tools
-RUN apt-get update && apt-get install -y --no-install-recommends libgsl-dev libgsl2 libatlas3-base liblapack-dev && apt-get clean
+# Large scale regression related tools for running some susieR vignettes
+ENV GENLASSO_VERSION 13eee75eedcb6c3236c127bc6ad34affcf748fe8
+ENV L0LEARN_VERSION 6ebc1394b4586e3c3347cc15bca1205fa46b91d4
+RUN R --slave -e "devtools::install_github('glmgen/genlasso', ref = '"${GENLASSO_VERSION}"')"
+RUN R --slave -e "devtools::install_github('hazimehh/L0Learn', ref = '"${L0LEARN_VERSION}"')"
+
 RUN curl -L https://github.com/fhormoz/caviar/tarball/743038a32ae66ea06ee599670cb7939fb80a923f -o caviar.tar.gz \
     && tar -zxvf caviar.tar.gz && cd fhormoz-caviar-*/CAVIAR-C++ && make \
     && mv CAVIAR eCAVIAR mupCAVIAR setCAVIAR /usr/local/bin && rm -rf /tmp/*
@@ -65,16 +75,8 @@ RUN curl -L https://raw.githubusercontent.com/stephenslab/susieR/${SuSiE_VERSION
 RUN curl -L https://raw.githubusercontent.com/stephenslab/susieR/${SuSiE_VERSION}/inst/code/dap-g.py -o /usr/local/bin/dap-g.py \
     && chmod +x /usr/local/bin/dap-g.py
 
-# DSC R-utils
-RUN R --slave -e "devtools::install_github('rstudio/reticulate')"
-RUN R --slave -e "devtools::install_github('stephenslab/dsc@v0.3.1.2', subdir = 'dscrutils')"
-
-# susieR 
+# susieR
 RUN R --slave -e "devtools::install_github('stephenslab/susieR', ref = '"${SuSiE_VERSION}"')"
-
-# Benchmark related
-RUN R --slave -e "install.packages('abind', repos='http://cran.us.r-project.org')"
-
 
 # Prevent local config / packages from being loaded
 ENV R_ENVIRON_USER ""

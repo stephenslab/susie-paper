@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -198,7 +199,8 @@ body {
   </div><!--/.container -->
 </div><!--/.navbar -->
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Application-to-change-point-detection-problem">Application to change point detection problem<a class="anchor-link" href="#Application-to-change-point-detection-problem">&#182;</a></h1><p>Although we developed SuSiE primarily with the goal of performing variable selection in highly sparse settings -- and, in particular, for genetic fine-mapping -- the approach also has considerable potential for application to other large-scale regression problems. Here we briefly illustrate this potential by applying it to a non-parametric regression problem that at first sight seems to be ill-suited to our approach.</p>
 
@@ -206,7 +208,8 @@ body {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Specifically we focus on the "change point detection problem", which does not involve strict sparsity, and the underlying correlation structure of the explanatory variables is very different from the "blocky" covariance structure of genetic data that SuSiE was designed for. Nonetheless, we will see that SuSiE performs well here despite this (partly due to its ability to capture non-sparse signals via Bayesian Model Averaging). Consider the non-parametric regression:
 $$y_t = \mu_t + e_t \quad t=1,\dots,T$$
@@ -218,14 +221,16 @@ where the $j$th column of $X$ is the step function with a step at $j$ ($j = 1,\d
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="SuSiE-change-point-example">SuSiE change point example<a class="anchor-link" href="#SuSiE-change-point-example">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To illustrate the potential of SuSiE for change point estimation we applied it to a simple simulated example from the <code>DNAcopy</code> package.</p>
 
@@ -242,7 +247,7 @@ where the $j$th column of $X$ is the step function with a step at $j$ ($j = 1,\d
 <span class="n">library</span><span class="p">(</span><span class="s2">&quot;changepoint&quot;</span><span class="p">)</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -252,7 +257,7 @@ where the $j$th column of $X$ is the step function with a step at $j$ ($j = 1,\d
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stderr output_text">
@@ -275,7 +280,8 @@ Successfully loaded changepoint package version 2.2.2
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The example comes from <code>?DNAcopy::segment</code> (note we changed this into a single problem (single chromosome) whereas the example was originally split into two chromosomes).</p>
 
@@ -295,7 +301,7 @@ Successfully loaded changepoint package version 2.2.2
 <span class="n">test2</span> <span class="o">&lt;-</span> <span class="n">DNAcopy</span><span class="p">::</span><span class="n">segment</span><span class="p">(</span><span class="n">CNA</span><span class="p">(</span><span class="n">genomdat</span><span class="p">,</span> <span class="n">chrom</span><span class="p">,</span> <span class="n">maploc</span><span class="p">))</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -305,7 +311,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -328,7 +334,7 @@ Successfully loaded changepoint package version 2.2.2
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -338,7 +344,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -360,7 +366,7 @@ Successfully loaded changepoint package version 2.2.2
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">cp_truth</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">100</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -370,7 +376,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -382,7 +388,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -394,7 +400,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -411,7 +417,8 @@ Successfully loaded changepoint package version 2.2.2
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We have implemented in <code>susieR</code> 0.6.0 a funciton <code>susie_trendfilter</code> which internally creates $X$ matrix with step functions in the columns to match input $y$. The algebra have been optimized to work on such trendfiltering matrices.</p>
 
@@ -426,7 +433,7 @@ Successfully loaded changepoint package version 2.2.2
 <div class=" highlight hl-sos"><pre><span></span><span class="n">genomdat</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="n">susieR</span><span class="p">::</span><span class="n">susie_trendfilter</span><span class="p">(</span><span class="n">genomdat</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -450,7 +457,7 @@ Successfully loaded changepoint package version 2.2.2
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -460,7 +467,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -482,7 +489,7 @@ Successfully loaded changepoint package version 2.2.2
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">cp_susie_example</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">100</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -492,7 +499,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -504,7 +511,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -516,7 +523,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -533,14 +540,16 @@ Successfully loaded changepoint package version 2.2.2
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Convergence-issue">Convergence issue<a class="anchor-link" href="#Convergence-issue">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We set up a simple simulated example with two change points very close together.</p>
 
@@ -562,7 +571,7 @@ Successfully loaded changepoint package version 2.2.2
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -572,7 +581,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -594,7 +603,7 @@ Successfully loaded changepoint package version 2.2.2
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">cp_susie_convergence_bad</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">100</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -604,7 +613,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -616,7 +625,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -628,7 +637,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -652,7 +661,7 @@ Successfully loaded changepoint package version 2.2.2
 <div class=" highlight hl-sos"><pre><span></span><span class="n">susie_get_objective</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -662,7 +671,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -677,7 +686,8 @@ Successfully loaded changepoint package version 2.2.2
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now initialize at the "truth",</p>
 
@@ -697,7 +707,7 @@ Successfully loaded changepoint package version 2.2.2
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -707,7 +717,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -729,7 +739,7 @@ Successfully loaded changepoint package version 2.2.2
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">cp_susie_convergence_okay</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">100</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -739,7 +749,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -751,7 +761,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -763,7 +773,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -780,7 +790,8 @@ Successfully loaded changepoint package version 2.2.2
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The objective is better compared to previous fit,</p>
 
@@ -795,7 +806,7 @@ Successfully loaded changepoint package version 2.2.2
 <div class=" highlight hl-sos"><pre><span></span><span class="n">susie_get_objective</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">s2</span><span class="p">)</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -805,7 +816,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -820,14 +831,16 @@ Successfully loaded changepoint package version 2.2.2
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Figure-for-the-manuscript">Figure for the manuscript<a class="anchor-link" href="#Figure-for-the-manuscript">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Putting these plots together,</p>
 
@@ -853,7 +866,7 @@ Successfully loaded changepoint package version 2.2.2
 <span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -863,7 +876,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -885,7 +898,7 @@ Successfully loaded changepoint package version 2.2.2
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">preview</span> <span class="n">cp_susie</span><span class="o">.</span><span class="n">pdf</span> <span class="o">-</span><span class="n">s</span> <span class="n">png</span> <span class="o">--</span><span class="n">dpi</span> <span class="mi">100</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -895,7 +908,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -907,7 +920,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -919,7 +932,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -943,7 +956,7 @@ Successfully loaded changepoint package version 2.2.2
 <div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">sessioninfo</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -953,7 +966,7 @@ Successfully loaded changepoint package version 2.2.2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 

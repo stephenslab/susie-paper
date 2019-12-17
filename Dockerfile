@@ -36,10 +36,11 @@ RUN curl https://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VERSION-Linux
 RUN pip install sos-notebook==0.21.0 sos==0.20.12 dsc==0.4.0 --no-cache-dir
 
 # Packages for building and running susieR vignettes
+# and making plots for the paper
 RUN conda install -c conda-forge r-devtools r-testthat r-openssl r-reshape r-ggplot2 r-cowplot \
 	r-profvis r-microbenchmark r-pkgdown r-dplyr r-stringr r-readr r-magrittr r-abind r-tibble \
-	r-matrixstats r-glmnet \
-	libiconv && conda clean --all -tipsy && rm -rf /tmp/* $HOME/.cache
+	r-matrixstats r-glmnet libiconv imagemagick \
+    && conda clean --all -tipsy && rm -rf /tmp/* $HOME/.cache
 RUN ln -s /bin/tar /bin/gtar
 
 # DSC R utils
@@ -77,6 +78,9 @@ RUN curl -L https://raw.githubusercontent.com/stephenslab/susieR/${SuSiE_VERSION
 
 # susieR
 RUN R --slave -e "devtools::install_github('stephenslab/susieR', ref = '"${SuSiE_VERSION}"')"
+
+# packages for result post-processing pipeline for SuSiE paper
+RUN R --slave -e "install.packages('scam', repos = 'http://cran.us.r-project.org')"
 
 # Prevent local config / packages from being loaded
 ENV R_ENVIRON_USER ""

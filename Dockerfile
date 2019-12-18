@@ -33,7 +33,7 @@ RUN curl https://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VERSION-Linux
     && conda install -c conda-forge r-base==3.5.1 rpy2==3.1.0 r-reticulate==1.13 \
 			matplotlib==3.0.2 seaborn==0.9.0 \
     && conda clean --all -tipsy && rm -rf /tmp/* $HOME/.cache
-RUN pip install sos-notebook==0.21.0 sos==0.20.12 dsc==0.4.0 --no-cache-dir
+RUN pip install sos-notebook==0.21.0 sos==0.20.12 sos-pbs==0.20.3 dsc==0.4.1 --no-cache-dir
 
 # Packages for building and running susieR vignettes
 # and making plots for the paper

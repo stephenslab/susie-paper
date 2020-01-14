@@ -1,0 +1,576 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="ipynb_website:version" content="0.9.7" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet" type="text/css" href="../css/jt.css">
+<link rel="stylesheet" type="text/css" href="../css/readable.css">
+<link rel="stylesheet" type="text/css" href="../css/toc2.css">
+
+<link href="../site_libs/jqueryui-1.11.4/jquery-ui.css">
+<link rel="stylesheet" href="../site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="../site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+<script src="../site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="../site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="../site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+
+<link rel="stylesheet"
+      href="../site_libs/highlightjs/null.min.css"
+      type="text/css" />
+
+<script src="../site_libs/highlightjs/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+<script src="../js/doc_toc.js"></script>
+<script src="../js/docs.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+        },
+        "HTML-CSS": {
+            preferredFont: "TeX",
+            availableFonts: ["TeX"],
+            styles: {
+                scale: 110,
+                ".MathJax_Display": {
+                    "font-size": "110%",
+                }
+            }
+        }
+    });
+</script>
+<script>
+function filterDataFrame(id) {
+    var input = document.getElementById("search_" + id);
+    var filter = input.value.toUpperCase();
+    var table = document.getElementById("dataframe_" + id);
+    var tr = table.getElementsByTagName("tr");
+    // Loop through all table rows, and hide those who don't match the search query
+    for (var i = 1; i < tr.length; i++) {
+        for (var j = 0; j < tr[i].cells.length; ++j) {
+            var matched = false;
+            if (tr[i].cells[j].innerHTML.toUpperCase().indexOf(filter) != -1) {
+                tr[i].style.display = "";
+                matched = true
+                break;
+            }
+            if (!matched)
+                tr[i].style.display = "none";
+        }
+    }
+}
+function sortDataFrame(id, n, dtype) {
+    var table = document.getElementById("dataframe_" + id);
+    var tb = table.tBodies[0]; // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
+    var tr = Array.prototype.slice.call(tb.rows, 0); // put rows into array
+    if (dtype === 'numeric') {
+        var fn = function(a, b) { 
+            return parseFloat(a.cells[n].textContent) <= parseFloat(b.cells[n].textContent) ? -1 : 1;
+        }
+    } else {
+        var fn = function(a, b) {
+            var c = a.cells[n].textContent.trim().localeCompare(b.cells[n].textContent.trim()); 
+            return c > 0 ? 1 : (c < 0 ? -1 : 0) }
+    }
+    var isSorted = function(array, fn) {
+        if (array.length < 2)
+            return 1;
+        var direction = fn(array[0], array[1]); 
+        for (var i = 1; i < array.length - 1; ++i) {
+            var d = fn(array[i], array[i+1]);
+            if (d == 0)
+                continue;
+            else if (direction == 0)
+                direction = d;
+            else if (direction != d)
+                return 0;
+            }
+        return direction;
+    }
+    var sorted = isSorted(tr, fn);
+    if (sorted == 1 || sorted == -1) {
+        // if sorted already, reverse it
+        for(var i = tr.length - 1; i >= 0; --i)
+            tb.appendChild(tr[i]); // append each row in order
+    } else {
+        tr = tr.sort(fn);
+        for(var i = 0; i < tr.length; ++i)
+            tb.appendChild(tr[i]); // append each row in order
+    }
+}
+</script>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+  // mark it active
+  menuAnchor.parent().addClass('active');
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+<div class="container-fluid main-container">
+<!-- tabsets -->
+<script src="../site_libs/navigation-1.1/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+
+
+<title>SuSiE manuscript</title>
+
+<style type = "text/css">
+body {
+  
+  padding-top: 66px;
+  padding-bottom: 40px;
+}
+</style>
+</head>
+
+<body>
+<div tabindex="-1" id="notebook" class="border-box-sizing">
+<div class="container" id="notebook-container">
+
+<!-- code folding -->
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">SuSiE manuscript</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+<li>
+  <a href="../index.html">Overview</a>
+</li>
+        
+<li>
+  <a href="../finemapping_benchmark.html">Finemapping Benchmark</a>
+</li>
+        
+<li>
+  <a href="../manuscript_results.html">Manuscript Results</a>
+</li>
+        
+      </ul>
+        
+<ul class="nav navbar-nav navbar-right">
+<li>
+   <a href="http://github.com/stephenslab/susie-paper"> source </a>
+</li>
+</ul>
+        
+      </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Experiment-on-identifiability-of-SuSiE">Experiment on identifiability of SuSiE<a class="anchor-link" href="#Experiment-on-identifiability-of-SuSiE">&#182;</a></h1><p>This notebook is meant to address to a concern from a referee.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It says the following:</p>
+<blockquote><p>. Suppose
+we have another predictor $x_5$, which is both correlated with $(x_1,
+x_2)$ and $(x_3, x_4)$. Say $\mathrm{cor}(x_1, x_5) = 0.9$,
+$\mathrm{cor}(x_2, x_5) = 0.7$, and $\mathrm{cor}(x_5, x_3)
+= \mathrm{cor}(x_5, x_4) = 0.8$. Does the current method assign $x_5$
+to the $(x_1, x_2)$ group or the $(x_3, x_4)$ group?</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First we simulate an $X$ matrix of 500 samples and 5 variables with properties as outlined above,</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>h <span class="o">=</span> <span class="m">1</span>
+l <span class="o">=</span> <span class="m">0.5</span>
+cormat <span class="o">=</span> <span class="kp">rbind</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">1.0</span><span class="p">,</span> h<span class="p">,</span>   l<span class="p">,</span>   l<span class="p">,</span>   <span class="m">0.9</span><span class="p">),</span>
+               <span class="kt">c</span><span class="p">(</span>h<span class="p">,</span>   <span class="m">1.0</span><span class="p">,</span> l<span class="p">,</span>   l<span class="p">,</span>   <span class="m">0.7</span><span class="p">),</span>
+               <span class="kt">c</span><span class="p">(</span>l<span class="p">,</span>   l<span class="p">,</span>   <span class="m">1.0</span><span class="p">,</span> h<span class="p">,</span>   <span class="m">0.8</span><span class="p">),</span>
+               <span class="kt">c</span><span class="p">(</span>l<span class="p">,</span>   l<span class="p">,</span>   h<span class="p">,</span>   <span class="m">1.0</span><span class="p">,</span> <span class="m">0.8</span><span class="p">),</span>
+               <span class="kt">c</span><span class="p">(</span><span class="m">0.9</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span> <span class="m">1.0</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>where we additionally assume high correlation between $x_1$ and $x_2$, and $x_3$ and $x_4$. We further assume that $(x_1, x_2)$ and $(x_3, x_4)$ are also correlated (correlation is 0.5).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>covmat <span class="o">=</span> Matrix<span class="o">::</span>nearPD<span class="p">(</span>cormat<span class="p">)</span><span class="o">$</span>mat
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>covmat
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>5 x 5 Matrix of class &#34;dpoMatrix&#34;
+          [,1]      [,2]      [,3]      [,4]      [,5]
+[1,] 1.0415955 0.9727553 0.5071754 0.5071754 0.8723721
+[2,] 0.9727553 1.0178450 0.4953001 0.4953001 0.7180960
+[3,] 0.5071754 0.4953001 1.0012378 1.0012378 0.7952340
+[4,] 0.5071754 0.4953001 1.0012378 1.0012378 0.7952340
+[5,] 0.8723721 0.7180960 0.7952340 0.7952340 1.0183505</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We now simulate $X$ and access the empirical correlation of columns of $X$,</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>n <span class="o">=</span> <span class="m">500</span>
+<span class="kp">set.seed</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+X <span class="o">=</span> MASS<span class="o">::</span>mvrnorm<span class="p">(</span>n<span class="o">=</span>n<span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="kp">nrow</span><span class="p">(</span>covmat<span class="p">)),</span> covmat<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>cor<span class="p">(</span>X<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<caption>A matrix: 5 × 5 of type dbl[,5]</caption>
+<tbody>
+	<tr><td>1.0000000</td><td>0.9476961</td><td>0.4730130</td><td>0.4730053</td><td>0.8339206</td></tr>
+	<tr><td>0.9476961</td><td>1.0000000</td><td>0.4448778</td><td>0.4448681</td><td>0.6857495</td></tr>
+	<tr><td>0.4730130</td><td>0.4448778</td><td>1.0000000</td><td>1.0000000</td><td>0.7892324</td></tr>
+	<tr><td>0.4730053</td><td>0.4448681</td><td>1.0000000</td><td>1.0000000</td><td>0.7892302</td></tr>
+	<tr><td>0.8339206</td><td>0.6857495</td><td>0.7892324</td><td>0.7892302</td><td>1.0000000</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It roughly agrees with our simulation settings.</p>
+<p>Now let's expand <code>X</code> matrix to having 1000 variables,</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>p <span class="o">=</span> <span class="m">1000</span>
+X <span class="o">=</span> <span class="kp">cbind</span><span class="p">(</span>X<span class="p">,</span> <span class="kt">matrix</span><span class="p">(</span>rnorm<span class="p">(</span>n <span class="o">*</span> <span class="p">(</span>p <span class="o">-</span> <span class="kp">ncol</span><span class="p">(</span>X<span class="p">))),</span> nrow<span class="o">=</span>n<span class="p">,</span> ncol<span class="o">=</span><span class="p">(</span>p <span class="o">-</span> <span class="kp">ncol</span><span class="p">(</span>X<span class="p">))))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>and assuming $x_2$, $x_3$ and $x_5$ are effect variables we simulate response <code>y</code>,</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>b <span class="o">=</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span>p<span class="p">)</span>
+b<span class="p">[</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">5</span><span class="p">)]</span> <span class="o">=</span> <span class="m">1</span>
+y <span class="o">=</span> X <span class="o">%*%</span> b <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And we analyze with SuSiE,</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>res <span class="o">&lt;-</span> susieR<span class="o">::</span>susie<span class="p">(</span>X<span class="p">,</span>y<span class="p">,</span>L<span class="o">=</span><span class="m">10</span><span class="p">,</span>max_iter<span class="o">=</span><span class="m">1000</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>res<span class="o">$</span>sets
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dl>
+	<dt>$cs</dt>
+		<dd><dl>
+	<dt>$L1</dt>
+		<dd>5</dd>
+	<dt>$L2</dt>
+		<dd>2</dd>
+	<dt>$L3</dt>
+		<dd><ol class=list-inline>
+	<li>3</li>
+	<li>4</li>
+</ol>
+</dd>
+</dl>
+</dd>
+	<dt>$purity</dt>
+		<dd><table>
+<caption>A df[,3]: 3 × 3</caption>
+<thead>
+	<tr><th></th><th scope=col>min.abs.corr</th><th scope=col>mean.abs.corr</th><th scope=col>median.abs.corr</th></tr>
+	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>L1</th><td>1</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>L2</th><td>1</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>L3</th><td>1</td><td>1</td><td>1</td></tr>
+</tbody>
+</table>
+</dd>
+	<dt>$cs_index</dt>
+		<dd><ol class=list-inline>
+	<li>1</li>
+	<li>2</li>
+	<li>3</li>
+</ol>
+</dd>
+	<dt>$coverage</dt>
+		<dd>0.95</dd>
+</dl>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>res<span class="o">$</span>pip<span class="p">[</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">)]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>1.35669253609194e-13</li>
+	<li>0.999999999999864</li>
+	<li>0.501170500839132</li>
+	<li>0.498829499160868</li>
+	<li>1</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this analysis 3 95% credible sets are identified. The first two CS contain effect variables $x_2$ and $x_5$ respectively and no other variables, even though $x_1$ is highly correlated with $x_2$ (correlation 0.948) its posterior inclusion probability is nearly zero (1E-13). The last CS contains two variables $x_3$ and $x_4$ each with 0.5 posterior inclusion probability because they are perfectly correlated.</p>
+
+</div>
+</div>
+</div>
+<hr>
+&copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob//manuscript_results/susie_identifiability.ipynb"><code>manuscript_results/susie_identifiability.ipynb</code></a> committed by Gao Wang on Tue Dec 17 22:37:36 2019 <a href="http://github.com/stephenslab/susie-paper/commit/">revision 0, </a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+</div>
+</div>
+</body>
+</html>

@@ -212,7 +212,7 @@ body {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It says the following:</p>
-<blockquote><p>. Suppose
+<blockquote><p>Suppose
 we have another predictor $x_5$, which is both correlated with $(x_1,
 x_2)$ and $(x_3, x_4)$. Say $\mathrm{cor}(x_1, x_5) = 0.9$,
 $\mathrm{cor}(x_2, x_5) = 0.7$, and $\mathrm{cor}(x_5, x_3)
@@ -255,7 +255,7 @@ cormat <span class="o">=</span> <span class="kp">rbind</span><span class="p">(</
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>where we additionally assume high correlation between $x_1$ and $x_2$, and $x_3$ and $x_4$. We further assume that $(x_1, x_2)$ and $(x_3, x_4)$ are also correlated (correlation is 0.5).</p>
+<p>where we additionally assume high correlation between $x_1$ and $x_2$, and $x_3$ and $x_4$. We further assume that $(x_1, x_2)$ and $(x_3, x_4)$ are correlated with correlation 0.5.</p>
 
 </div>
 </div>
@@ -406,7 +406,15 @@ X <span class="o">=</span> <span class="kp">cbind</span><span class="p">(</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>and assuming $x_2$, $x_3$ and $x_5$ are effect variables we simulate response <code>y</code>,</p>
+<h2 id="Experiment-1">Experiment 1<a class="anchor-link" href="#Experiment-1">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First we assume $x_2$, $x_3$ and $x_5$ are effect variables we simulate response <code>y</code>,</p>
 
 </div>
 </div>
@@ -475,10 +483,8 @@ y <span class="o">=</span> X <span class="o">%*%</span> b <span class="o">+</spa
 	<dt>$cs</dt>
 		<dd><dl>
 	<dt>$L1</dt>
-		<dd>5</dd>
-	<dt>$L2</dt>
 		<dd>2</dd>
-	<dt>$L3</dt>
+	<dt>$L2</dt>
 		<dd><ol class=list-inline>
 	<li>3</li>
 	<li>4</li>
@@ -488,7 +494,7 @@ y <span class="o">=</span> X <span class="o">%*%</span> b <span class="o">+</spa
 </dd>
 	<dt>$purity</dt>
 		<dd><table>
-<caption>A df[,3]: 3 × 3</caption>
+<caption>A df[,3]: 2 × 3</caption>
 <thead>
 	<tr><th></th><th scope=col>min.abs.corr</th><th scope=col>mean.abs.corr</th><th scope=col>median.abs.corr</th></tr>
 	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
@@ -496,7 +502,6 @@ y <span class="o">=</span> X <span class="o">%*%</span> b <span class="o">+</spa
 <tbody>
 	<tr><th scope=row>L1</th><td>1</td><td>1</td><td>1</td></tr>
 	<tr><th scope=row>L2</th><td>1</td><td>1</td><td>1</td></tr>
-	<tr><th scope=row>L3</th><td>1</td><td>1</td><td>1</td></tr>
 </tbody>
 </table>
 </dd>
@@ -504,7 +509,6 @@ y <span class="o">=</span> X <span class="o">%*%</span> b <span class="o">+</spa
 		<dd><ol class=list-inline>
 	<li>1</li>
 	<li>2</li>
-	<li>3</li>
 </ol>
 </dd>
 	<dt>$coverage</dt>
@@ -567,9 +571,158 @@ y <span class="o">=</span> X <span class="o">%*%</span> b <span class="o">+</spa
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Experiment-2">Experiment 2<a class="anchor-link" href="#Experiment-2">&#182;</a></h2><p>Here we assume $x_2$ and $x_3$ are effect variable, but not $x_5$,</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>b <span class="o">=</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span>p<span class="p">)</span>
+b<span class="p">[</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">)]</span> <span class="o">=</span> <span class="m">1</span>
+y <span class="o">=</span> X <span class="o">%*%</span> b <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And we analyze with SuSiE,</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>res <span class="o">&lt;-</span> susieR<span class="o">::</span>susie<span class="p">(</span>X<span class="p">,</span>y<span class="p">,</span>L<span class="o">=</span><span class="m">10</span><span class="p">,</span>max_iter<span class="o">=</span><span class="m">1000</span><span class="p">)</span>
+res<span class="o">$</span>sets
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dl>
+	<dt>$cs</dt>
+		<dd><dl>
+	<dt>$L2</dt>
+		<dd>2</dd>
+	<dt>$L1</dt>
+		<dd><ol class=list-inline>
+	<li>3</li>
+	<li>4</li>
+</ol>
+</dd>
+</dl>
+</dd>
+	<dt>$purity</dt>
+		<dd><table>
+<caption>A df[,3]: 2 × 3</caption>
+<thead>
+	<tr><th></th><th scope=col>min.abs.corr</th><th scope=col>mean.abs.corr</th><th scope=col>median.abs.corr</th></tr>
+	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>L2</th><td>1</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>L1</th><td>1</td><td>1</td><td>1</td></tr>
+</tbody>
+</table>
+</dd>
+	<dt>$cs_index</dt>
+		<dd><ol class=list-inline>
+	<li>2</li>
+	<li>1</li>
+</ol>
+</dd>
+	<dt>$coverage</dt>
+		<dd>0.95</dd>
+</dl>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>res<span class="o">$</span>pip<span class="p">[</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">)]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>2.22044604925031e-16</li>
+	<li>1</li>
+	<li>0.496536934744119</li>
+	<li>0.503463065255881</li>
+	<li>0</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As expected, $x_5$ was dropped out with posterior inclusion probability zero.</p>
+
+</div>
+</div>
+</div>
 <hr>
 &copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
-<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/5a0d38d7c66bf27fb0d48bc155a8e9ad7e0006c1/manuscript_results/susie_identifiability.ipynb"><code>manuscript_results/susie_identifiability.ipynb</code></a> committed by Gao Wang on Tue Jan 14 10:37:45 2020 <a href="http://github.com/stephenslab/susie-paper/commit/5a0d38d7c66bf27fb0d48bc155a8e9ad7e0006c1">revision 1, 5a0d38d</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/fee38dd6c1036039048d6d58f399ebaee1f77844/manuscript_results/susie_identifiability.ipynb"><code>manuscript_results/susie_identifiability.ipynb</code></a> committed by Gao Wang on Tue Jan 14 10:56:13 2020 <a href="http://github.com/stephenslab/susie-paper/commit/fee38dd6c1036039048d6d58f399ebaee1f77844">revision 2, fee38dd</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
 </div>
 </div>
 </body>

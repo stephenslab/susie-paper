@@ -219,6 +219,7 @@ $\mathrm{cor}(x_2, x_5) = 0.7$, and $\mathrm{cor}(x_5, x_3)
 = \mathrm{cor}(x_5, x_4) = 0.8$. Does the current method assign $x_5$
 to the $(x_1, x_2)$ group or the $(x_3, x_4)$ group?</p>
 </blockquote>
+<p>Here we investigate the problem using simulations for given correlation structure over multiple replicates.</p>
 
 </div>
 </div>
@@ -227,7 +228,15 @@ to the $(x_1, x_2)$ group or the $(x_3, x_4)$ group?</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>First we simulate an $X$ matrix of 500 samples and 5 variables with properties as outlined above,</p>
+<h2 id="Correlation-structure-between-variables">Correlation structure between variables<a class="anchor-link" href="#Correlation-structure-between-variables">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First we determine covariance matrix that satisfies correlation structure as outlined above,</p>
 
 </div>
 </div>
@@ -237,8 +246,8 @@ to the $(x_1, x_2)$ group or the $(x_3, x_4)$ group?</p>
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>h <span class="o">=</span> <span class="m">1</span>
-l <span class="o">=</span> <span class="m">0.5</span>
+<div class=" highlight hl-r"><pre><span></span>h <span class="o">=</span> <span class="m">0.92</span>
+l <span class="o">=</span> <span class="m">0.7</span>
 cormat <span class="o">=</span> <span class="kp">rbind</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">1.0</span><span class="p">,</span> h<span class="p">,</span>   l<span class="p">,</span>   l<span class="p">,</span>   <span class="m">0.9</span><span class="p">),</span>
                <span class="kt">c</span><span class="p">(</span>h<span class="p">,</span>   <span class="m">1.0</span><span class="p">,</span> l<span class="p">,</span>   l<span class="p">,</span>   <span class="m">0.7</span><span class="p">),</span>
                <span class="kt">c</span><span class="p">(</span>l<span class="p">,</span>   l<span class="p">,</span>   <span class="m">1.0</span><span class="p">,</span> h<span class="p">,</span>   <span class="m">0.8</span><span class="p">),</span>
@@ -255,7 +264,9 @@ cormat <span class="o">=</span> <span class="kp">rbind</span><span class="p">(</
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>where we additionally assume high correlation between $x_1$ and $x_2$, and $x_3$ and $x_4$. We further assume that $(x_1, x_2)$ and $(x_3, x_4)$ are correlated with correlation 0.5.</p>
+<p>where we assume high correlation between $x_1$ and $x_2$, and $x_3$ and $x_4$ ($R_{12} = R_{34} = 0.92$). 
+We set $R_{13} = R_{13} = R_{23} = R_{24} = 0.7$ and find the nearest 
+positive definite matrix for this correlation structure:</p>
 
 </div>
 </div>
@@ -265,7 +276,7 @@ cormat <span class="o">=</span> <span class="kp">rbind</span><span class="p">(</
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>covmat <span class="o">=</span> Matrix<span class="o">::</span>nearPD<span class="p">(</span>cormat<span class="p">)</span><span class="o">$</span>mat
+<div class=" highlight hl-r"><pre><span></span>covmat <span class="o">=</span> <span class="kp">as.matrix</span><span class="p">(</span>Matrix<span class="o">::</span>nearPD<span class="p">(</span>cormat<span class="p">)</span><span class="o">$</span>mat<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -278,70 +289,7 @@ cormat <span class="o">=</span> <span class="kp">rbind</span><span class="p">(</
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>covmat
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>5 x 5 Matrix of class &#34;dpoMatrix&#34;
-          [,1]      [,2]      [,3]      [,4]      [,5]
-[1,] 1.0415955 0.9727553 0.5071754 0.5071754 0.8723721
-[2,] 0.9727553 1.0178450 0.4953001 0.4953001 0.7180960
-[3,] 0.5071754 0.4953001 1.0012378 1.0012378 0.7952340
-[4,] 0.5071754 0.4953001 1.0012378 1.0012378 0.7952340
-[5,] 0.8723721 0.7180960 0.7952340 0.7952340 1.0183505</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We now simulate $X$ and access the empirical correlation of columns of $X$,</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>n <span class="o">=</span> <span class="m">500</span>
-<span class="kp">set.seed</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
-X <span class="o">=</span> MASS<span class="o">::</span>mvrnorm<span class="p">(</span>n<span class="o">=</span>n<span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="kp">nrow</span><span class="p">(</span>covmat<span class="p">)),</span> covmat<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>cor<span class="p">(</span>X<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span>cov2cor<span class="p">(</span>covmat<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -362,11 +310,11 @@ X <span class="o">=</span> MASS<span class="o">::</span>mvrnorm<span class="p">(
 <table>
 <caption>A matrix: 5 × 5 of type dbl[,5]</caption>
 <tbody>
-	<tr><td>1.0000000</td><td>0.9476961</td><td>0.4730130</td><td>0.4730053</td><td>0.8339206</td></tr>
-	<tr><td>0.9476961</td><td>1.0000000</td><td>0.4448778</td><td>0.4448681</td><td>0.6857495</td></tr>
-	<tr><td>0.4730130</td><td>0.4448778</td><td>1.0000000</td><td>1.0000000</td><td>0.7892324</td></tr>
-	<tr><td>0.4730053</td><td>0.4448681</td><td>1.0000000</td><td>1.0000000</td><td>0.7892302</td></tr>
-	<tr><td>0.8339206</td><td>0.6857495</td><td>0.7892324</td><td>0.7892302</td><td>1.0000000</td></tr>
+	<tr><td>1.0000000</td><td>0.9166551</td><td>0.6995185</td><td>0.6995185</td><td>0.8965043</td></tr>
+	<tr><td>0.9166551</td><td>1.0000000</td><td>0.6993032</td><td>0.6993032</td><td>0.7003526</td></tr>
+	<tr><td>0.6995185</td><td>0.6993032</td><td>1.0000000</td><td>0.9200059</td><td>0.7991611</td></tr>
+	<tr><td>0.6995185</td><td>0.6993032</td><td>0.9200059</td><td>1.0000000</td><td>0.7991611</td></tr>
+	<tr><td>0.8965043</td><td>0.7003526</td><td>0.7991611</td><td>0.7991611</td><td>1.0000000</td></tr>
 </tbody>
 </table>
 
@@ -382,9 +330,88 @@ X <span class="o">=</span> MASS<span class="o">::</span>mvrnorm<span class="p">(
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It roughly agrees with our simulation settings.</p>
-<p>Now let's expand <code>X</code> matrix to having 1000 variables,</p>
+<p>It still satisfy the structure as outlined at the beginning of the document. We use the nearest PD found as the covariance matrix for simulation below.</p>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Simulation-of-features-and-response-variables">Simulation of features and response variables<a class="anchor-link" href="#Simulation-of-features-and-response-variables">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We simulate an $X$ matrix of $N=1000$ samples and $P_1=5$ variables, 
+$$X_{p} \sim MVN(0, \Sigma)$$</p>
+<p>where $\Sigma$ is covariance matrix as defined above.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We then expand $X$ to having a total of $P=2000$ variables where the other 1995 variables are independent --- they come from multivariate normal $MVN(0,I)$ with $I$ being the identity matrix.</p>
+<p>The sample size and number of variables mimics a relatively small sample genetic association fine-mapping application.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We simulate response $y$ using a linear model $y = Xb + e$, $e \sim N(0, I_n)$, and effect size $b$ a length $p$ vector with zero elsewhere except:</p>
+<ul>
+<li>Scenario 1: $x_2$ and $x_3$ are effect variables and $x_5$ is not effect variable: $b_2=b_3=1$.</li>
+<li>Scenario 2: $x_2$, $x_3$ and $x_5$ are all effect variables: $b_2=b_3=b_5=1$.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Analysis-plan">Analysis plan<a class="anchor-link" href="#Analysis-plan">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We run 500 replicates for the above 2 scenarios. We focus our evaluation on $x_5$ and ask:</p>
+<ol>
+<li>When $x_5$ is not a effect variable, how often is it dropped from the results, or grouped with $(x_1, x_2)$ or $(x_3,x_4)$.</li>
+<li>When $x_5$ is an effect variable, how often is it considered as a set on its own, or grouped with $(x_1, x_2)$ or $(x_3,x_4)$.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The code for the experiments can be found at: <a href="https://github.com/stephenslab/susie-paper/tree/master/identifiability_dsc">https://github.com/stephenslab/susie-paper/tree/master/identifiability_dsc</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Results">Results<a class="anchor-link" href="#Results">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -393,75 +420,55 @@ X <span class="o">=</span> MASS<span class="o">::</span>mvrnorm<span class="p">(
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>p <span class="o">=</span> <span class="m">1000</span>
-X <span class="o">=</span> <span class="kp">cbind</span><span class="p">(</span>X<span class="p">,</span> <span class="kt">matrix</span><span class="p">(</span>rnorm<span class="p">(</span>n <span class="o">*</span> <span class="p">(</span>p <span class="o">-</span> <span class="kp">ncol</span><span class="p">(</span>X<span class="p">))),</span> nrow<span class="o">=</span>n<span class="p">,</span> ncol<span class="o">=</span><span class="p">(</span>p <span class="o">-</span> <span class="kp">ncol</span><span class="p">(</span>X<span class="p">))))</span>
+<div class=" highlight hl-r"><pre><span></span><span class="kp">setwd</span><span class="p">(</span><span class="s">&#39;../identifiability_dsc/&#39;</span><span class="p">)</span>
+res <span class="o">=</span> dscrutils<span class="o">::</span>dscquery<span class="p">(</span><span class="s">&#39;identifiability&#39;</span><span class="p">,</span>targets <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;simulate.b5&#39;</span><span class="p">,</span><span class="s">&#39;evaluate&#39;</span><span class="p">,</span><span class="s">&#39;evaluate.has_2&#39;</span><span class="p">,</span><span class="s">&#39;evaluate.has_3&#39;</span><span class="p">,</span><span class="s">&#39;evaluate.has_5&#39;</span><span class="p">,</span><span class="s">&#39;evaluate.in_12&#39;</span><span class="p">,</span><span class="s">&#39;evaluate.in_34&#39;</span><span class="p">,</span> <span class="s">&#39;evaluate.own&#39;</span><span class="p">,</span> <span class="s">&#39;evaluate.mixed&#39;</span><span class="p">),</span> module.output.files<span class="o">=</span><span class="s">&#39;evaluate&#39;</span><span class="p">)</span>
+<span class="kp">saveRDS</span><span class="p">(</span>res<span class="p">,</span> <span class="s">&#39;identifiability_20200120.rds&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Experiment-1">Experiment 1<a class="anchor-link" href="#Experiment-1">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>First we assume $x_2$, $x_3$ and $x_5$ are effect variables we simulate response <code>y</code>,</p>
+<div class="output_wrapper">
+<div class="output">
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>b <span class="o">=</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span>p<span class="p">)</span>
-b<span class="p">[</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">5</span><span class="p">)]</span> <span class="o">=</span> <span class="m">1</span>
-y <span class="o">=</span> X <span class="o">%*%</span> b <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">)</span>
-</pre></div>
 
-</div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Calling: dsc-query identifiability -o /tmp/Rtmpbv1sZ3/file129f2e9808bb.csv --target &#34;simulate.b5 evaluate.has_2 evaluate.has_3 evaluate.has_5 evaluate.in_12 evaluate.in_34 evaluate.own evaluate.mixed&#34; --force 
+Loaded dscquery output table with 1 rows and 9 columns.
+</pre>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>And we analyze with SuSiE,</p>
+<div class="output_area">
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>res <span class="o">&lt;-</span> susieR<span class="o">::</span>susie<span class="p">(</span>X<span class="p">,</span>y<span class="p">,</span>L<span class="o">=</span><span class="m">10</span><span class="p">,</span>max_iter<span class="o">=</span><span class="m">1000</span><span class="p">)</span>
-</pre></div>
+<div class="prompt"></div>
 
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>dscquery is returning a list because one or more outputs are complex; consider converting the list to a tibble using the &#34;tibble&#34; package
+</pre>
 </div>
+</div>
+
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>res<span class="o">$</span>sets
+<div class=" highlight hl-r"><pre><span></span>res <span class="o">=</span> <span class="kp">readRDS</span><span class="p">(</span><span class="s">&#39;identifiability_20200120.rds&#39;</span><span class="p">)</span>
+res<span class="o">$</span>evaluate.mixed <span class="o">=</span> <span class="kp">sapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>res<span class="o">$</span>evaluate.mixed<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>l<span class="p">)</span> <span class="kp">length</span><span class="p">(</span>res<span class="o">$</span>evaluate.mixed<span class="p">[[</span>l<span class="p">]]))</span>
+res <span class="o">=</span> tibble<span class="o">::</span>as_tibble<span class="p">(</span>res<span class="p">)</span>
+<span class="kp">head</span><span class="p">(</span>res<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -479,40 +486,101 @@ y <span class="o">=</span> X <span class="o">%*%</span> b <span class="o">+</spa
 
 
 <div class="output_html rendered_html output_subarea ">
-<dl>
-	<dt>$cs</dt>
-		<dd><dl>
-	<dt>$L1</dt>
-		<dd>2</dd>
-	<dt>$L2</dt>
-		<dd><ol class=list-inline>
-	<li>3</li>
-	<li>4</li>
-</ol>
-</dd>
-</dl>
-</dd>
-	<dt>$purity</dt>
-		<dd><table>
-<caption>A df[,3]: 2 × 3</caption>
+<table>
+<caption>A tibble: 6 × 10</caption>
 <thead>
-	<tr><th></th><th scope=col>min.abs.corr</th><th scope=col>mean.abs.corr</th><th scope=col>median.abs.corr</th></tr>
-	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+	<tr><th scope=col>DSC</th><th scope=col>simulate.b5</th><th scope=col>evaluate.has_2</th><th scope=col>evaluate.has_3</th><th scope=col>evaluate.has_5</th><th scope=col>evaluate.in_12</th><th scope=col>evaluate.in_34</th><th scope=col>evaluate.own</th><th scope=col>evaluate.mixed</th><th scope=col>evaluate.output.file</th></tr>
+	<tr><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;list&gt;</th><th scope=col>&lt;list&gt;</th><th scope=col>&lt;list&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>L1</th><td>1</td><td>1</td><td>1</td></tr>
-	<tr><th scope=row>L2</th><td>1</td><td>1</td><td>1</td></tr>
+	<tr><td>1</td><td>0</td><td>FALSE, TRUE, FALSE</td><td>TRUE, FALSE, FALSE</td><td>FALSE, FALSE, TRUE</td><td>0</td><td>1</td><td>0</td><td>0</td><td>evaluate/simulate_1_susie_1_evaluate_1</td></tr>
+	<tr><td>1</td><td>1</td><td>FALSE, FALSE</td><td>TRUE, FALSE</td><td>FALSE, FALSE</td><td>0</td><td>0</td><td>0</td><td>0</td><td>evaluate/simulate_2_susie_1_evaluate_1</td></tr>
+	<tr><td>2</td><td>0</td><td>TRUE, FALSE</td><td>FALSE, TRUE</td><td>FALSE, FALSE</td><td>0</td><td>0</td><td>0</td><td>0</td><td>evaluate/simulate_3_susie_1_evaluate_1</td></tr>
+	<tr><td>2</td><td>1</td><td>FALSE, FALSE</td><td>FALSE, TRUE</td><td>FALSE, FALSE</td><td>0</td><td>0</td><td>0</td><td>0</td><td>evaluate/simulate_4_susie_1_evaluate_1</td></tr>
+	<tr><td>3</td><td>0</td><td>TRUE, FALSE</td><td>FALSE, TRUE</td><td>FALSE, FALSE</td><td>0</td><td>0</td><td>0</td><td>0</td><td>evaluate/simulate_5_susie_1_evaluate_1</td></tr>
+	<tr><td>3</td><td>1</td><td>FALSE, FALSE</td><td>FALSE, TRUE</td><td>FALSE, FALSE</td><td>0</td><td>0</td><td>0</td><td>0</td><td>evaluate/simulate_6_susie_1_evaluate_1</td></tr>
 </tbody>
 </table>
-</dd>
-	<dt>$cs_index</dt>
-		<dd><ol class=list-inline>
-	<li>1</li>
-	<li>2</li>
-</ol>
-</dd>
-	<dt>$coverage</dt>
-		<dd>0.95</dd>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="When-$x_5$-is-not-effect-variable">When $x_5$ is not effect variable<a class="anchor-link" href="#When-$x_5$-is-not-effect-variable">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>b5 <span class="o">=</span> <span class="m">0</span>
+rep <span class="o">=</span> <span class="kp">nrow</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5<span class="p">),])</span>
+in_12 <span class="o">=</span> <span class="kp">nrow</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5 <span class="o">&amp;</span> res<span class="o">$</span>evaluate.in_12<span class="o">&gt;</span><span class="m">0</span><span class="p">),])</span>
+in_34 <span class="o">=</span> <span class="kp">nrow</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5 <span class="o">&amp;</span> res<span class="o">$</span>evaluate.in_34<span class="o">&gt;</span><span class="m">0</span><span class="p">),])</span>
+own <span class="o">=</span> <span class="kp">nrow</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5 <span class="o">&amp;</span> res<span class="o">$</span>evaluate.own<span class="o">&gt;</span><span class="m">0</span><span class="p">),])</span>
+mixed <span class="o">=</span> <span class="kp">nrow</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5 <span class="o">&amp;</span> res<span class="o">$</span>evaluate.mixed<span class="o">&gt;</span><span class="m">0</span><span class="p">),])</span>
+total_cs <span class="o">=</span> <span class="kp">sum</span><span class="p">(</span><span class="kp">sapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5<span class="p">),]</span><span class="o">$</span>evaluate.has_2<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>l<span class="p">)</span> <span class="kp">length</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5<span class="p">),]</span><span class="o">$</span>evaluate.has_2<span class="p">[[</span>l<span class="p">]])))</span>
+has_2 <span class="o">=</span> <span class="kp">sum</span><span class="p">(</span><span class="kp">sapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5<span class="p">),]</span><span class="o">$</span>evaluate.has_2<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>l<span class="p">)</span> <span class="kp">any</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5<span class="p">),]</span><span class="o">$</span>evaluate.has_2<span class="p">[[</span>l<span class="p">]])))</span>
+has_3 <span class="o">=</span> <span class="kp">sum</span><span class="p">(</span><span class="kp">sapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5<span class="p">),]</span><span class="o">$</span>evaluate.has_3<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>l<span class="p">)</span> <span class="kp">any</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5<span class="p">),]</span><span class="o">$</span>evaluate.has_3<span class="p">[[</span>l<span class="p">]])))</span>
+out <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="kp">rep</span><span class="p">,</span> total_cs<span class="p">,</span> has_2<span class="p">,</span> has_3<span class="p">,</span> in_12<span class="p">,</span> in_34<span class="p">,</span> own<span class="p">,</span> mixed<span class="p">)</span>
+<span class="kp">names</span><span class="p">(</span>out<span class="p">)</span> <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;replicates&#39;</span><span class="p">,</span> <span class="s">&#39;total CS reported&#39;</span><span class="p">,</span> <span class="s">&#39;replicates X2 is detected&#39;</span><span class="p">,</span> <span class="s">&#39;replicates X3 is detected&#39;</span><span class="p">,</span> <span class="s">&#39;X5 in CS with X1 and X2&#39;</span><span class="p">,</span> <span class="s">&#39;X5 in CS with X3 and X4&#39;</span><span class="p">,</span> <span class="s">&#39;X5 on its own&#39;</span><span class="p">,</span> <span class="s">&#39;(X1,X2) and (X3,X4) are mixed up&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>out
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dl class=dl-horizontal>
+	<dt>replicates</dt>
+		<dd>500</dd>
+	<dt>total CS reported</dt>
+		<dd>994</dd>
+	<dt>replicates X2 is detected</dt>
+		<dd>500</dd>
+	<dt>replicates X3 is detected</dt>
+		<dd>500</dd>
+	<dt>X5 in CS with X1 and X2</dt>
+		<dd>0</dd>
+	<dt>X5 in CS with X3 and X4</dt>
+		<dd>1</dd>
+	<dt>X5 on its own</dt>
+		<dd>1</dd>
+	<dt>(X1,X2) and (X3,X4) are mixed up</dt>
+		<dd>11</dd>
 </dl>
 
 </div>
@@ -523,12 +591,52 @@ y <span class="o">=</span> X <span class="o">%*%</span> b <span class="o">+</spa
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The result looks good.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="When-$x_5$-is-effect-variable">When $x_5$ is effect variable<a class="anchor-link" href="#When-$x_5$-is-effect-variable">&#182;</a></h3>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>res<span class="o">$</span>pip<span class="p">[</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">)]</span>
+<div class=" highlight hl-r"><pre><span></span>b5 <span class="o">=</span> <span class="m">1</span>
+rep <span class="o">=</span> <span class="kp">nrow</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5<span class="p">),])</span>
+in_12 <span class="o">=</span> <span class="kp">nrow</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5 <span class="o">&amp;</span> res<span class="o">$</span>evaluate.in_12<span class="o">&gt;</span><span class="m">0</span><span class="p">),])</span>
+in_34 <span class="o">=</span> <span class="kp">nrow</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5 <span class="o">&amp;</span> res<span class="o">$</span>evaluate.in_34<span class="o">&gt;</span><span class="m">0</span><span class="p">),])</span>
+own <span class="o">=</span> <span class="kp">nrow</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5 <span class="o">&amp;</span> res<span class="o">$</span>evaluate.own<span class="o">&gt;</span><span class="m">0</span><span class="p">),])</span>
+mixed <span class="o">=</span> <span class="kp">nrow</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5 <span class="o">&amp;</span> res<span class="o">$</span>evaluate.mixed<span class="o">&gt;</span><span class="m">0</span><span class="p">),])</span>
+total_cs <span class="o">=</span> <span class="kp">sum</span><span class="p">(</span><span class="kp">sapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5<span class="p">),]</span><span class="o">$</span>evaluate.has_2<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>l<span class="p">)</span> <span class="kp">length</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5<span class="p">),]</span><span class="o">$</span>evaluate.has_2<span class="p">[[</span>l<span class="p">]])))</span>
+has_2 <span class="o">=</span> <span class="kp">sum</span><span class="p">(</span><span class="kp">sapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5<span class="p">),]</span><span class="o">$</span>evaluate.has_2<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>l<span class="p">)</span> <span class="kp">any</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5<span class="p">),]</span><span class="o">$</span>evaluate.has_2<span class="p">[[</span>l<span class="p">]])))</span>
+has_3 <span class="o">=</span> <span class="kp">sum</span><span class="p">(</span><span class="kp">sapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5<span class="p">),]</span><span class="o">$</span>evaluate.has_3<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>l<span class="p">)</span> <span class="kp">any</span><span class="p">(</span>res<span class="p">[</span><span class="kp">which</span><span class="p">(</span>res<span class="o">$</span>simulate.b5<span class="o">==</span>b5<span class="p">),]</span><span class="o">$</span>evaluate.has_3<span class="p">[[</span>l<span class="p">]])))</span>
+out <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="kp">rep</span><span class="p">,</span> total_cs<span class="p">,</span> has_2<span class="p">,</span> has_3<span class="p">,</span> in_12<span class="p">,</span> in_34<span class="p">,</span> own<span class="p">,</span> mixed<span class="p">)</span>
+<span class="kp">names</span><span class="p">(</span>out<span class="p">)</span> <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;replicates&#39;</span><span class="p">,</span> <span class="s">&#39;total CS reported&#39;</span><span class="p">,</span> <span class="s">&#39;replicates X2 is detected&#39;</span><span class="p">,</span> <span class="s">&#39;replicates X3 is detected&#39;</span><span class="p">,</span> <span class="s">&#39;X5 in CS with X1 and X2&#39;</span><span class="p">,</span> <span class="s">&#39;X5 in CS with X3 and X4&#39;</span><span class="p">,</span> <span class="s">&#39;X5 on its own&#39;</span><span class="p">,</span> <span class="s">&#39;(X1,X2) and (X3,X4) are mixed up&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>out
 </pre></div>
 
 </div>
@@ -546,162 +654,24 @@ y <span class="o">=</span> X <span class="o">%*%</span> b <span class="o">+</spa
 
 
 <div class="output_html rendered_html output_subarea ">
-<ol class=list-inline>
-	<li>1.35669253609194e-13</li>
-	<li>0.999999999999864</li>
-	<li>0.501170500839132</li>
-	<li>0.498829499160868</li>
-	<li>1</li>
-</ol>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In this analysis 3 95% credible sets are identified. The first two CS contain effect variables $x_2$ and $x_5$ respectively and no other variables, even though $x_1$ is highly correlated with $x_2$ (correlation 0.948) its posterior inclusion probability is nearly zero (1E-13). The last CS contains two variables $x_3$ and $x_4$ each with 0.5 posterior inclusion probability because they are perfectly correlated.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Experiment-2">Experiment 2<a class="anchor-link" href="#Experiment-2">&#182;</a></h2><p>Here we assume $x_2$ and $x_3$ are effect variable, but not $x_5$,</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>b <span class="o">=</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span>p<span class="p">)</span>
-b<span class="p">[</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">)]</span> <span class="o">=</span> <span class="m">1</span>
-y <span class="o">=</span> X <span class="o">%*%</span> b <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>And we analyze with SuSiE,</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>res <span class="o">&lt;-</span> susieR<span class="o">::</span>susie<span class="p">(</span>X<span class="p">,</span>y<span class="p">,</span>L<span class="o">=</span><span class="m">10</span><span class="p">,</span>max_iter<span class="o">=</span><span class="m">1000</span><span class="p">)</span>
-res<span class="o">$</span>sets
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<dl>
-	<dt>$cs</dt>
-		<dd><dl>
-	<dt>$L2</dt>
+<dl class=dl-horizontal>
+	<dt>replicates</dt>
+		<dd>500</dd>
+	<dt>total CS reported</dt>
+		<dd>1012</dd>
+	<dt>replicates X2 is detected</dt>
+		<dd>34</dd>
+	<dt>replicates X3 is detected</dt>
+		<dd>468</dd>
+	<dt>X5 in CS with X1 and X2</dt>
+		<dd>0</dd>
+	<dt>X5 in CS with X3 and X4</dt>
+		<dd>1</dd>
+	<dt>X5 on its own</dt>
+		<dd>43</dd>
+	<dt>(X1,X2) and (X3,X4) are mixed up</dt>
 		<dd>2</dd>
-	<dt>$L1</dt>
-		<dd><ol class=list-inline>
-	<li>3</li>
-	<li>4</li>
-</ol>
-</dd>
 </dl>
-</dd>
-	<dt>$purity</dt>
-		<dd><table>
-<caption>A df[,3]: 2 × 3</caption>
-<thead>
-	<tr><th></th><th scope=col>min.abs.corr</th><th scope=col>mean.abs.corr</th><th scope=col>median.abs.corr</th></tr>
-	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
-</thead>
-<tbody>
-	<tr><th scope=row>L2</th><td>1</td><td>1</td><td>1</td></tr>
-	<tr><th scope=row>L1</th><td>1</td><td>1</td><td>1</td></tr>
-</tbody>
-</table>
-</dd>
-	<dt>$cs_index</dt>
-		<dd><ol class=list-inline>
-	<li>2</li>
-	<li>1</li>
-</ol>
-</dd>
-	<dt>$coverage</dt>
-		<dd>0.95</dd>
-</dl>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>res<span class="o">$</span>pip<span class="p">[</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">)]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<ol class=list-inline>
-	<li>2.22044604925031e-16</li>
-	<li>1</li>
-	<li>0.496536934744119</li>
-	<li>0.503463065255881</li>
-	<li>0</li>
-</ol>
 
 </div>
 
@@ -715,14 +685,25 @@ res<span class="o">$</span>sets
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As expected, $x_5$ was dropped out with posterior inclusion probability zero.</p>
+<p>The result is slightly problematic but is somewhat expected:</p>
+<ol>
+<li>Many CS incorrectly capture the non-effect variable $x_1$ instead of the true effect variable $x_2$.<ul>
+<li>expected because the non-effect variable $x_1$ is both in correlation with effect variables $x_2$ and $x_5$, and has stronger correlation with $x_5$ than correlation between $x_2$ and $x_5$.</li>
+</ul>
+</li>
+<li>The effect variable $x_5$ is often not detected in 95% CS<ul>
+<li>expected because it is highly correlated with other effect variables but its contribution after accounting for other variables are not enough to stand out as a 95% CS.</li>
+<li>in this setting $x_5$ still don't end up either with $(x_1,x_2)$ or with $(x_3,x_4)$.</li>
+</ul>
+</li>
+</ol>
 
 </div>
 </div>
 </div>
 <hr>
 &copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
-<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/fee38dd6c1036039048d6d58f399ebaee1f77844/manuscript_results/susie_identifiability.ipynb"><code>manuscript_results/susie_identifiability.ipynb</code></a> committed by Gao Wang on Tue Jan 14 10:56:13 2020 <a href="http://github.com/stephenslab/susie-paper/commit/fee38dd6c1036039048d6d58f399ebaee1f77844">revision 2, fee38dd</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/7d1eee9a80b3e2184dbe4d4af3e038dd97b398f3/manuscript_results/susie_identifiability.ipynb"><code>manuscript_results/susie_identifiability.ipynb</code></a> committed by Gao Wang on Mon Jan 20 14:52:48 2020 <a href="http://github.com/stephenslab/susie-paper/commit/7d1eee9a80b3e2184dbe4d4af3e038dd97b398f3">revision 4, 7d1eee9</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
 </div>
 </div>
 </body>

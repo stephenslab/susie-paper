@@ -265,7 +265,7 @@ cormat <span class="o">=</span> <span class="kp">rbind</span><span class="p">(</
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>where we assume high correlation between $x_1$ and $x_2$, and $x_3$ and $x_4$ ($R_{12} = R_{34} = 0.92$). 
-We set $R_{13} = R_{13} = R_{23} = R_{24} = 0.7$ and find the nearest 
+We set $R_{13} = R_{14} = R_{23} = R_{24} = 0.7$ and find the nearest 
 positive definite matrix for this correlation structure:</p>
 
 </div>
@@ -373,6 +373,7 @@ $$X_{p} \sim MVN(0, \Sigma)$$</p>
 <li>Scenario 1: $x_2$ and $x_3$ are effect variables and $x_5$ is not effect variable: $b_2=b_3=1$.</li>
 <li>Scenario 2: $x_2$, $x_3$ and $x_5$ are all effect variables: $b_2=b_3=b_5=1$.</li>
 </ul>
+<p><strong>Notice: here we intentially set $x_2$ but not $x_1$ the effect variable for the first set of highly correlated variables, because we expect that for scenario 2 when $x_1$ has higher correlation with $x_5$ than $x_2$ with $x_5$ then SuSiE might have trouble detecting $x_2$</strong>.</p>
 
 </div>
 </div>
@@ -391,8 +392,8 @@ $$X_{p} \sim MVN(0, \Sigma)$$</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We run 500 replicates for the above 2 scenarios. We focus our evaluation on $x_5$ and ask:</p>
 <ol>
-<li>When $x_5$ is not a effect variable, how often is it dropped from the results, or grouped with $(x_1, x_2)$ or $(x_3,x_4)$.</li>
-<li>When $x_5$ is an effect variable, how often is it considered as a set on its own, or grouped with $(x_1, x_2)$ or $(x_3,x_4)$.</li>
+<li>When $x_5$ is not a effect variable, how often is it dropped from the results, or grouped with $(x_1, x_2)$, or with $(x_3,x_4)$.</li>
+<li>When $x_5$ is an effect variable, how often is it considered as a set on its own, or grouped with $(x_1, x_2)$, or with $(x_3,x_4)$.</li>
 </ol>
 
 </div>
@@ -703,7 +704,7 @@ out <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><s
 </div>
 <hr>
 &copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
-<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/7d1eee9a80b3e2184dbe4d4af3e038dd97b398f3/manuscript_results/susie_identifiability.ipynb"><code>manuscript_results/susie_identifiability.ipynb</code></a> committed by Gao Wang on Mon Jan 20 14:52:48 2020 <a href="http://github.com/stephenslab/susie-paper/commit/7d1eee9a80b3e2184dbe4d4af3e038dd97b398f3">revision 4, 7d1eee9</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/ad50d0ed5519519fba69fa711f5e991e2897171b/manuscript_results/susie_identifiability.ipynb"><code>manuscript_results/susie_identifiability.ipynb</code></a> committed by Gao Wang on Mon Jan 20 14:57:34 2020 <a href="http://github.com/stephenslab/susie-paper/commit/ad50d0ed5519519fba69fa711f5e991e2897171b">revision 5, ad50d0e</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
 </div>
 </div>
 </body>

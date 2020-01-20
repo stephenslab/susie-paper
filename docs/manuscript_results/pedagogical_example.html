@@ -667,6 +667,32 @@ $L3
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>LD pattern in the data-set can be visualized by:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-sos"><pre><span></span><span class="n">pdf</span><span class="p">(</span><span class="s1">&#39;LDheatmap.pdf&#39;</span><span class="p">)</span>
+<span class="kn">LDheatmap:</span><span class="p">:</span><span class="n">LDheatmap</span><span class="p">(</span><span class="n">cor</span><span class="p">(</span><span class="n">dat</span><span class="err">$</span><span class="n">X</span><span class="p">[,</span><span class="mi">100</span><span class="p">:</span><span class="mi">200</span><span class="p">]),</span><span class="n">add</span><span class="o">.</span><span class="n">map</span><span class="o">=</span><span class="n">F</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Pairwise LD</span><span class="se">\n</span><span class="s2">(variables 100 to 200)&quot;</span><span class="p">)</span>
+<span class="kn">LDheatmap:</span><span class="p">:</span><span class="n">LDheatmap</span><span class="p">(</span><span class="n">cor</span><span class="p">(</span><span class="n">dat</span><span class="err">$</span><span class="n">X</span><span class="p">[,</span><span class="mi">350</span><span class="p">:</span><span class="mi">450</span><span class="p">]),</span><span class="n">add</span><span class="o">.</span><span class="n">map</span><span class="o">=</span><span class="n">F</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Pairwise LD</span><span class="se">\n</span><span class="s2">(variables 350 to 450)&quot;</span><span class="p">)</span>
+<span class="kn">LDheatmap:</span><span class="p">:</span><span class="n">LDheatmap</span><span class="p">(</span><span class="n">cor</span><span class="p">(</span><span class="n">dat</span><span class="err">$</span><span class="n">X</span><span class="p">[,</span><span class="mi">750</span><span class="p">:</span><span class="mi">850</span><span class="p">]),</span><span class="n">add</span><span class="o">.</span><span class="n">map</span><span class="o">=</span><span class="n">F</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Pairwise LD</span><span class="se">\n</span><span class="s2">(variables 750 to 850)&quot;</span><span class="p">)</span>
+<span class="n">dev</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="A-note-on-identifiability">A note on identifiability<a class="anchor-link" href="#A-note-on-identifiability">&#182;</a></h2><p>Correlation between the simualted two effect variables is 0.31. Correlation between the variable with top $z$ score and the first effect variable is 0.32; its correlation with the second effect variable is -0.54.</p>
 
 </div>
@@ -2244,7 +2270,7 @@ TRUE
 </div>
 <hr>
 &copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
-<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/5a0d38d7c66bf27fb0d48bc155a8e9ad7e0006c1/manuscript_results/pedagogical_example.ipynb"><code>manuscript_results/pedagogical_example.ipynb</code></a> committed by Gao Wang on Tue Jan 14 10:37:45 2020 <a href="http://github.com/stephenslab/susie-paper/commit/5a0d38d7c66bf27fb0d48bc155a8e9ad7e0006c1">revision 17, 5a0d38d</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/c2bc3fb18caaac0e276b6a4ec318320933b42914/manuscript_results/pedagogical_example.ipynb"><code>manuscript_results/pedagogical_example.ipynb</code></a> committed by Gao Wang on Mon Jan 20 15:26:13 2020 <a href="http://github.com/stephenslab/susie-paper/commit/c2bc3fb18caaac0e276b6a4ec318320933b42914">revision 18, c2bc3fb</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
 </div>
 </div>
 </body>

@@ -6,7 +6,7 @@ simulate: simulate.R
     $X: X
     $y: y
 
-susie: R(res <- susieR::susie(X,y,L=L,max_iter=1000))
+susie: R(res <- susieR::susie(X,y,L=L,estimate_prior_method="simple",max_iter=1000))
     @CONF: R_libs = susieR
     X: $X
     y: $y
@@ -15,7 +15,9 @@ susie: R(res <- susieR::susie(X,y,L=L,max_iter=1000))
 
 evaluate: evaluate.R
     cs: $cs
-    $dropped: dropped
+    $has_2: has_2
+    $has_3: has_3
+    $has_5: has_5
     $in_12: in_12
     $in_34: in_34
     $own: own

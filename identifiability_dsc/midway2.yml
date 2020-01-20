@@ -42,3 +42,6 @@ default:
   cpus_per_instance: 1
   mem_per_instance: 2G
   time_per_instance: 5m
+
+susie:
+  instances_per_job: 10

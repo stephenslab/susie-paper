@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -199,8 +198,7 @@ body {
   </div><!--/.container -->
 </div><!--/.navbar -->
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Experiment-on-identifiability-of-SuSiE">Experiment on identifiability of SuSiE<a class="anchor-link" href="#Experiment-on-identifiability-of-SuSiE">&#182;</a></h1><p>This notebook is meant to address to a concern from a referee.</p>
 
@@ -208,8 +206,7 @@ body {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It says the following:</p>
 <blockquote><p>Suppose
@@ -225,16 +222,14 @@ to the $(x_1, x_2)$ group or the $(x_3, x_4)$ group?</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Correlation-structure-between-variables">Correlation structure between variables<a class="anchor-link" href="#Correlation-structure-between-variables">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>First we determine covariance matrix that satisfies correlation structure as outlined above,</p>
 
@@ -255,14 +250,13 @@ cormat <span class="o">=</span> <span class="kp">rbind</span><span class="p">(</
                <span class="kt">c</span><span class="p">(</span><span class="m">0.9</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span> <span class="m">1.0</span><span class="p">))</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>where we assume high correlation between $x_1$ and $x_2$, and $x_3$ and $x_4$ ($R_{12} = R_{34} = 0.92$). 
 We set $R_{13} = R_{14} = R_{23} = R_{24} = 0.7$ and find the nearest 
@@ -279,7 +273,7 @@ positive definite matrix for this correlation structure:</p>
 <div class=" highlight hl-r"><pre><span></span>covmat <span class="o">=</span> <span class="kp">as.matrix</span><span class="p">(</span>Matrix<span class="o">::</span>nearPD<span class="p">(</span>cormat<span class="p">)</span><span class="o">$</span>mat<span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -292,7 +286,7 @@ positive definite matrix for this correlation structure:</p>
 <div class=" highlight hl-r"><pre><span></span>cov2cor<span class="p">(</span>covmat<span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -302,7 +296,7 @@ positive definite matrix for this correlation structure:</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -327,8 +321,7 @@ positive definite matrix for this correlation structure:</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It still satisfy the structure as outlined at the beginning of the document. We use the nearest PD found as the covariance matrix for simulation below.</p>
 
@@ -336,16 +329,14 @@ positive definite matrix for this correlation structure:</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Simulation-of-features-and-response-variables">Simulation of features and response variables<a class="anchor-link" href="#Simulation-of-features-and-response-variables">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We simulate an $X$ matrix of $N=1000$ samples and $P_1=5$ variables, 
 $$X_{p} \sim MVN(0, \Sigma)$$</p>
@@ -355,8 +346,7 @@ $$X_{p} \sim MVN(0, \Sigma)$$</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We then expand $X$ to having a total of $P=2000$ variables where the other 1995 variables are independent --- they come from multivariate normal $MVN(0,I)$ with $I$ being the identity matrix.</p>
 <p>The sample size and number of variables mimics a relatively small sample genetic association fine-mapping application.</p>
@@ -365,8 +355,7 @@ $$X_{p} \sim MVN(0, \Sigma)$$</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We simulate response $y$ using a linear model $y = Xb + e$, $e \sim N(0, I_n)$, and effect size $b$ a length $p$ vector with zero elsewhere except:</p>
 <ul>
@@ -379,16 +368,14 @@ $$X_{p} \sim MVN(0, \Sigma)$$</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Analysis-plan">Analysis plan<a class="anchor-link" href="#Analysis-plan">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We run 500 replicates for the above 2 scenarios. We focus our evaluation on $x_5$ and ask:</p>
 <ol>
@@ -400,8 +387,7 @@ $$X_{p} \sim MVN(0, \Sigma)$$</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The code for the experiments can be found at: <a href="https://github.com/stephenslab/susie-paper/tree/master/identifiability_dsc">https://github.com/stephenslab/susie-paper/tree/master/identifiability_dsc</a></p>
 
@@ -409,8 +395,7 @@ $$X_{p} \sim MVN(0, \Sigma)$$</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Results">Results<a class="anchor-link" href="#Results">&#182;</a></h2>
 </div>
@@ -426,7 +411,7 @@ res <span class="o">=</span> dscrutils<span class="o">::</span>dscquery<span cla
 <span class="kp">saveRDS</span><span class="p">(</span>res<span class="p">,</span> <span class="s">&#39;identifiability_20200120.rds&#39;</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -436,7 +421,7 @@ res <span class="o">=</span> dscrutils<span class="o">::</span>dscquery<span cla
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -448,7 +433,7 @@ Loaded dscquery output table with 1 rows and 9 columns.
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stderr output_text">
@@ -472,7 +457,7 @@ res <span class="o">=</span> tibble<span class="o">::</span>as_tibble<span class
 <span class="kp">head</span><span class="p">(</span>res<span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -482,7 +467,7 @@ res <span class="o">=</span> tibble<span class="o">::</span>as_tibble<span class
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -512,8 +497,7 @@ res <span class="o">=</span> tibble<span class="o">::</span>as_tibble<span class
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="When-$x_5$-is-not-effect-variable">When $x_5$ is not effect variable<a class="anchor-link" href="#When-$x_5$-is-not-effect-variable">&#182;</a></h3>
 </div>
@@ -537,7 +521,7 @@ out <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><s
 <span class="kp">names</span><span class="p">(</span>out<span class="p">)</span> <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;replicates&#39;</span><span class="p">,</span> <span class="s">&#39;total CS reported&#39;</span><span class="p">,</span> <span class="s">&#39;replicates X2 is detected&#39;</span><span class="p">,</span> <span class="s">&#39;replicates X3 is detected&#39;</span><span class="p">,</span> <span class="s">&#39;X5 in CS with X1 and X2&#39;</span><span class="p">,</span> <span class="s">&#39;X5 in CS with X3 and X4&#39;</span><span class="p">,</span> <span class="s">&#39;X5 on its own&#39;</span><span class="p">,</span> <span class="s">&#39;(X1,X2) and (X3,X4) are mixed up&#39;</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -550,7 +534,7 @@ out <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><s
 <div class=" highlight hl-r"><pre><span></span>out
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -560,7 +544,7 @@ out <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><s
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -593,8 +577,7 @@ out <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><s
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The result looks good.</p>
 
@@ -602,8 +585,7 @@ out <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><s
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="When-$x_5$-is-effect-variable">When $x_5$ is effect variable<a class="anchor-link" href="#When-$x_5$-is-effect-variable">&#182;</a></h3>
 </div>
@@ -627,7 +609,7 @@ out <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><s
 <span class="kp">names</span><span class="p">(</span>out<span class="p">)</span> <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;replicates&#39;</span><span class="p">,</span> <span class="s">&#39;total CS reported&#39;</span><span class="p">,</span> <span class="s">&#39;replicates X2 is detected&#39;</span><span class="p">,</span> <span class="s">&#39;replicates X3 is detected&#39;</span><span class="p">,</span> <span class="s">&#39;X5 in CS with X1 and X2&#39;</span><span class="p">,</span> <span class="s">&#39;X5 in CS with X3 and X4&#39;</span><span class="p">,</span> <span class="s">&#39;X5 on its own&#39;</span><span class="p">,</span> <span class="s">&#39;(X1,X2) and (X3,X4) are mixed up&#39;</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -640,7 +622,7 @@ out <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><s
 <div class=" highlight hl-r"><pre><span></span>out
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -650,7 +632,7 @@ out <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><s
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -683,8 +665,7 @@ out <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><s
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The result is slightly problematic but is somewhat expected:</p>
 <ol>
@@ -704,7 +685,7 @@ out <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><s
 </div>
 <hr>
 &copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
-<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/ad50d0ed5519519fba69fa711f5e991e2897171b/manuscript_results/susie_identifiability.ipynb"><code>manuscript_results/susie_identifiability.ipynb</code></a> committed by Gao Wang on Mon Jan 20 14:57:34 2020 <a href="http://github.com/stephenslab/susie-paper/commit/ad50d0ed5519519fba69fa711f5e991e2897171b">revision 5, ad50d0e</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/305e4113dd8aa9df4c29a6c8b4db4e42d5db1424/manuscript_results/ref4_question.ipynb"><code>manuscript_results/ref4_question.ipynb</code></a> committed by Gao Wang on Wed Jan 22 16:31:40 2020 <a href="http://github.com/stephenslab/susie-paper/commit/305e4113dd8aa9df4c29a6c8b4db4e42d5db1424">revision 1, 305e411</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
 </div>
 </div>
 </body>

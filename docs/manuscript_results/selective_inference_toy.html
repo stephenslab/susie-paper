@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -210,7 +211,7 @@ body {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>knitr<span class="o">::</span>opts_chunk<span class="o">$</span>set<span class="p">(</span>comment <span class="o">=</span> <span class="s">&quot;#&quot;</span><span class="p">,</span>collapse <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>results <span class="o">=</span> <span class="s">&quot;hold&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">knitr</span><span class="o">::</span><span class="n">opts_chunk</span><span class="o">$</span><span class="nf">set</span><span class="p">(</span><span class="n">comment</span> <span class="o">=</span> <span class="s">&quot;#&quot;</span><span class="p">,</span><span class="n">collapse</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span><span class="n">results</span> <span class="o">=</span> <span class="s">&quot;hold&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -231,7 +232,7 @@ body {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kn">library</span><span class="p">(</span>selectiveInference<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">selectiveInference</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -251,7 +252,7 @@ body {
 <pre>Loading required package: glmnet
 Loading required package: Matrix
 Loading required package: foreach
-Loaded glmnet 2.0-18
+Loaded glmnet 2.0-16
 
 Loading required package: intervals
 
@@ -285,16 +286,16 @@ than $p = 1000$ so that the example runs faster.)</p>
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">set.seed</span><span class="p">(</span><span class="m">15</span><span class="p">)</span>
-n     <span class="o">&lt;-</span> <span class="m">500</span>
-p     <span class="o">&lt;-</span> <span class="m">100</span>
-x     <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span>rnorm<span class="p">(</span>n<span class="o">*</span>p<span class="p">),</span>n<span class="p">,</span>p<span class="p">)</span>
-x<span class="p">[,</span><span class="m">2</span><span class="p">]</span> <span class="o">&lt;-</span> x<span class="p">[,</span><span class="m">1</span><span class="p">]</span>
-x<span class="p">[,</span><span class="m">4</span><span class="p">]</span> <span class="o">&lt;-</span> x<span class="p">[,</span><span class="m">3</span><span class="p">]</span>
-b     <span class="o">&lt;-</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span>p<span class="p">)</span>
-b<span class="p">[</span><span class="m">1</span><span class="p">]</span>  <span class="o">&lt;-</span> <span class="m">1</span>
-b<span class="p">[</span><span class="m">4</span><span class="p">]</span>  <span class="o">&lt;-</span> <span class="m">1</span>
-y     <span class="o">&lt;-</span> <span class="kp">drop</span><span class="p">(</span>x <span class="o">%*%</span> b <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">))</span>
+<div class=" highlight hl-r"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">15</span><span class="p">)</span>
+<span class="n">n</span>     <span class="o">&lt;-</span> <span class="m">500</span>
+<span class="n">p</span>     <span class="o">&lt;-</span> <span class="m">100</span>
+<span class="n">x</span>     <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">p</span><span class="p">),</span><span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+<span class="n">x[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span> <span class="o">&lt;-</span> <span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span>
+<span class="n">x[</span><span class="p">,</span><span class="m">4</span><span class="n">]</span> <span class="o">&lt;-</span> <span class="n">x[</span><span class="p">,</span><span class="m">3</span><span class="n">]</span>
+<span class="n">b</span>     <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+<span class="n">b[1]</span>  <span class="o">&lt;-</span> <span class="m">1</span>
+<span class="n">b[4]</span>  <span class="o">&lt;-</span> <span class="m">1</span>
+<span class="n">y</span>     <span class="o">&lt;-</span> <span class="nf">drop</span><span class="p">(</span><span class="n">x</span> <span class="o">%*%</span> <span class="n">b</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -316,8 +317,8 @@ columns.</p>
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">try</span><span class="p">(</span>fsfit <span class="o">&lt;-</span> fs<span class="p">(</span>x<span class="p">,</span>y<span class="p">))</span>
-<span class="kp">try</span><span class="p">(</span>larfit <span class="o">&lt;-</span> lar<span class="p">(</span>x<span class="p">,</span>y<span class="p">))</span>
+<div class=" highlight hl-r"><pre><span></span><span class="nf">try</span><span class="p">(</span><span class="n">fsfit</span> <span class="o">&lt;-</span> <span class="nf">fs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+<span class="nf">try</span><span class="p">(</span><span class="n">larfit</span> <span class="o">&lt;-</span> <span class="nf">lar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -357,10 +358,10 @@ Error in checkargs.xy(x = x, y = y) : x cannot have duplicate columns
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>x<span class="p">[,</span><span class="m">2</span><span class="p">]</span> <span class="o">&lt;-</span> x<span class="p">[,</span><span class="m">1</span><span class="p">]</span> <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0.1</span><span class="p">)</span>
-x<span class="p">[,</span><span class="m">4</span><span class="p">]</span> <span class="o">&lt;-</span> x<span class="p">[,</span><span class="m">3</span><span class="p">]</span> <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0.1</span><span class="p">)</span>
-cor<span class="p">(</span>x<span class="p">[,</span><span class="m">1</span><span class="p">],</span>x<span class="p">[,</span><span class="m">2</span><span class="p">])</span>
-cor<span class="p">(</span>x<span class="p">[,</span><span class="m">3</span><span class="p">],</span>x<span class="p">[,</span><span class="m">4</span><span class="p">])</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">x[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span> <span class="o">&lt;-</span> <span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0.1</span><span class="p">)</span>
+<span class="n">x[</span><span class="p">,</span><span class="m">4</span><span class="n">]</span> <span class="o">&lt;-</span> <span class="n">x[</span><span class="p">,</span><span class="m">3</span><span class="n">]</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">cor</span><span class="p">(</span><span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">,</span><span class="n">x[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="p">)</span>
+<span class="nf">cor</span><span class="p">(</span><span class="n">x[</span><span class="p">,</span><span class="m">3</span><span class="n">]</span><span class="p">,</span><span class="n">x[</span><span class="p">,</span><span class="m">4</span><span class="n">]</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -413,9 +414,9 @@ confidence intervals.</p>
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>fsfit <span class="o">&lt;-</span> fs<span class="p">(</span>x<span class="p">,</span>y<span class="p">)</span>
-out   <span class="o">&lt;-</span> fsInf<span class="p">(</span>fsfit<span class="p">)</span>
-<span class="kp">print</span><span class="p">(</span>out<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">fsfit</span> <span class="o">&lt;-</span> <span class="nf">fs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">out</span>   <span class="o">&lt;-</span> <span class="nf">fsInf</span><span class="p">(</span><span class="n">fsfit</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 </pre></div>
 
     </div>

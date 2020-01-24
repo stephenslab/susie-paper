@@ -9,6 +9,9 @@ covmat = as.matrix(Matrix::nearPD(cormat)$mat)
 X = MASS::mvrnorm(n=n, rep(0,nrow(covmat)), covmat)
 X = cbind(X, matrix(rnorm(n * (p - ncol(X))), nrow=n, ncol=(p - ncol(X))))
 b = rep(0,p)
-b[c(2,3)] = 1
-b[5] = b5
-y = X %*% b + rnorm(n)
+b[c(2,3)] = rnorm(2)
+b[5] = b5 * rnorm(1)
+y = X %*% b
+sigma = sqrt(var(y)*(1-pve)/pve)
+epsilon = rnorm(n, mean = 0, sd = sigma)
+y = y + epsilon

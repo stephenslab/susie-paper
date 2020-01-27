@@ -5,6 +5,8 @@ library(susieR)
 # SCRIPT PARAMETERS
 ns <- 1000          # Number of simulations.
 n  <- 600           # Number of samples.
+
+# Ref 4
 b  <- c(0,1,1,0,0)  # True effects.
 se <- 3             # residual s.d.
 
@@ -26,7 +28,7 @@ cs <- vector("list",ns)
 pip <- vector("list",ns)
 for (i in 1:ns) {
   cat("*")
-  
+
   # Simulate data.
   X <- rmvnorm(n,sigma = S)
   y <- drop(X %*% b + se*rnorm(n))

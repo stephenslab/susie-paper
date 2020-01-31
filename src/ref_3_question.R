@@ -15,6 +15,7 @@ set.seed(1)
 # Repeat for each simulation.
 cs <- vector("list",ns)
 pip <- vector("list",ns)
+b_lasso <- vector()
 for (i in 1:ns) {
   cat("*")
 
@@ -28,7 +29,8 @@ for (i in 1:ns) {
                min_abs_corr = 0, max_iter=500)
   cs[[i]] <- fit$sets$cs
   pip[[i]] <- fit$pip
-
+  fit.lasso <- glmnet::cv.glmnet(X,y)
+  b_lasso <- append(b_lasso, as.vector(coef(fit.lasso)[-1]))
 }
 cat("\n")
 
@@ -45,3 +47,7 @@ apply(non_effect_pip, 1, mean)
 
 effect_pip = do.call(cbind,lapply(1:length(pip), function(i) pip[[i]][c(1)]))
 apply(effect_pip, 1, mean)
+                                  
+b_lasso = matrix(b_lasso, ns,length(b),byrow=T)    
+length(which(b_lasso[,1]==0))
+length(which(bs_l[,2]!=0))                                  

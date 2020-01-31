@@ -44,9 +44,11 @@ print(out)
 
 non_effect_pip = do.call(cbind,lapply(1:length(pip), function(i) pip[[i]][c(2)]))
 apply(non_effect_pip, 1, mean)
+apply(non_effect_pip, 1, median)
 
 effect_pip = do.call(cbind,lapply(1:length(pip), function(i) pip[[i]][c(1)]))
 apply(effect_pip, 1, mean)
+apply(effect_pip, 1, median)
                                   
 b_lasso = matrix(b_lasso, ns,length(b),byrow=T)    
 length(which(b_lasso[,1]==0))

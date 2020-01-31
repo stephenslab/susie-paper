@@ -50,4 +50,4 @@ apply(effect_pip, 1, mean)
                                   
 b_lasso = matrix(b_lasso, ns,length(b),byrow=T)    
 length(which(b_lasso[,1]==0))
-length(which(bs_l[,2]!=0))                                  
+length(which(b_lasso[,2]!=0))                                  

@@ -1,8 +1,10 @@
+# This script implements a small numerical experiment to respond to a
+# question from Reviewer 3.
 library(glmnet)
 library(mvtnorm)
 library(susieR)
 
-# SCRIPT PARAMETERS
+# Script parameters
 ns <- 1000    # Number of simulations.
 n  <- 600     # Number of samples.
 b  <- c(1,0)  # True effects.
@@ -10,6 +12,8 @@ se <- 3       # Residual s.d.
 r  <- 0.9     # Correlation between x1 and x2.
 S  <- rbind(c(1,r),
             c(r,1))
+
+# Initiialize the sequence of pseudorandom numbers.
 set.seed(1)
 
 # Repeat for each simulation.
@@ -44,6 +48,7 @@ out
 
 # Summarize the susie posterior inclusion probabilities (PIPs) across all
 # simulations.
+cat("All simulations:\n")
 pip1 <- sapply(1:ns,function(i) pip[[i]][1])
 pip2 <- sapply(1:ns,function(i) pip[[i]][2])
 cat("      mean median\n")
@@ -52,6 +57,7 @@ cat(sprintf("x2: %0.4f %0.4f\n",mean(pip2),median(pip2)))
 
 # Summarize the susie posterior inclusion probabilities (PIPs) across
 # all simulations in which the inferred CS contains both x1 and x2.
+cat("Simulations in which CS is (1,2):\n")
 i    <- which(sapply(cs,function (x) length(x) == 1 &
                                      all(sort(unlist(x)) == 1:2)))
 pip1 <- sapply(i,function(i) pip[[i]][1])

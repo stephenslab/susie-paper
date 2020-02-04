@@ -40,16 +40,33 @@ out <- table(factor(out))
 out <- sort(out,decreasing = TRUE)
 out <- as.data.frame(out)
 names(out) <- c("CSs","count")
-print(out)
+out
 
+print('X2 pip mean and median')
 non_effect_pip = do.call(cbind,lapply(1:length(pip), function(i) pip[[i]][c(2)]))
-apply(non_effect_pip, 1, mean)
-apply(non_effect_pip, 1, median)
+print(apply(non_effect_pip, 1, mean))
+print(apply(non_effect_pip, 1, median))
 
+
+print('X1 pip mean and median')
 effect_pip = do.call(cbind,lapply(1:length(pip), function(i) pip[[i]][c(1)]))
-apply(effect_pip, 1, mean)
-apply(effect_pip, 1, median)
+print(apply(effect_pip, 1, mean))
+print(apply(effect_pip, 1, median))
+
+
+two_var_cs = sapply(1:length(cs), function(i) length(cs[[i]][[1]])==2)
+print(length(which(two_var_cs)))
+if (length(which(two_var_cs))>0) {
+	print('X2 pip for CS 1:2 mean and median')
+	print(apply(non_effect_pip[,which(two_var_cs),drop=F], 1, mean))
+	print(apply(non_effect_pip[,which(two_var_cs),drop=F], 1, median))
+	print('X1 pip for CS 1:2 mean and median')
+	print(apply(effect_pip[,which(two_var_cs),drop=F], 1, mean))
+	print(apply(effect_pip[,which(two_var_cs),drop=F], 1, median))
+}
                                   
 b_lasso = matrix(b_lasso, ns,length(b),byrow=T)    
+print('lasso false negative')
 print(length(which(b_lasso[,1]==0)))
-print(length(which(b_lasso[,2]!=0)))                           
+print('lasso false positive')
+print(length(which(b_lasso[,2]!=0)))

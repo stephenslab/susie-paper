@@ -40,7 +40,7 @@ out <- table(factor(out))
 out <- sort(out,decreasing = TRUE)
 out <- as.data.frame(out)
 names(out) <- c("CSs","count")
-print(out)
+out
 
 # Summarize the susie posterior inclusion probabilities (PIPs) across all
 # simulations.

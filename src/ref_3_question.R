@@ -7,9 +7,9 @@ ns <- 1000          # Number of simulations.
 n  <- 600           # Number of samples.
 b  <- c(1,0)  # True effects.
 se <- 3             # residual s.d.
-
-S <- rbind(c(1.0,  0.95),
-           c(0.95, 1.0))
+r <- 0.9
+S <- rbind(c(1.0,  r),
+           c(r, 1.0))
 set.seed(1)
 
 # Repeat for each simulation.
@@ -51,5 +51,5 @@ apply(effect_pip, 1, mean)
 apply(effect_pip, 1, median)
                                   
 b_lasso = matrix(b_lasso, ns,length(b),byrow=T)    
-length(which(b_lasso[,1]==0))
-length(which(b_lasso[,2]!=0))                                  
+print(length(which(b_lasso[,1]==0)))
+print(length(which(b_lasso[,2]!=0)))                           

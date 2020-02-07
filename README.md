@@ -15,6 +15,9 @@ For full details, please view the repository website at: https://stephenslab.git
 [**A demonstration of SuSiE's motivations**](https://stephenslab.github.io/susie-paper/manuscript_results/motivating_example.html)<br>
 &nbsp; &nbsp;This document explains with toy example illustration the unique type of inference SuSiE is interested in.
 
+[**Experiment with variables of given high correlation structure**](https://stephenslab.github.io/susie-paper/manuscript_results/motivating_example_high_corr.html)<br>
+&nbsp; &nbsp;This notebook is meant to address to a shared concern from two referees. The motivating example in the manuscript was designed to be a simple toy for illustrating the novel type of inference SuSiE offers. Here are some slightly more complicated examples, based on the motivating example, but with variables in high (rather than perfect) correlations with each other.
+
 [**A pedagogical example of fine-mapping problem**](https://stephenslab.github.io/susie-paper/manuscript_results/pedagogical_example.html)<br>
 &nbsp; &nbsp;Here we demonstrate with simulated data a setting of fine-mapping problem where it is clearly problematic to run forward stagewise selection, but SuSiE's Iterative Bayesian Stepwise Selection procedure can correctly identify the causal signals and compute posterior inclusion probability (posterior mean from a variational approximation to the posterior distribution). We also compared SuSiE results with other Bayesian sparse regression approach, and demonstrate that SuSiE is robust to prior choice and provide information more relevant to fine-mapping applications that other methods do not provide.
 

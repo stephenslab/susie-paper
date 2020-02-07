@@ -220,13 +220,12 @@ suggestion, we simulated two variables, $x_1$ and $x_2$, with high but
 not perfect correlation ($0.9$). Specifically, we simulated $n = 600$
 samples stored as an $X_{600 \times 2}$ matrix, in which each row was
 drawn <em>i.i.d.</em> from a normal distribution with mean zero and
-$\mathrm{cor}(x_1, x_2) = 0.9$. We then simulated $y<em>i = x</em>{i1} \beta_1</p>
-<ul>
-<li>x_{i2} \beta_2 + \varepsilon_i$, with $\beta_1 = 1, \beta_2 = 0$,
+$\mathrm{cor}(x_1, x_2) = 0.9$.</p>
+<p>We then simulated $y_i = x_{i1} \beta_1 + x_{i2} \beta_2 + \varepsilon_i$, 
+with $\beta_1 = 1, \beta_2 = 0$,
 and $\varepsilon_i$ <em>i.i.d.</em> normal with zero mean and standard
 deviation of 3. We performed 1,000 replicates of this simulation
-(generated with different random number seeds).</li>
-</ul>
+(generated with different random number seeds).</p>
 
 </div>
 </div>
@@ -239,8 +238,8 @@ sufficiently high (0.9) to make distinguishing between the two
 variables somewhat possible, but not non entirely straightforward. For
 example, when we run lasso (using <code>cv.glmnet</code> from the <code>glmnet</code>
 R package) on these data it wrongly selected $x_2$ as having
-non-zero coefficient in about 10\% of the simulations (95 out of
-1,000), and correctly selected $x_1$ in about 96\% of simulations (956
+non-zero coefficient in about 10% of the simulations (95 out of
+1,000), and correctly selected $x_1$ in about 96% of simulations (956
 out of 1,000). Note that the lasso does not assess uncertainty in
 variable selection, so these results are not directly comparable
 with SuSiE CSs below; however, the lasso results demonstrate that
@@ -256,9 +255,9 @@ that the example is uninteresting.</p>
 <p>Ideally, then, SuSiE should identify variable $x_1$ as an effect
 variable and drop $x_2$ as often as possible. However, due to the high
 correlation between the variables, it is inevitable that some
-95\% SuSiE credible sets (CS) will also contain $x_2$. Most
+95% SuSiE credible sets (CS) will also contain $x_2$. Most
 important is that we should avoid, as much as possible, reporting a CS
-that contains <em>only</em> $x_2$, since the goal is that 95\% of CSs
+that contains <em>only</em> $x_2$, since the goal is that 95% of CSs
 should contain at least one effect variable.  The SuSiE results (SuSiE version 0.9.1 on R 3.5.2) 
 are summarized below. The code used for the simulation <a href="https://github.com/stephenslab/susie-paper/blob/master/src/ref_3_question.R">can be found here</a>.</p>
 
@@ -299,7 +298,7 @@ are summarized below. The code used for the simulation <a href="https://github.c
 <p>Highlighted in <strong>bold</strong> are CSs that do <em>not</em> contain
 the true effect variable --- there are 2 of them out of 1,000 CSs
 detected. In summary, SuSiE precisely identifies the effect
-variable in a single CS in the majority (83\%) of the simulations, and
+variable in a single CS in the majority (83%) of the simulations, and
 provides a "valid" CS (<em>i.e.</em>, one containing an effect
 variable) in almost all simulations (998 out of 1,000). Further, even
 when SuSiE reports a CS including both variables, it consistently
@@ -406,9 +405,8 @@ two matrices).</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We simulated $n = 600$ samples from this
 multivariate normal distribution, then we simulated $n = 600$
-responses $y_i$ from the regression model $y_i = x_{i1} \beta_1 +
-\cdots x_{i5} \beta_5 + \varepsilon_i$, with $\beta = (0, 1, 1, 0,
-0)^T$, and $\varepsilon_i$ <em>i.i.d.</em> normal with zero mean and
+responses $y_i$ from the regression model $y_i = x_{i1} \beta_1 + \cdots x_{i5} \beta_5 + \varepsilon_i$, 
+with $\beta = (0, 1, 1, 0, 0)^T$, and $\varepsilon_i$ <em>i.i.d.</em> normal with zero mean and
 standard deviation of 3. We repeated this simulation procedure 1,000
 times with different random seeds, and each time we fit a SuSiE
 model to the simulated data by running the IBSS algorithm.\footnote{To
@@ -546,7 +544,7 @@ approach (first cluster variables into groups, then test groups) would
 work well in the toy example in the paper, but in general it requires
 <em>ad hoc</em> decisions about how to cluster variables. In this more
 complex example raised by the referee, it is far from clear how to
-cluster the variables. \SuSiE avoids this problem because there is
+cluster the variables. SuSiE avoids this problem because there is
 no pre-clustering of variables; instead, the SuSiE CSs are computed
 directly from an (approximate) posterior distribution (which takes
 into account how the variables $x$ are correlated with each other, as
@@ -557,7 +555,7 @@ well as their relationship with $y$).</p>
 </div>
 <hr>
 &copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
-<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/3ed0e7b479923e10921c4020db78bf17ca25756d/manuscript_results/motivating_example_high_corr.ipynb"><code>manuscript_results/motivating_example_high_corr.ipynb</code></a> committed by Gao Wang on Fri Feb 7 08:38:07 2020 <a href="http://github.com/stephenslab/susie-paper/commit/3ed0e7b479923e10921c4020db78bf17ca25756d">revision 1, 3ed0e7b</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/78a205f1f8a1c05effa9ce70dbb81f3e443bccfc/manuscript_results/motivating_example_high_corr.ipynb"><code>manuscript_results/motivating_example_high_corr.ipynb</code></a> committed by Gao Wang on Fri Feb 7 08:45:41 2020 <a href="http://github.com/stephenslab/susie-paper/commit/78a205f1f8a1c05effa9ce70dbb81f3e443bccfc">revision 2, 78a205f</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
 </div>
 </div>
 </body>

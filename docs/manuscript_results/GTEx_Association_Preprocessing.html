@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="ipynb_website:version" content="0.9.7" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet" type="text/css" href="../css/jt.css">
+<link rel="stylesheet" type="text/css" href="../css/readable.css">
+<link rel="stylesheet" type="text/css" href="../css/toc2.css">
+
+<link href="../site_libs/jqueryui-1.11.4/jquery-ui.css">
+<link rel="stylesheet" href="../site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="../site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+<script src="../site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="../site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="../site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+
+<link rel="stylesheet"
+      href="../site_libs/highlightjs/null.min.css"
+      type="text/css" />
+
+<script src="../site_libs/highlightjs/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+<script src="../js/doc_toc.js"></script>
+<script src="../js/docs.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+        },
+        "HTML-CSS": {
+            preferredFont: "TeX",
+            availableFonts: ["TeX"],
+            styles: {
+                scale: 110,
+                ".MathJax_Display": {
+                    "font-size": "110%",
+                }
+            }
+        }
+    });
+</script>
+<script>
+function filterDataFrame(id) {
+    var input = document.getElementById("search_" + id);
+    var filter = input.value.toUpperCase();
+    var table = document.getElementById("dataframe_" + id);
+    var tr = table.getElementsByTagName("tr");
+    // Loop through all table rows, and hide those who don't match the search query
+    for (var i = 1; i < tr.length; i++) {
+        for (var j = 0; j < tr[i].cells.length; ++j) {
+            var matched = false;
+            if (tr[i].cells[j].innerHTML.toUpperCase().indexOf(filter) != -1) {
+                tr[i].style.display = "";
+                matched = true
+                break;
+            }
+            if (!matched)
+                tr[i].style.display = "none";
+        }
+    }
+}
+function sortDataFrame(id, n, dtype) {
+    var table = document.getElementById("dataframe_" + id);
+    var tb = table.tBodies[0]; // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
+    var tr = Array.prototype.slice.call(tb.rows, 0); // put rows into array
+    if (dtype === 'numeric') {
+        var fn = function(a, b) { 
+            return parseFloat(a.cells[n].textContent) <= parseFloat(b.cells[n].textContent) ? -1 : 1;
+        }
+    } else {
+        var fn = function(a, b) {
+            var c = a.cells[n].textContent.trim().localeCompare(b.cells[n].textContent.trim()); 
+            return c > 0 ? 1 : (c < 0 ? -1 : 0) }
+    }
+    var isSorted = function(array, fn) {
+        if (array.length < 2)
+            return 1;
+        var direction = fn(array[0], array[1]); 
+        for (var i = 1; i < array.length - 1; ++i) {
+            var d = fn(array[i], array[i+1]);
+            if (d == 0)
+                continue;
+            else if (direction == 0)
+                direction = d;
+            else if (direction != d)
+                return 0;
+            }
+        return direction;
+    }
+    var sorted = isSorted(tr, fn);
+    if (sorted == 1 || sorted == -1) {
+        // if sorted already, reverse it
+        for(var i = tr.length - 1; i >= 0; --i)
+            tb.appendChild(tr[i]); // append each row in order
+    } else {
+        tr = tr.sort(fn);
+        for(var i = 0; i < tr.length; ++i)
+            tb.appendChild(tr[i]); // append each row in order
+    }
+}
+</script>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+  // mark it active
+  menuAnchor.parent().addClass('active');
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+<div class="container-fluid main-container">
+<!-- tabsets -->
+<script src="../site_libs/navigation-1.1/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+
+
+<title>SuSiE manuscript</title>
+
+<style type = "text/css">
+body {
+  
+  padding-top: 66px;
+  padding-bottom: 40px;
+}
+</style>
+</head>
+
+<body>
+<div tabindex="-1" id="notebook" class="border-box-sizing">
+<div class="container" id="notebook-container">
+
+<!-- code folding -->
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">SuSiE manuscript</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+<li>
+  <a href="../index.html">Overview</a>
+</li>
+        
+<li>
+  <a href="../finemapping_benchmark.html">Finemapping Benchmark</a>
+</li>
+        
+<li>
+  <a href="../manuscript_results.html">Manuscript Results</a>
+</li>
+        
+      </ul>
+        
+<ul class="nav navbar-nav navbar-right">
+<li>
+   <a href="http://github.com/stephenslab/susie-paper"> source </a>
+</li>
+</ul>
+        
+      </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Individual-level-genotype-expression-data-preprocessing-for-association-analysis">Individual-level genotype-expression data preprocessing for association analysis<a class="anchor-link" href="#Individual-level-genotype-expression-data-preprocessing-for-association-analysis">&#182;</a></h2><p>This pipeline aims to extract individual-level genotype-expression data in preparation for cis-eQTL fine-mapping. It was written by Jiarun Chen (Tsinghua U.) advised by Gao Wang.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Aim">Aim<a class="anchor-link" href="#Aim">&#182;</a></h2><p>We want to organize data in units of genes. For each gene, we would like to have an RDS file that saves the genotype (sample by variants), expression (sample by condition, ie, tissues in GTEx context), and covariates data (sample by covariates). Additionally to facilicate downstream analysis, for each condition of normalized gene expression we regress out covariates and save residuals as a residual expression matrix.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">&#182;</a></h2><p>Each RDS file contains information to perform association analysis of one gene,</p>
+<ol>
+<li>covariates (<code>Z</code>): This is independent of genes, so this is the same among genes and can be directly copied from the original covariates data, for each condition (tissues in GTEx).</li>
+<li>expression (<code>y</code>, and residual, <code>y_res</code>): Each condition saves expression data for all genes in one file. We first generate a <code>gene:line_number</code> meta-database -- for each gene, the <code>line_number</code> is the line numbers of the gene in a expression data files. Once we have the meta-data, for each gene we read the corresponding lines from each condition and combine them as the expression matrix. This will be a lot faster than, e.g., to use <code>grep</code> for genes from each file; and is easier to write than say using database type of languages. To implement,<ol>
+<li>extract the column of <code>ensembl_gene_id</code> in the 49 expression files, using <code>pandas</code>.</li>
+<li>assign <code>gene:line_number</code> for each gene in each tissue based on the extracted column and their row index, and write them to text files as meta information.</li>
+<li>for each gene, extract the row of expression of the gene using meta info from above, and combine it with sample names.</li>
+</ol>
+</li>
+<li>genotype (<code>X</code>): Given TSS data of all genes, we extract from VCF file genotype within a predefined radius around the TSS (say, 1Mb).</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Data-format-documentation">Data format documentation<a class="anchor-link" href="#Data-format-documentation">&#182;</a></h1><h2 id="Input">Input<a class="anchor-link" href="#Input">&#182;</a></h2><p>Genotype data is one VCF file.</p>
+<ul>
+<li>genotype: .vcf.gz</li>
+</ul>
+
+<pre><code>    #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  GTEX-1117F      GTEX-111CU      GTEX-111FC      GTEX-111VG      GTEX-111YS      GTEX-1122O
+    chr1    13526   chr1_13526_C_T_b38      C       T       .       PASS    AN=1676;AF=0.000596659;AC=1     GT      0|0     0|0     0|0     0|0     0|0     0|0</code></pre>
+<p>Expression data is per file per condition,</p>
+<ul>
+<li>expression: .bed.gz
+<pre><code>  #chr    start   end     gene_id GTEX-1117F      GTEX-111CU      GTEX-111FC      GTEX-111VG      GTEX-111YS      GTEX-1122O      GTEX-1128S
+  chr1    29552   29553   ENSG00000227232.5       1.3135329173730264      -0.9007944960568992     -0.29268956046586164    -0.7324113622418431     -0.27475411245874887    -0.6990255198601908     0.18188866123299216</code></pre>
+</li>
+</ul>
+<p>Covariate data is per file per condition,</p>
+<ul>
+<li>covariates: .txt
+<pre><code>  ID      GTEX-1117F      GTEX-111CU      GTEX-111FC      GTEX-111VG      GTEX-111YS
+  PC1     -0.0867  0.0107  0.0099  0.0144  0.0154
+  PC2     -0.0132 -0.0026 -0.0050 -0.0081 -0.0093</code></pre>
+</li>
+</ul>
+<h2 id="Output">Output<a class="anchor-link" href="#Output">&#182;</a></h2><p>Every gene is an RDS file containing information outlined in previous section. Below is a processed example:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-sos"><pre><span></span><span class="n">dat</span> <span class="o">&lt;-</span> <span class="n">readRDS</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s1">&#39;/scratch/midway2/chj1ar/GTEx_Analysis_v8_eQTL_expression_genewise/output/ENSG00000284484.1.Multi_Tissues.RDS&#39;</span><span class="p">)</span>
+<span class="nb">str</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>List of 4
+ $ X    : chr [1:838, 1:40947] &#34;0&#34; &#34;0&#34; &#34;0&#34; &#34;0&#34; ...
+  ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. ..$ : chr [1:838] &#34;GTEX-1117F&#34; &#34;GTEX-111CU&#34; &#34;GTEX-111FC&#34; &#34;GTEX-111VG&#34; ...
+  .. ..$ : chr [1:40947] &#34;chr16_74677011_G_C_b38&#34; &#34;chr16_74677177_G_A_b38&#34; &#34;chr16_74677272_C_T_b38&#34; &#34;chr16_74677278_C_G_b38&#34; ...
+ $ y    :List of 12
+  ..$ Brain_Cerebellar_Hemisphere          : chr [1:175, 1] &#34;0.4099833&#34; &#34;0.7860842&#34; &#34;-0.8056329&#34; &#34;0.2007308&#34; ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:175] &#34;GTEX-11DYG&#34; &#34;GTEX-11DZ1&#34; &#34;GTEX-11EI6&#34; &#34;GTEX-11EMC&#34; ...
+  .. .. ..$ : NULL
+  ..$ Brain_Cerebellum                     : chr [1:209, 1] &#34;-0.08365173&#34; &#34;-1.0467&#34; &#34;0.8247319&#34; &#34;2.18935&#34; ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:209] &#34;GTEX-111FC&#34; &#34;GTEX-1128S&#34; &#34;GTEX-117XS&#34; &#34;GTEX-1192X&#34; ...
+  .. .. ..$ : NULL
+  ..$ Brain_Hypothalamus                   : chr [1:170, 1] &#34;1.003148&#34; &#34;-0.1992013&#34; &#34;0.4960161&#34; &#34;-1.003148&#34; ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:170] &#34;GTEX-1192X&#34; &#34;GTEX-11DYG&#34; &#34;GTEX-11DZ1&#34; &#34;GTEX-11EI6&#34; ...
+  .. .. ..$ : NULL
+  ..$ Brain_Nucleus_accumbens_basal_ganglia: chr [1:202, 1] &#34;0.294373&#34; &#34;-0.7665489&#34; &#34;1.413069&#34; &#34;-0.5805017&#34; ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:202] &#34;GTEX-1192X&#34; &#34;GTEX-11DYG&#34; &#34;GTEX-11DZ1&#34; &#34;GTEX-11GSP&#34; ...
+  .. .. ..$ : NULL
+  ..$ Nerve_Tibial                         : chr [1:532, 1] &#34;-1.306538&#34; &#34;0.05881974&#34; &#34;0.9889212&#34; &#34;-0.1107433&#34; ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:532] &#34;GTEX-111CU&#34; &#34;GTEX-111FC&#34; &#34;GTEX-111VG&#34; &#34;GTEX-111YS&#34; ...
+  .. .. ..$ : NULL
+  ..$ Ovary                                : chr [1:167, 1] &#34;-0.8331469&#34; &#34;1.179761&#34; &#34;1.094332&#34; &#34;1.731664&#34; ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:167] &#34;GTEX-11DXX&#34; &#34;GTEX-11EM3&#34; &#34;GTEX-11EMC&#34; &#34;GTEX-11GSP&#34; ...
+  .. .. ..$ : NULL
+  ..$ Pituitary                            : chr [1:237, 1] &#34;-1.465234&#34; &#34;0.8813078&#34; &#34;0.5413951&#34; &#34;-0.2230078&#34; ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:237] &#34;GTEX-1128S&#34; &#34;GTEX-113JC&#34; &#34;GTEX-117XS&#34; &#34;GTEX-117YW&#34; ...
+  .. .. ..$ : NULL
+  ..$ Spleen                               : chr [1:227, 1] &#34;-0.3013365&#34; &#34;-1.098629&#34; &#34;-0.2216821&#34; &#34;0.504322&#34; ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:227] &#34;GTEX-111CU&#34; &#34;GTEX-111FC&#34; &#34;GTEX-1122O&#34; &#34;GTEX-117YX&#34; ...
+  .. .. ..$ : NULL
+  ..$ Testis                               : chr [1:322, 1] &#34;0.7520643&#34; &#34;-0.5594548&#34; &#34;-1.401747&#34; &#34;0.4535472&#34; ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:322] &#34;GTEX-111CU&#34; &#34;GTEX-111FC&#34; &#34;GTEX-111VG&#34; &#34;GTEX-111YS&#34; ...
+  .. .. ..$ : NULL
+  ..$ Thyroid                              : chr [1:574, 1] &#34;1.276612&#34; &#34;0.9802626&#34; &#34;-1.657634&#34; &#34;0.4339182&#34; ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:574] &#34;GTEX-111CU&#34; &#34;GTEX-111FC&#34; &#34;GTEX-111VG&#34; &#34;GTEX-111YS&#34; ...
+  .. .. ..$ : NULL
+  ..$ Uterus                               : chr [1:129, 1] &#34;-0.7618428&#34; &#34;1.053073&#34; &#34;-1.159742&#34; &#34;1.426077&#34; ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:129] &#34;GTEX-1117F&#34; &#34;GTEX-113JC&#34; &#34;GTEX-11DXX&#34; &#34;GTEX-11EM3&#34; ...
+  .. .. ..$ : NULL
+  ..$ Vagina                               : chr [1:141, 1] &#34;-1.250087&#34; &#34;0.4371924&#34; &#34;-0.5988157&#34; &#34;0.7542415&#34; ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:141] &#34;GTEX-1117F&#34; &#34;GTEX-113JC&#34; &#34;GTEX-11DXX&#34; &#34;GTEX-11EM3&#34; ...
+  .. .. ..$ : NULL
+ $ Z    :List of 12
+  ..$ Brain_Cerebellar_Hemisphere          : num [1:175, 1:38] -0.0941 0.0148 0.0141 0.0141 0.0147 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:175] &#34;GTEX-11DYG&#34; &#34;GTEX-11DZ1&#34; &#34;GTEX-11EI6&#34; &#34;GTEX-11EMC&#34; ...
+  .. .. ..$ : chr [1:38] &#34;PC1&#34; &#34;PC2&#34; &#34;PC3&#34; &#34;PC4&#34; ...
+  ..$ Brain_Cerebellum                     : num [1:209, 1:38] 0.0099 0.0145 0.0139 0.0138 -0.0941 0.0148 0.0141 0.0141 0.0142 0.0147 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:209] &#34;GTEX-111FC&#34; &#34;GTEX-1128S&#34; &#34;GTEX-117XS&#34; &#34;GTEX-1192X&#34; ...
+  .. .. ..$ : chr [1:38] &#34;PC1&#34; &#34;PC2&#34; &#34;PC3&#34; &#34;PC4&#34; ...
+  ..$ Brain_Hypothalamus                   : num [1:170, 1:38] 0.0138 -0.0941 0.0148 0.0141 0.0141 0.0147 0.0146 0.0145 0.0161 -0.0958 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:170] &#34;GTEX-1192X&#34; &#34;GTEX-11DYG&#34; &#34;GTEX-11DZ1&#34; &#34;GTEX-11EI6&#34; ...
+  .. .. ..$ : chr [1:38] &#34;PC1&#34; &#34;PC2&#34; &#34;PC3&#34; &#34;PC4&#34; ...
+  ..$ Brain_Nucleus_accumbens_basal_ganglia: num [1:202, 1:38] 0.0138 -0.0941 0.0148 0.0147 0.0139 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:202] &#34;GTEX-1192X&#34; &#34;GTEX-11DYG&#34; &#34;GTEX-11DZ1&#34; &#34;GTEX-11GSP&#34; ...
+  .. .. ..$ : chr [1:38] &#34;PC1&#34; &#34;PC2&#34; &#34;PC3&#34; &#34;PC4&#34; ...
+  ..$ Nerve_Tibial                         : num [1:532, 1:68] 0.0107 0.0099 0.0144 0.0154 -0.0728 -0.024 0.0138 0.0141 -0.0898 -0.0941 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:532] &#34;GTEX-111CU&#34; &#34;GTEX-111FC&#34; &#34;GTEX-111VG&#34; &#34;GTEX-111YS&#34; ...
+  .. .. ..$ : chr [1:68] &#34;PC1&#34; &#34;PC2&#34; &#34;PC3&#34; &#34;PC4&#34; ...
+  ..$ Ovary                                : num [1:167, 1:38] 0.0141 0.0145 0.0141 0.0147 0.014 0.0146 0.014 0.015 0.0154 0.0144 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:167] &#34;GTEX-11DXX&#34; &#34;GTEX-11EM3&#34; &#34;GTEX-11EMC&#34; &#34;GTEX-11GSP&#34; ...
+  .. .. ..$ : chr [1:38] &#34;PC1&#34; &#34;PC2&#34; &#34;PC3&#34; &#34;PC4&#34; ...
+  ..$ Pituitary                            : num [1:237, 1:38] 0.0145 0.0106 0.0139 0.0109 0.0134 0.0138 -0.0941 0.0141 0.0141 0.0091 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:237] &#34;GTEX-1128S&#34; &#34;GTEX-113JC&#34; &#34;GTEX-117XS&#34; &#34;GTEX-117YW&#34; ...
+  .. .. ..$ : chr [1:38] &#34;PC1&#34; &#34;PC2&#34; &#34;PC3&#34; &#34;PC4&#34; ...
+  ..$ Spleen                               : num [1:227, 1:38] 0.0107 0.0099 0.0139 -0.024 0.0141 0.0135 0.0148 0.0139 -0.0998 0.0146 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:227] &#34;GTEX-111CU&#34; &#34;GTEX-111FC&#34; &#34;GTEX-1122O&#34; &#34;GTEX-117YX&#34; ...
+  .. .. ..$ : chr [1:38] &#34;PC1&#34; &#34;PC2&#34; &#34;PC3&#34; &#34;PC4&#34; ...
+  ..$ Testis                               : num [1:322, 1:53] 0.0107 0.0099 0.0144 0.0154 0.0139 0.0109 -0.024 -0.0898 0.0141 0.0139 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:322] &#34;GTEX-111CU&#34; &#34;GTEX-111FC&#34; &#34;GTEX-111VG&#34; &#34;GTEX-111YS&#34; ...
+  .. .. ..$ : chr [1:53] &#34;PC1&#34; &#34;PC2&#34; &#34;PC3&#34; &#34;PC4&#34; ...
+  ..$ Thyroid                              : num [1:574, 1:68] 0.0107 0.0099 0.0144 0.0154 0.0139 0.0145 0.0106 0.0139 0.0109 -0.024 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:574] &#34;GTEX-111CU&#34; &#34;GTEX-111FC&#34; &#34;GTEX-111VG&#34; &#34;GTEX-111YS&#34; ...
+  .. .. ..$ : chr [1:68] &#34;PC1&#34; &#34;PC2&#34; &#34;PC3&#34; &#34;PC4&#34; ...
+  ..$ Uterus                               : num [1:129, 1:23] -0.0867 0.0106 0.0141 0.0145 0.0141 0.0147 0.014 0.0146 0.0154 0.0144 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:129] &#34;GTEX-1117F&#34; &#34;GTEX-113JC&#34; &#34;GTEX-11DXX&#34; &#34;GTEX-11EM3&#34; ...
+  .. .. ..$ : chr [1:23] &#34;PC1&#34; &#34;PC2&#34; &#34;PC3&#34; &#34;PC4&#34; ...
+  ..$ Vagina                               : num [1:141, 1:23] -0.0867 0.0106 0.0141 0.0145 0.0141 0.0147 0.014 0.0146 0.0161 0.014 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:141] &#34;GTEX-1117F&#34; &#34;GTEX-113JC&#34; &#34;GTEX-11DXX&#34; &#34;GTEX-11EM3&#34; ...
+  .. .. ..$ : chr [1:23] &#34;PC1&#34; &#34;PC2&#34; &#34;PC3&#34; &#34;PC4&#34; ...
+ $ y_res:List of 12
+  ..$ Brain_Cerebellar_Hemisphere          : num [1:175, 1] 0.4994 0.258 0.0121 0.1096 0.2218 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:175] &#34;GTEX-11DYG&#34; &#34;GTEX-11DZ1&#34; &#34;GTEX-11EI6&#34; &#34;GTEX-11EMC&#34; ...
+  .. .. ..$ : NULL
+  ..$ Brain_Cerebellum                     : num [1:209, 1] 0.25761 -0.40058 0.26031 0.23858 0.00136 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:209] &#34;GTEX-111FC&#34; &#34;GTEX-1128S&#34; &#34;GTEX-117XS&#34; &#34;GTEX-1192X&#34; ...
+  .. .. ..$ : NULL
+  ..$ Brain_Hypothalamus                   : num [1:170, 1] -0.3326 -0.0139 0.1878 0.0302 -0.1408 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:170] &#34;GTEX-1192X&#34; &#34;GTEX-11DYG&#34; &#34;GTEX-11DZ1&#34; &#34;GTEX-11EI6&#34; ...
+  .. .. ..$ : NULL
+  ..$ Brain_Nucleus_accumbens_basal_ganglia: num [1:202, 1] -0.1732 -0.5435 0.366 -0.135 -0.0661 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:202] &#34;GTEX-1192X&#34; &#34;GTEX-11DYG&#34; &#34;GTEX-11DZ1&#34; &#34;GTEX-11GSP&#34; ...
+  .. .. ..$ : NULL
+  ..$ Nerve_Tibial                         : num [1:532, 1] -0.0746 0.0679 -0.6145 -0.029 -0.2999 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:532] &#34;GTEX-111CU&#34; &#34;GTEX-111FC&#34; &#34;GTEX-111VG&#34; &#34;GTEX-111YS&#34; ...
+  .. .. ..$ : NULL
+  ..$ Ovary                                : num [1:167, 1] -0.1464 0.0702 0.4032 0.6144 0.5007 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:167] &#34;GTEX-11DXX&#34; &#34;GTEX-11EM3&#34; &#34;GTEX-11EMC&#34; &#34;GTEX-11GSP&#34; ...
+  .. .. ..$ : NULL
+  ..$ Pituitary                            : num [1:237, 1] -0.136526 -0.266844 -0.583977 0.000303 0.163791 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:237] &#34;GTEX-1128S&#34; &#34;GTEX-113JC&#34; &#34;GTEX-117XS&#34; &#34;GTEX-117YW&#34; ...
+  .. .. ..$ : NULL
+  ..$ Spleen                               : num [1:227, 1] -0.2093 0.0971 -0.081 -0.1846 -0.6929 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:227] &#34;GTEX-111CU&#34; &#34;GTEX-111FC&#34; &#34;GTEX-1122O&#34; &#34;GTEX-117YX&#34; ...
+  .. .. ..$ : NULL
+  ..$ Testis                               : num [1:322, 1] -0.17 0.125 0.128 0.202 0.277 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:322] &#34;GTEX-111CU&#34; &#34;GTEX-111FC&#34; &#34;GTEX-111VG&#34; &#34;GTEX-111YS&#34; ...
+  .. .. ..$ : NULL
+  ..$ Thyroid                              : num [1:574, 1] -0.0422 0.4231 -0.771 -0.2314 -0.0944 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:574] &#34;GTEX-111CU&#34; &#34;GTEX-111FC&#34; &#34;GTEX-111VG&#34; &#34;GTEX-111YS&#34; ...
+  .. .. ..$ : NULL
+  ..$ Uterus                               : num [1:129, 1] -0.71121 -0.00343 0.31425 0.50844 -0.63224 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:129] &#34;GTEX-1117F&#34; &#34;GTEX-113JC&#34; &#34;GTEX-11DXX&#34; &#34;GTEX-11EM3&#34; ...
+  .. .. ..$ : NULL
+  ..$ Vagina                               : num [1:141, 1] -0.9296 0.2999 0.3062 0.0652 -0.014 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:141] &#34;GTEX-1117F&#34; &#34;GTEX-113JC&#34; &#34;GTEX-11DXX&#34; &#34;GTEX-11EM3&#34; ...
+  .. .. ..$ : NULL
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-sos"><pre><span></span><span class="n">sos</span> <span class="n">run</span> <span class="mi">20191029</span><span class="n">_GTEx_V8_preprocessing</span><span class="o">.</span><span class="n">ipynb</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>usage: sos run 20191029_GTEx_V8_preprocessing.ipynb
+               [workflow_name | -t targets] [options] [workflow_options]
+  workflow_name:        Single or combined workflows defined in this script
+  targets:              One or more targets to generate
+  options:              Single-hyphen sos parameters (see &#34;sos run -h&#34; for details)
+  workflow_options:     Double-hyphen workflow-specific parameters
+
+Workflows:
+  get_gene_meta
+  preprocess
+  get_gene_meta_biomaRt
+  extract
+  dap
+
+Global Workflow Options:
+  --cwd output (as path)
+  --expression-data  paths(glob(&#39;/project2/compbio/GTEx_dbGaP/GTEx_Analysis_2017-06-05_v8/eqtl/GTEx_Analysis_v8_eQTL_expression_matrices/*.gz&#39;))
+
+  --genotype-data /project2/compbio/GTEx_dbGaP/GTEx_Analysis_2017-06-05_v8/genotypes/WGS/variant_calls/GTEx_Analysis_2017-06-05_v8_WholeGenomeSeq_838Indiv_Analysis_Freeze.SHAPEIT2_phased.vcf.gz (as path)
+  --covariates-data  paths(glob(&#39;/project2/compbio/GTEx_dbGaP/GTEx_Analysis_2017-06-05_v8/eqtl/GTEx_Analysis_v8_eQTL_covariates/*.txt&#39;))
+
+  --gene-id-file  path(f&#34;{cwd:a}/ensembl_gene_id.txt&#34;)
+
+  --gene-tss-file  path(f&#34;{cwd:a}/ensembl_gene_tss.txt&#34;)
+
+  --analysis-ready-dir  cwd
+
+
+Sections
+  get_gene_meta_1:      get gene-line mappping
+  get_gene_meta_2:      TSS for genes using provided TSS information
+  get_gene_meta_3:      get all gene names
+  preprocess:
+  get_gene_meta_biomaRt: # TSS for genes by biomaRt
+  extract:
+  dap:
+    Workflow Options:
+      --args &#39;&#39;
+                        Extra arguments to pass to DAP
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Usage">Usage<a class="anchor-link" href="#Usage">&#182;</a></h2><p><strong>You can edit and change the following bash variable.</strong> First edit and run the following bash variable.</p>
+
+<pre><code>work_dir=~/GTEx_Analysis_v8_eQTL_expression_genewise</code></pre>
+<p>Then run as follows:</p>
+
+<pre><code>cd $work_dir
+sos run 20191029_GTEx_V8_preprocessing.ipynb preprocess
+sos run 20191029_GTEx_V8_preprocessing.ipynb extract --analysis-ready-dir /project2/compbio/GTEx_eQTL/cis_eqtl_analysis_ready
+sos run 20191029_GTEx_V8_preprocessing.ipynb dap --analysis-ready-dir /project2/compbio/GTEx_eQTL/cis_eqtl_analysis_ready</code></pre>
+<p>To run the code on UChicago RCC midway, for example,</p>
+
+<pre><code>sos run 20191029_GTEx_V8_preprocessing.ipynb extract --gene-id-file output/ensembl_gene_id.txt \
+                                    --analysis-ready-dir /project2/compbio/GTEx_eQTL/cis_eqtl_analysis_ready \
+                                    -c midway2.yml -q midway2</code></pre>
+<h2 id="A-minimal-working-example">A minimal working example<a class="anchor-link" href="#A-minimal-working-example">&#182;</a></h2><p>If you want to only extract a self-defined list, eg, first 2 genes from the <code>gene_id_file</code>,</p>
+
+<pre><code>work_dir=~/GTEx_Analysis_v8_eQTL_expression_genewise
+cd $work_dir
+sos run 20191029_GTEx_V8_preprocessing.ipynb preprocess
+head -2 output/ensembl_gene_id.txt &gt; output/test.txt
+sos run 20191029_GTEx_V8_preprocessing.ipynb extract --gene-id-file output/test.txt --analysis-ready-dir output/</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-sos"><pre><span></span><span class="p">[</span><span class="k">global</span><span class="p">]</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+<span class="kn">parameter:</span> <span class="n">cwd</span> <span class="o">=</span> <span class="n">path</span><span class="p">(</span><span class="s1">&#39;./output&#39;</span><span class="p">)</span>
+<span class="kn">parameter:</span> <span class="n">expression_data</span> <span class="o">=</span> <span class="n">paths</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/project2/compbio/GTEx_dbGaP/GTEx_Analysis_2017-06-05_v8/eqtl/GTEx_Analysis_v8_eQTL_expression_matrices/*.gz&#39;</span><span class="p">))</span>
+<span class="kn">parameter:</span> <span class="n">genotype_data</span> <span class="o">=</span> <span class="n">path</span><span class="p">(</span><span class="s1">&#39;/project2/compbio/GTEx_dbGaP/GTEx_Analysis_2017-06-05_v8/genotypes/WGS/variant_calls/GTEx_Analysis_2017-06-05_v8_WholeGenomeSeq_838Indiv_Analysis_Freeze.SHAPEIT2_phased.vcf.gz&#39;</span><span class="p">)</span>
+<span class="kn">parameter:</span> <span class="n">covariates_data</span> <span class="o">=</span> <span class="n">paths</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/project2/compbio/GTEx_dbGaP/GTEx_Analysis_2017-06-05_v8/eqtl/GTEx_Analysis_v8_eQTL_covariates/*.txt&#39;</span><span class="p">))</span>
+<span class="kn">parameter:</span> <span class="n">gene_id_file</span> <span class="o">=</span> <span class="n">path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cwd</span><span class="si">:</span><span class="s2">a</span><span class="si">}</span><span class="s2">/ensembl_gene_id.txt&quot;</span><span class="p">)</span>
+<span class="kn">parameter:</span> <span class="n">gene_tss_file</span> <span class="o">=</span> <span class="n">path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cwd</span><span class="si">:</span><span class="s2">a</span><span class="si">}</span><span class="s2">/ensembl_gene_tss.txt&quot;</span><span class="p">)</span>
+<span class="kn">parameter:</span> <span class="n">analysis_ready_dir</span> <span class="o">=</span> <span class="n">cwd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Preprocessing">Preprocessing<a class="anchor-link" href="#Preprocessing">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-sos"><pre><span></span><span class="c1"># get gene-line mapping</span>
+<span class="p">[</span><span class="n">get_gene_meta_1</span><span class="p">]</span>
+<span class="kn">input:</span> <span class="n">expression_data</span><span class="p">,</span> <span class="n">group_by</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="kn">output:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cwd</span><span class="si">:</span><span class="s2">a</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">_input</span><span class="si">:</span><span class="s2">bnn</span><span class="si">}</span><span class="s2">.gene_meta.json&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cwd</span><span class="si">:</span><span class="s2">a</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">_input</span><span class="si">:</span><span class="s2">bnn</span><span class="si">}</span><span class="s2">.gene_meta.gz&quot;</span>
+<span class="kn">python3:</span> <span class="n">expand</span> <span class="o">=</span> <span class="s1">&#39;${ }&#39;</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="n">genes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">_input</span><span class="p">:</span><span class="n">r</span><span class="p">},</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s1">&#39;gzip&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">skip_blank_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">usecols</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">gene_linenum</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">genes</span><span class="p">[</span><span class="s1">&#39;gene_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())])</span>
+    <span class="kn">import</span> <span class="nn">json</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">_output</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">r</span><span class="p">},</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="err">$</span><span class="p">{</span><span class="n">_input</span><span class="p">:</span><span class="n">r</span><span class="p">}:</span><span class="n">gene_linenum</span><span class="p">},</span> <span class="n">outfile</span><span class="p">)</span>
+    <span class="c1"># chr, start, end, gene name</span>
+    <span class="n">genes</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">_output</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="n">r</span><span class="p">},</span> <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-sos"><pre><span></span><span class="c1"># TSS for genes using provided TSS information</span>
+<span class="p">[</span><span class="n">get_gene_meta_2</span><span class="p">]</span>
+<span class="kn">input:</span> <span class="n">group_by</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span>
+<span class="kn">output:</span> <span class="n">gene_tss_file</span>
+<span class="kn">bash:</span> <span class="n">expand</span> <span class="o">=</span> <span class="s1">&#39;${ }&#39;</span><span class="p">,</span> <span class="kp">workdir</span> <span class="o">=</span> <span class="n">cwd</span>
+    <span class="n">zcat</span> <span class="err">$</span><span class="p">{</span><span class="n">paths</span><span class="p">(</span><span class="n">_input</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])}</span> <span class="o">|</span> <span class="n">sort</span> <span class="o">-</span><span class="n">u</span> <span class="o">&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">_output</span><span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-sos"><pre><span></span><span class="c1"># get all gene names</span>
+<span class="p">[</span><span class="n">get_gene_meta_3</span><span class="p">]</span>
+<span class="kn">output:</span> <span class="n">gene_id_file</span>
+<span class="kn">bash:</span> <span class="n">expand</span> <span class="o">=</span> <span class="s1">&#39;${ }&#39;</span><span class="p">,</span> <span class="kp">workdir</span> <span class="o">=</span> <span class="n">cwd</span>
+    <span class="n">awk</span> <span class="s1">&#39;{print $4}&#39;</span> <span class="err">$</span><span class="p">{</span><span class="n">_input</span><span class="p">}</span> <span class="o">|</span> <span class="n">sort</span> <span class="o">-</span><span class="n">u</span> <span class="o">&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">_output</span><span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-sos"><pre><span></span><span class="p">[</span><span class="n">preprocess</span><span class="p">]</span>
+<span class="n">sos_run</span><span class="p">(</span><span class="s1">&#39;get_gene_meta&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">cd</span> <span class="o">~/</span><span class="n">GTEx_Analysis_v8_eQTL_expression_genewise</span><span class="o">/</span><span class="n">output</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/home/gaow/GTEx_Analysis_v8_eQTL_expression_genewise/output</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-sos"><pre><span></span><span class="n">wc</span> <span class="o">-</span><span class="n">l</span> <span class="n">ensembl_gene_tss</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>39832 ensembl_gene_tss.txt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-sos"><pre><span></span><span class="n">wc</span> <span class="o">-</span><span class="n">l</span> <span class="n">ensembl_gene_id</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>39832 ensembl_gene_id.txt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-reason-why-we-don't-use-biomaRt-to-get-TSS-for-genes">The reason why we don't use biomaRt to get TSS for genes<a class="anchor-link" href="#The-reason-why-we-don't-use-biomaRt-to-get-TSS-for-genes">&#182;</a></h3><p>The following workflow is not used for the current project because biomaRt fails to find some <code>ensembl_gene_id</code>. The loss is considerable, approximately from 40K to 20K. This is mostly due to gene name version inconsistencies in GTEx and in current Ensembl. For example the gene ENSG00000284523.1 is now ENSG00000284523.2 in Ensembl; ENSG00000284552.1 can no longer be found.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-sos"><pre><span></span><span class="c1"># # TSS for genes by biomaRt</span>
+<span class="p">[</span><span class="n">get_gene_meta_biomaRt</span><span class="p">]</span>
+<span class="kn">depends:</span> <span class="n">R_library</span><span class="p">(</span><span class="s2">&quot;biomaRt&quot;</span><span class="p">),</span> <span class="n">R_library</span><span class="p">(</span><span class="s2">&quot;data.table&quot;</span><span class="p">)</span>
+<span class="kn">input:</span> <span class="n">gene_id_file</span>
+<span class="kn">output:</span> <span class="n">gene_tss_file</span>
+<span class="kn">R:</span> <span class="n">expand</span> <span class="o">=</span> <span class="s1">&#39;${ }&#39;</span>
+    <span class="n">ensembl_gene_id</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">.</span><span class="n">table</span><span class="p">::</span><span class="n">fread</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="err">$</span><span class="p">{</span><span class="n">_input</span><span class="p">:</span><span class="n">r</span><span class="p">},</span> <span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">quote</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">)</span>
+    <span class="n">mart</span> <span class="o">&lt;-</span> <span class="n">biomaRt</span><span class="p">::</span><span class="n">useDataset</span><span class="p">(</span><span class="s2">&quot;hsapiens_gene_ensembl&quot;</span><span class="p">,</span> <span class="n">biomaRt</span><span class="p">::</span><span class="n">useMart</span><span class="p">(</span><span class="s2">&quot;ensembl&quot;</span><span class="p">))</span>
+    <span class="n">gene_TSS</span> <span class="o">&lt;-</span> <span class="n">biomaRt</span><span class="p">::</span><span class="n">getBM</span><span class="p">(</span><span class="n">attributes</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="s2">&quot;chromosome_name&quot;</span><span class="p">,</span> <span class="s2">&quot;transcript_start&quot;</span><span class="p">,</span> <span class="s2">&quot;transcript_end&quot;</span><span class="p">,</span> <span class="s2">&quot;ensembl_gene_id&quot;</span><span class="p">,</span> <span class="s2">&quot;ensembl_gene_id_version&quot;</span><span class="p">),</span> <span class="n">filters</span> <span class="o">=</span> <span class="s2">&quot;ensembl_gene_id_version&quot;</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">ensembl_gene_id</span><span class="p">,</span> <span class="n">mart</span> <span class="o">=</span> <span class="n">mart</span><span class="p">)</span>
+    <span class="n">write</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">gene_TSS</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="err">$</span><span class="p">{</span><span class="n">_output</span><span class="p">:</span><span class="n">r</span><span class="p">},</span> <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">quote</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">,</span> <span class="n">col</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">)</span>
+    <span class="c1"># gene_TSS_retrieval &lt;- read.table(file = &quot;gene_TSS.csv&quot;, sep = &#39;\t&#39;, quote = &quot;&quot;, stringsAsFactors = FALSE, header = TRUE)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Data-extraction">Data extraction<a class="anchor-link" href="#Data-extraction">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-sos"><pre><span></span><span class="p">[</span><span class="n">extract</span><span class="p">]</span>
+<span class="kn">depends:</span> <span class="n">executable</span><span class="p">(</span><span class="s1">&#39;tabix&#39;</span><span class="p">),</span> <span class="n">R_library</span><span class="p">(</span><span class="s2">&quot;data.table&quot;</span><span class="p">),</span> <span class="n">R_library</span><span class="p">(</span><span class="s1">&#39;rjson&#39;</span><span class="p">),</span> <span class="n">R_library</span><span class="p">(</span><span class="s1">&#39;vcfR&#39;</span><span class="p">),</span> <span class="n">R_library</span><span class="p">(</span><span class="s1">&#39;dplyr&#39;</span><span class="p">)</span>
+<span class="kn">parameter:</span> <span class="n">radius</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="kn">parameter:</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Multi_Tissues&#39;</span>
+<span class="n">genes</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">gene_id_file</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="kn">input:</span> <span class="n">for_each</span> <span class="o">=</span> <span class="s1">&#39;genes&#39;</span>
+<span class="kn">output:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">analysis_ready_dir</span><span class="si">:</span><span class="s2">a</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">_genes</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">.rds&quot;</span>
+<span class="c1"># each job uses 10 nodes, each node 4 cores in parallel each core using 2G memory; and jobs are created in batches of 40.</span>
+<span class="kn">task:</span> <span class="kp">trunk_workers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="kp">trunk_size</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="kp">walltime</span> <span class="o">=</span> <span class="s1">&#39;20m&#39;</span><span class="p">,</span> <span class="kp">mem</span> <span class="o">=</span> <span class="s1">&#39;2G&#39;</span><span class="p">,</span> <span class="kp">cores</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="kp">tags</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">step_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">_output</span><span class="si">:</span><span class="s1">bn</span><span class="si">}</span><span class="s1">&#39;</span>
+
+<span class="kn">bash:</span> <span class="n">expand</span> <span class="o">=</span> <span class="s1">&#39;${ }&#39;</span><span class="p">,</span> <span class="kp">workdir</span> <span class="o">=</span> <span class="n">cwd</span>
+    <span class="c1"># X</span>
+    <span class="n">tabix</span> <span class="o">-</span><span class="n">h</span> <span class="o">-</span><span class="n">f</span> <span class="err">$</span><span class="p">{</span><span class="n">genotype_data</span><span class="p">}</span> <span class="err">`</span><span class="n">awk</span> <span class="s1">&#39;$4 ~ /$</span><span class="si">{_genes}</span><span class="s1">/ {print $0}&#39;</span> <span class="err">$</span><span class="p">{</span><span class="n">gene_tss_file</span><span class="p">:</span><span class="n">a</span><span class="p">}</span> <span class="o">|</span> <span class="n">head</span> <span class="o">-</span><span class="n">n</span> <span class="mi">1</span> <span class="o">|</span> <span class="n">awk</span> <span class="s1">&#39;{$3=$2+$</span><span class="si">{radius}</span><span class="s1">} {$2=$2-$</span><span class="si">{radius}</span><span class="s1">} {print &quot;chr&quot;$1&quot;:&quot;$2&quot;-&quot;$3}&#39;</span><span class="err">`</span> <span class="o">&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">_genes</span><span class="p">}</span><span class="n">_genotype</span><span class="o">.</span><span class="n">vcf</span>
+
+<span class="kn">R:</span> <span class="n">expand</span> <span class="o">=</span> <span class="s2">&quot;${ }&quot;</span><span class="p">,</span> <span class="kp">workdir</span> <span class="o">=</span> <span class="n">cwd</span>
+    <span class="c1"># Z</span>
+    <span class="n">Z</span> <span class="o">&lt;-</span> <span class="n">lapply</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">covariates_data</span><span class="p">:</span><span class="n">r</span><span class="p">,}),</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">t</span><span class="p">(</span><span class="k">as</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">read</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">quote</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="mi">1</span><span class="p">))))</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">Z</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1"># the format of sample names Z was changed somehow by `read.table`, from &quot;GTEX-*&quot; to &quot;GTEX.*&quot;, so we need to convert it back.</span>
+        <span class="n">rownames</span><span class="p">(</span><span class="n">Z</span><span class="p">[[</span><span class="n">i</span><span class="p">]])</span> <span class="o">&lt;-</span> <span class="n">gsub</span><span class="p">(</span><span class="n">pattern</span> <span class="o">=</span> <span class="s2">&quot;GTEX.&quot;</span><span class="p">,</span> <span class="n">replacement</span> <span class="o">=</span> <span class="s2">&quot;GTEX-&quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">rownames</span><span class="p">(</span><span class="n">Z</span><span class="p">[[</span><span class="n">i</span><span class="p">]]))</span>
+        <span class="c1"># add tissue names, in order match with those of y</span>
+        <span class="n">names</span><span class="p">(</span><span class="n">Z</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">strsplit</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">covariates_data</span><span class="p">:</span><span class="n">br</span><span class="p">,})[</span><span class="n">i</span><span class="p">],</span> <span class="n">split</span> <span class="o">=</span> <span class="s2">&quot;[.]&quot;</span><span class="p">)[[</span><span class="mi">1</span><span class="p">]][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># y</span>
+    <span class="n">filenames_json</span> <span class="o">&lt;-</span> <span class="nb">list</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="err">$</span><span class="p">{</span><span class="n">cwd</span><span class="p">:</span><span class="n">ar</span><span class="p">},</span> <span class="n">pattern</span> <span class="o">=</span> <span class="s2">&quot;*.json$&quot;</span><span class="p">,</span> <span class="n">full</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span>
+    <span class="n">line_numbers</span> <span class="o">&lt;-</span> <span class="n">lapply</span><span class="p">(</span><span class="n">filenames_json</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">rjson</span><span class="p">::</span><span class="n">fromJSON</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">x</span><span class="p">))</span>
+  
+    <span class="n">extract_y</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">y_file</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">is</span><span class="o">.</span><span class="n">null</span><span class="p">(</span><span class="n">line</span><span class="p">))</span> <span class="k">return</span><span class="p">(</span><span class="n">NULL</span><span class="p">)</span>
+        <span class="c1"># a sed version here</span>
+        <span class="c1"># cmd &lt;- paste0(&quot;zcat &quot;, y_file, &quot; | sed &#39;&quot;, line, &quot;q;d&#39;&quot;)</span>
+        <span class="c1"># yi &lt;- data.table::fread(cmd=cmd)</span>
+        <span class="n">yi</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">.</span><span class="n">table</span><span class="p">::</span><span class="n">fread</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="n">y_file</span><span class="p">,</span> <span class="n">skip</span> <span class="o">=</span> <span class="n">line</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nrows</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">samplenames_yi</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">.</span><span class="n">table</span><span class="p">::</span><span class="n">fread</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="n">y_file</span><span class="p">,</span> <span class="n">skip</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nrows</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">colnames</span><span class="p">(</span><span class="n">yi</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">colnames</span><span class="p">(</span><span class="n">samplenames_yi</span><span class="p">)</span>
+        <span class="n">yi</span> <span class="o">&lt;-</span> <span class="n">t</span><span class="p">(</span><span class="k">as</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">yi</span><span class="p">))</span>
+        <span class="n">yi</span> <span class="o">&lt;-</span> <span class="n">yi</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="p">,</span> <span class="n">drop</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">]</span>
+        <span class="c1"># y_file:bnn, add tissue names</span>
+        <span class="c1"># colnames(yi) &lt;- file_path_sans_ext(file_path_sans_ext(basename(y_file)))</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">yi</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">lapply</span><span class="p">(</span><span class="n">line_numbers</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">extract_y</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">[[</span><span class="mi">1</span><span class="p">]][[</span><span class="s2">&quot;$</span><span class="si">{_genes}</span><span class="s2">&quot;</span><span class="p">]]))</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1"># add tissue names, in order match with those of Z</span>
+        <span class="n">names</span><span class="p">(</span><span class="n">y</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">strsplit</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">line_numbers</span><span class="p">[[</span><span class="n">i</span><span class="p">]])),</span> <span class="n">split</span> <span class="o">=</span> <span class="s1">&#39;[.]&#39;</span><span class="p">)[[</span><span class="mi">1</span><span class="p">]][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="n">y</span><span class="p">[</span><span class="n">sapply</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="ow">is</span><span class="o">.</span><span class="n">null</span><span class="p">)]</span> <span class="o">&lt;-</span> <span class="n">NULL</span>
+    
+    <span class="c1">## tissue names matching between y and Z (y as reference)</span>
+    <span class="n">tissuenamesmatching</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">reference</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">match</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">reference</span><span class="p">),</span> <span class="n">names</span><span class="p">(</span><span class="n">x</span><span class="p">))]</span>
+    <span class="p">}</span>
+    <span class="n">Z</span> <span class="o">&lt;-</span> <span class="n">tissuenamesmatching</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Z</span><span class="p">,</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span>
+    
+    <span class="c1">## sample names matching between y and Z (Z as reference)</span>
+    <span class="n">samplenamesmatching</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">reference</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">lapply</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">reference</span><span class="p">),</span> <span class="n">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="n">x</span><span class="p">[[</span><span class="n">i</span><span class="p">]][</span><span class="n">match</span><span class="p">(</span><span class="n">rownames</span><span class="p">(</span><span class="n">reference</span><span class="p">[[</span><span class="n">i</span><span class="p">]]),</span> <span class="n">rownames</span><span class="p">(</span><span class="n">x</span><span class="p">[[</span><span class="n">i</span><span class="p">]])),</span> <span class="p">,</span> <span class="n">drop</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">])</span>
+    <span class="p">}</span>
+    <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">samplenamesmatching</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">Z</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1"># the tissue names are lost during `samplenamesmatching`, it is therefore needed to retrieve the tissue names</span>
+        <span class="n">names</span><span class="p">(</span><span class="n">y</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">names</span><span class="p">(</span><span class="n">Z</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># X</span>
+    <span class="n">vcf</span> <span class="o">&lt;-</span> <span class="n">vcfR</span><span class="p">::</span><span class="n">read</span><span class="o">.</span><span class="n">vcfR</span><span class="p">(</span><span class="s2">&quot;${cwd:a}/$</span><span class="si">{_genes}</span><span class="s2">_genotype.vcf&quot;</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">)</span>
+    <span class="c1"># FIXME: not sure about tri-allelic case?</span>
+    <span class="n">X</span> <span class="o">&lt;-</span> <span class="n">vcfR</span><span class="p">::</span><span class="n">extract</span><span class="o">.</span><span class="n">gt</span><span class="p">(</span><span class="n">vcf</span><span class="p">,</span> <span class="k">as</span><span class="o">.</span><span class="n">numeric</span> <span class="o">=</span> <span class="n">T</span><span class="p">)</span>
+    
+    <span class="c1"># y_res, residual of y</span>
+    <span class="n">y_res</span> <span class="o">&lt;-</span> <span class="n">lapply</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">Z</span><span class="p">),</span> <span class="n">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">.</span><span class="n">lm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Z</span><span class="p">[[</span><span class="n">i</span><span class="p">]],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[[</span><span class="n">i</span><span class="p">]])</span><span class="err">$</span><span class="n">residuals</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">y_res</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1"># add tissue names of y_res</span>
+        <span class="n">names</span><span class="p">(</span><span class="n">y_res</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">names</span><span class="p">(</span><span class="n">Z</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="c1"># create a y_res matrix that matches X, as association analysis ready data</span>
+    <span class="c1"># code below are written by Fabio Morgante</span>
+    
+    <span class="n">options</span><span class="p">(</span><span class="n">stringsAsFactors</span><span class="o">=</span><span class="n">F</span><span class="p">)</span>
+    <span class="c1">###If the gene has expression values in multiple tissues</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">y_res</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">){</span>
+      <span class="c1">###Loop through tissues and recursively join them</span>
+      <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="mi">2</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">y_res</span><span class="p">)){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">2</span><span class="p">){</span>
+          <span class="n">df_a</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">rownames</span><span class="p">(</span><span class="n">y_res</span><span class="p">[[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]]),</span> <span class="n">y_res</span><span class="p">[[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+          <span class="n">colnames</span><span class="p">(</span><span class="n">df_a</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">names</span><span class="p">(</span><span class="n">y_res</span><span class="p">)[[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+          <span class="n">df_b</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">rownames</span><span class="p">(</span><span class="n">y_res</span><span class="p">[[</span><span class="n">i</span><span class="p">]]),</span> <span class="n">y_res</span><span class="p">[[</span><span class="n">i</span><span class="p">]])</span>
+          <span class="n">colnames</span><span class="p">(</span><span class="n">df_b</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">names</span><span class="p">(</span><span class="n">y_res</span><span class="p">)[[</span><span class="n">i</span><span class="p">]]</span>
+          <span class="n">Y_df</span> <span class="o">&lt;-</span> <span class="n">dplyr</span><span class="p">::</span><span class="n">full_join</span><span class="p">(</span><span class="n">df_a</span><span class="p">,</span> <span class="n">df_b</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="n">df_b</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">rownames</span><span class="p">(</span><span class="n">y_res</span><span class="p">[[</span><span class="n">i</span><span class="p">]]),</span> <span class="n">y_res</span><span class="p">[[</span><span class="n">i</span><span class="p">]])</span>
+          <span class="n">colnames</span><span class="p">(</span><span class="n">df_b</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">names</span><span class="p">(</span><span class="n">y_res</span><span class="p">)[[</span><span class="n">i</span><span class="p">]]</span>
+          <span class="n">Y_df</span> <span class="o">&lt;-</span> <span class="n">dplyr</span><span class="p">::</span><span class="n">full_join</span><span class="p">(</span><span class="n">Y_df</span><span class="p">,</span> <span class="n">df_b</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="c1">###Assign row names as ID to Y_df and drop id column</span>
+      <span class="n">rownames</span><span class="p">(</span><span class="n">Y_df</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">Y_df</span><span class="p">[,</span> <span class="mi">1</span><span class="p">]</span>
+      <span class="n">Y_df</span> <span class="o">&lt;-</span> <span class="n">Y_df</span><span class="p">[,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+      <span class="c1">###If the tissue data contains the same individuals as the genotype data</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">Y_df</span><span class="p">)</span><span class="o">==</span><span class="n">ncol</span><span class="p">(</span><span class="n">X</span><span class="p">)){</span>
+        <span class="c1">###Order the rows (ID) of the joined data according to the columns (ID) of the genotype matrix </span>
+        <span class="n">X_names</span> <span class="o">&lt;-</span> <span class="n">colnames</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">Y_mat</span> <span class="o">&lt;-</span> <span class="k">as</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">Y_df</span><span class="p">[</span><span class="n">X_names</span><span class="p">,</span> <span class="p">])</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">Y_df</span><span class="p">)</span><span class="o">&lt;</span><span class="n">ncol</span><span class="p">(</span><span class="n">X</span><span class="p">)){</span> <span class="c1">###If the tissue data contains fewer individuals than the genotype data</span>
+        <span class="c1">###Compute the individuals in common between the tissue data and the genotype data</span>
+        <span class="n">X_names</span> <span class="o">&lt;-</span> <span class="n">colnames</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">Y_names</span> <span class="o">&lt;-</span> <span class="n">rownames</span><span class="p">(</span><span class="n">Y_df</span><span class="p">)</span>
+        <span class="n">in_common</span> <span class="o">&lt;-</span> <span class="n">base</span><span class="p">::</span><span class="n">intersect</span><span class="p">(</span><span class="n">X_names</span><span class="p">,</span> <span class="n">Y_names</span><span class="p">)</span>
+
+        <span class="c1">###Extract from the genotype data only the individuals in common between tissue data and the genotype data, and order tissue data according to the genotype data</span>
+        <span class="n">X</span> <span class="o">&lt;-</span> <span class="n">X</span><span class="p">[,</span> <span class="n">which</span><span class="p">(</span><span class="n">colnames</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">%</span><span class="ow">in</span><span class="o">%</span> <span class="n">in_common</span><span class="p">)]</span>
+        <span class="n">Y_mat</span> <span class="o">&lt;-</span> <span class="k">as</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">Y_df</span><span class="p">[</span><span class="n">colnames</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="p">])</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">stop</span><span class="p">(</span><span class="s2">&quot;Error: There is a problem with IDs&quot;</span><span class="p">)</span>
+      <span class="p">}</span> 
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">###If the gene has expression values in only one tissue</span>
+      <span class="c1">###Extract y_res</span>
+      <span class="n">Y_df</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">y_res</span><span class="p">[[</span><span class="mi">1</span><span class="p">]])</span>
+
+      <span class="c1">###If the tissue data contains the same individuals as the genotype data</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">Y_df</span><span class="p">)</span><span class="o">==</span><span class="n">ncol</span><span class="p">(</span><span class="n">X</span><span class="p">)){</span>
+        <span class="c1">###Order the rows (ID) of the joined data according to the columns (ID) of the genotype matrix </span>
+        <span class="n">X_names</span> <span class="o">&lt;-</span> <span class="n">colnames</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">Y_mat</span> <span class="o">&lt;-</span> <span class="k">as</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">Y_df</span><span class="p">[</span><span class="n">X_names</span><span class="p">,</span> <span class="p">])</span>
+        <span class="n">rownames</span><span class="p">(</span><span class="n">Y_mat</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">X_names</span>
+        <span class="n">colnames</span><span class="p">(</span><span class="n">Y_mat</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">names</span><span class="p">(</span><span class="n">y_res</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">Y_df</span><span class="p">)</span><span class="o">&lt;</span><span class="n">ncol</span><span class="p">(</span><span class="n">X</span><span class="p">)){</span> <span class="c1">###If the tissue data contains fewer individuals than the genotype data</span>
+        <span class="c1">###Compute the individuals in common between the tissue data and the genotype data</span>
+        <span class="n">X_names</span> <span class="o">&lt;-</span> <span class="n">colnames</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">Y_names</span> <span class="o">&lt;-</span> <span class="n">rownames</span><span class="p">(</span><span class="n">Y_df</span><span class="p">)</span>
+        <span class="n">in_common</span> <span class="o">&lt;-</span> <span class="n">base</span><span class="p">::</span><span class="n">intersect</span><span class="p">(</span><span class="n">X_names</span><span class="p">,</span> <span class="n">Y_names</span><span class="p">)</span>
+
+        <span class="c1">###Extract from the genotype data only the individuals in common between tissue data and the genotype data, and order tissue data according to the genotype data</span>
+        <span class="n">X</span> <span class="o">&lt;-</span> <span class="n">X</span><span class="p">[,</span> <span class="n">which</span><span class="p">(</span><span class="n">colnames</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">%</span><span class="ow">in</span><span class="o">%</span> <span class="n">in_common</span><span class="p">)]</span>
+        <span class="n">Y_mat</span> <span class="o">&lt;-</span> <span class="k">as</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">Y_df</span><span class="p">[</span><span class="n">colnames</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="p">])</span>
+        <span class="n">rownames</span><span class="p">(</span><span class="n">Y_mat</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">colnames</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">colnames</span><span class="p">(</span><span class="n">Y_mat</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">names</span><span class="p">(</span><span class="n">y_res</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="n">stop</span><span class="p">(</span><span class="s2">&quot;Error: There is a problem with IDs&quot;</span><span class="p">)</span>
+      <span class="p">}</span> 
+    <span class="p">}</span>
+    <span class="c1"># save</span>
+    <span class="n">saveRDS</span><span class="p">(</span><span class="nb">object</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="p">,</span> <span class="n">y_res</span> <span class="o">=</span> <span class="n">Y_mat</span><span class="p">),</span> <span class="n">file</span> <span class="o">=</span> <span class="err">$</span><span class="p">{</span><span class="n">_output</span><span class="p">:</span><span class="n">r</span><span class="p">})</span>
+
+<span class="kn">bash:</span> <span class="n">expand</span> <span class="o">=</span> <span class="s1">&#39;${ }&#39;</span><span class="p">,</span> <span class="kp">workdir</span> <span class="o">=</span> <span class="n">cwd</span>
+    <span class="c1"># remove intermediate files</span>
+    <span class="n">rm</span> <span class="o">-</span><span class="n">f</span> <span class="err">$</span><span class="p">{</span><span class="n">_genes</span><span class="p">}</span><span class="n">_genotype</span><span class="o">.</span><span class="n">vcf</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Fine-mapping-with-DAP">Fine-mapping with DAP<a class="anchor-link" href="#Fine-mapping-with-DAP">&#182;</a></h2><p>Currently the <code>dap</code> step will use a loop to analyze all phenotypes for the gene.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-sos"><pre><span></span><span class="p">[</span><span class="n">dap</span><span class="p">]</span>
+<span class="c1"># Extra arguments to pass to DAP</span>
+<span class="kn">parameter:</span> <span class="n">args</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="kn">depends:</span> <span class="n">executable</span><span class="p">(</span><span class="s1">&#39;dap-g&#39;</span><span class="p">),</span> <span class="n">Py_Module</span><span class="p">(</span><span class="s1">&#39;pandas&#39;</span><span class="p">),</span> <span class="n">Py_Module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">),</span> <span class="n">R_library</span><span class="p">(</span><span class="s1">&#39;data.table&#39;</span><span class="p">)</span>
+<span class="n">genes</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">gene_id_file</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="kn">input:</span>  <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">analysis_ready_dir</span><span class="si">:</span><span class="s2">a</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">g</span><span class="si">}</span><span class="s2">.Multi_Tissues.rds&quot;</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">genes</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">analysis_ready_dir</span><span class="si">:</span><span class="s2">a</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">g</span><span class="si">}</span><span class="s2">.Multi_Tissues.rds&quot;</span><span class="p">)],</span> <span class="n">group_by</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="kn">output:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">cwd</span><span class="si">:</span><span class="s1">a</span><span class="si">}</span><span class="s1">/dap_output/</span><span class="si">{</span><span class="n">_input</span><span class="si">:</span><span class="s1">bn</span><span class="si">}</span><span class="s1">.DAP_G.pkl&#39;</span>
+<span class="kn">task:</span> <span class="kp">trunk_workers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="kp">trunk_size</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="kp">walltime</span> <span class="o">=</span> <span class="s1">&#39;2h&#39;</span><span class="p">,</span> <span class="kp">mem</span> <span class="o">=</span> <span class="s1">&#39;6G&#39;</span><span class="p">,</span> <span class="kp">cores</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="kp">tags</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">step_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">_output</span><span class="si">:</span><span class="s1">bn</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="kn">R:</span> <span class="n">expand</span> <span class="o">=</span> <span class="s1">&#39;${ }&#39;</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">_output</span><span class="si">:</span><span class="s1">n</span><span class="si">}</span><span class="s1">.stderr&#39;</span><span class="p">,</span> <span class="kp">workdir</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">_output</span><span class="si">:</span><span class="s1">ad</span><span class="si">}</span><span class="s1">&#39;</span>
+
+    <span class="n">remove_missing</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">not_missing</span><span class="p">,],</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">[</span><span class="n">not_missing</span><span class="p">]))</span>
+    <span class="p">}</span>
+  
+    <span class="n">write_data</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">prefix</span><span class="p">,</span><span class="n">group</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">geno</span> <span class="o">=</span> <span class="n">cbind</span><span class="p">(</span><span class="s1">&#39;geno&#39;</span><span class="p">,</span> <span class="n">rownames</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">group</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+      <span class="n">colnames</span><span class="p">(</span><span class="n">geno</span><span class="p">)</span> <span class="o">=</span> <span class="n">rownames</span><span class="p">(</span><span class="n">geno</span><span class="p">)</span> <span class="o">=</span> <span class="n">NULL</span>
+      <span class="n">pheno</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="s1">&#39;pheno&#39;</span><span class="p">,</span> <span class="err">$</span><span class="p">{</span><span class="n">_input</span><span class="p">:</span><span class="n">bnnr</span><span class="p">},</span> <span class="n">group</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+      <span class="n">dat</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">rbind</span><span class="p">(</span><span class="n">pheno</span><span class="p">,</span> <span class="n">geno</span><span class="p">))</span>
+      <span class="n">data</span><span class="o">.</span><span class="n">table</span><span class="p">::</span><span class="n">fwrite</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="n">paste0</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="s2">&quot;.data&quot;</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">F</span><span class="p">,</span> <span class="n">col</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">F</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">F</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Prepare DAP-G input</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">readRDS</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">_input</span><span class="p">:</span><span class="n">r</span><span class="p">})</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;${_output:nn}&quot;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">group</span> <span class="ow">in</span> <span class="n">colnames</span><span class="p">(</span><span class="n">data</span><span class="err">$</span><span class="n">y_res</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">not_missing</span> <span class="o">=</span> <span class="err">!</span><span class="ow">is</span><span class="o">.</span><span class="n">na</span><span class="p">(</span><span class="n">data</span><span class="err">$</span><span class="n">y_res</span><span class="p">[,</span><span class="n">group</span><span class="p">])</span>
+      <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="err">$</span><span class="n">X</span><span class="p">[</span><span class="n">not_missing</span><span class="p">,]</span>
+      <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="err">$</span><span class="n">y_res</span><span class="p">[,</span><span class="n">group</span><span class="p">][</span><span class="n">not_missing</span><span class="p">]</span>
+      <span class="n">write_data</span><span class="p">(</span><span class="n">t</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">y</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="kn">python:</span> <span class="n">expand</span> <span class="o">=</span> <span class="s1">&#39;${ }&#39;</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">_output</span><span class="si">:</span><span class="s1">n</span><span class="si">}</span><span class="s1">.stderr&#39;</span><span class="p">,</span> <span class="kp">workdir</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">_output</span><span class="si">:</span><span class="s1">ad</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="c1"># Run DAP-G and organize output</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="kn">import</span> <span class="nn">subprocess</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+    <span class="k">def</span> <span class="nf">run_dap_full</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dap-g&#39;</span><span class="p">,</span> <span class="s1">&#39;-d&#39;</span><span class="p">,</span> <span class="n">data_file</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">data_file</span><span class="si">:</span><span class="s1">n</span><span class="si">}</span><span class="s1">.result&#39;</span><span class="p">,</span> <span class="s1">&#39;--output_all&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>    
+        <span class="c1"># remove the temp data file but keep the output in text format</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s1">&#39;rm&#39;</span><span class="p">,</span> <span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="n">data_file</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">extract_dap_output</span><span class="p">(</span><span class="n">data_file</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">data_file</span><span class="si">:</span><span class="s1">n</span><span class="si">}</span><span class="s1">.result&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+        <span class="n">pips</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">clusters</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">still_pip</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">out</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;cluster_pip&#39;</span><span class="p">:</span>
+                <span class="n">still_pip</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">still_pip</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;((&#39;</span><span class="p">)):</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">still_pip</span><span class="p">:</span>
+                <span class="n">pips</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">4</span><span class="p">])])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">clusters</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">])])</span>
+        <span class="n">pips</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pips</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;snp&#39;</span><span class="p">,</span> <span class="s1">&#39;snp_prob&#39;</span><span class="p">,</span> <span class="s1">&#39;snp_log10bf&#39;</span><span class="p">,</span> <span class="s1">&#39;cluster&#39;</span><span class="p">])</span>
+        <span class="n">clusters</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">clusters</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span> <span class="s1">&#39;cluster_prob&#39;</span><span class="p">,</span> <span class="s1">&#39;cluster_avg_r2&#39;</span><span class="p">])</span>
+        <span class="n">clusters</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">clusters</span><span class="p">,</span> <span class="n">pips</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;cluster&#39;</span><span class="p">])[</span><span class="s1">&#39;snp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(),</span> <span class="n">on</span> <span class="o">=</span> <span class="s1">&#39;cluster&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;snp&#39;</span><span class="p">:</span> <span class="n">pips</span><span class="p">,</span> <span class="s1">&#39;set&#39;</span><span class="p">:</span> <span class="n">clusters</span><span class="p">}</span>
+
+
+    <span class="k">def</span> <span class="nf">dap_single</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="n">run_dap_full</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">extract_dap_output</span><span class="p">(</span><span class="n">data_file</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">dap_batch</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">([(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s1">bn</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">dap_single</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">args</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">files</span><span class="p">])</span>
+
+    <span class="kn">import</span> <span class="nn">glob</span>
+    <span class="kn">import</span> <span class="nn">pickle</span>
+    <span class="kn">from</span> <span class="nn">sos.targets</span> <span class="kn">import</span> <span class="n">paths</span>
+    <span class="n">data_files</span> <span class="o">=</span> <span class="n">paths</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;${_output:nn}.*.data&quot;</span><span class="p">))</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">dap_batch</span><span class="p">(</span><span class="n">data_files</span><span class="p">,</span> <span class="s1">&#39;$</span><span class="si">{args}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">_output</span><span class="p">:</span><span class="n">r</span><span class="p">},</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">handle</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<hr>
+&copy 2017-2018 authored by Gao Wang at Stephens Lab, The University of Chicago
+<p><small>Exported from <a href="http://github.com/stephenslab/susie-paper/blob/daca1905dda2106a813c26ff3c3bb409918a953b/manuscript_results/GTEx_Association_Preprocessing.ipynb"><code>manuscript_results/GTEx_Association_Preprocessing.ipynb</code></a> committed by Gao Wang on Sun May 24 18:10:05 2020 <a href="http://github.com/stephenslab/susie-paper/commit/daca1905dda2106a813c26ff3c3bb409918a953b">revision 1, daca190</a> <a href="https://stephenslab.github.io/ipynb-website/notes.html#Note-about-commit-ids"><span class="fa fa-question-circle"></span></a></small></p>
+</div>
+</div>
+</body>
+</html>

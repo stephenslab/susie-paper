@@ -1,11 +1,10 @@
-# Code & data accompanying Wang et al, 2018
+# Code & data accompanying Wang et al, J. R. Statist. Soc. B (2020)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2368676.svg)](https://doi.org/10.5281/zenodo.2368676)
 
 This repository contains code and data resources to accompany our
 research paper:
 
-> G Wang, A K Sarkar, P Carbonetto and M Stephens. A simple new approach to variable selection in regression, with application to genetic fine-mapping. [bioRxiv](https://www.biorxiv.org/content/10.1101/501114v2) doi:10.1101/501114. 
-
+> G Wang, A K Sarkar, P Carbonetto and M Stephens. A simple new approach to variable selection in regression, with application to genetic fine-mapping. [bioRxiv](https://www.biorxiv.org/content/10.1101/501114v2) doi:10.1101/501114. to appear on J. R. Statist. Soc. B (2020).
 
 
 For full details, please view the repository website at: https://stephenslab.github.io/susie-paper .
@@ -32,3 +31,6 @@ For full details, please view the repository website at: https://stephenslab.git
 
 [**Splicing QTL analysis: application to Li et al 2016**](https://stephenslab.github.io/susie-paper/manuscript_results/Li_2016_splice_QTL.html)<br>
 &nbsp; &nbsp;In Li et al 2016 the authors systematically analyzed genetic effects (SNPs) on various molecular phenotypes of gene regulation, from the chromatin state through protein function.
+
+[**Individual-level genotype-expression data preprocessing for association analysis**](https://stephenslab.github.io/susie-paper/manuscript_results/GTEx_Association_Preprocessing.html)<br>
+&nbsp; &nbsp; This pipeline aims to extract individual-level genotype-expression data in preparation for cis-eQTL fine-mapping. It was written by Jiarun Chen (Tsinghua U.) advised by Gao Wang.

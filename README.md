@@ -4,7 +4,7 @@
 This repository contains code and data resources to accompany our
 research paper:
 
-> G Wang, A K Sarkar, P Carbonetto and M Stephens. A simple new approach to variable selection in regression, with application to genetic fine-mapping. [bioRxiv](https://www.biorxiv.org/content/10.1101/501114v4) doi:10.1101/501114. to appear on J. R. Statist. Soc. B (2020).
+> Wang, G., Sarkar, A., Carbonetto, P., & Stephens, M. (2020). A simple new approach to variable selection in regression, with application to genetic fine mapping. Journal of the Royal Statistical Society: Series B (Statistical Methodology). https://doi.org/10.1111/rssb.12388
 
 
 For full details, please view the repository website at: https://stephenslab.github.io/susie-paper .

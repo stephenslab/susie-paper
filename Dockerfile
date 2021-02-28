@@ -27,21 +27,21 @@ RUN apt-get update \
 # R, Python, SoS and DSC
 ENV MINICONDA_VERSION 4.7.12
 ENV PATH /opt/miniconda3/bin:$PATH
-RUN curl https://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VERSION-Linux-x86_64.sh -o MCON.sh \
+
+RUN curl https://repo.anaconda.com/miniconda/Miniconda3-$MINICONDA_VERSION-Linux-x86_64.sh -o MCON.sh \
     && /bin/bash MCON.sh -b -p /opt/miniconda3 \
-    && ln -s /opt/miniconda3/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
-    && conda install -c conda-forge r-base==3.5.1 rpy2==3.1.0 r-reticulate==1.13 \
-			matplotlib==3.0.2 seaborn==0.9.0 \
-    && conda clean --all -tipsy && rm -rf /tmp/* $HOME/.cache
-RUN pip install sos-notebook==0.21.6 sos==0.21.5 sos-pbs==0.20.3 dsc==0.4.2 --no-cache-dir
+    && ln -s /opt/miniconda3/etc/profile.d/conda.sh /etc/profile.d/conda.sh
 
 # Packages for building and running susieR vignettes
 # and making plots for the paper
-RUN conda install -c conda-forge r-devtools r-testthat r-openssl r-reshape r-ggplot2 r-cowplot \
+RUN conda install -c conda-forge r-base==3.5.1 rpy2==3.1.0 r-reticulate==1.13 \
+	matplotlib==3.0.2 seaborn==0.9.0 \
+	r-devtools r-testthat r-openssl r-reshape r-ggplot2 r-cowplot \
 	r-profvis r-microbenchmark r-pkgdown r-dplyr r-stringr r-readr r-magrittr r-abind r-tibble \
 	r-matrixstats r-glmnet libiconv imagemagick \
     && conda clean --all -tipsy && rm -rf /tmp/* $HOME/.cache
 RUN ln -s /bin/tar /bin/gtar
+RUN pip install sos-notebook==0.21.6 sos==0.21.5 sos-pbs==0.20.3 dsc==0.4.2 --no-cache-dir
 
 # DSC R utils
 ENV DSCRUTILS_VERSION f90099a6e5f6d056602b57347a2b5f65ec65f94b

@@ -239,6 +239,14 @@ $(document).ready(function () {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Please not that this setup instruction is meant to reproduce the software environment that we have used to generate results for our manuscript. It involves a specific, and now out-dated release of <code>susieR</code>, as well as many other software packages we have compared. If your interest is to analyze data with SuSiE or to evaluate its current, most up-to-date version, please ignore the docker setup instruction on this page and instead follow the setup instructions on <a href="https://github.com/stephenslab/susieR"><code>susieR</code> software repository</a>.</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>In addition to <code>susieR</code>, software required to reproduce numerical comparisons in the manuscript are <code>CAVIAR</code>, <code>FINEMAP</code> and <code>DAP-G</code>, and a benchmarking tool <a href="https://stephenslab.github.io/dsc-wiki/"><code>dsc</code></a>. To reproduce the splicing QTL data analysis a bioinformatics pipeline tool <a href="https://github.com/vatlab/SoS"><code>SoS</code></a> is needed.</p>
 <p>Of course with some work it is possible to setup the computational environment on a Linux or Mac computer to reproduce &amp; extend our work. Alternatively, we have developed <a href="https://github.com/stephenslab/susie-paper/blob/master/Dockerfile">a docker image</a> that includes all software components necessary to run the analyses, configured to specified versions used in the manuscript. The image can be used both for evaluating the manuscript and for use in production. Unfortunately due to potential licensing restrictions with the <code>FINEMAP</code> program we cannot distribute the docker container on dockerhub. However it is straightforward to build and the docker image by yourself. In the rest of this section we discuss building and using the docker image for the manuscript.</p>
 <p>Docker can run on
